@@ -250,7 +250,7 @@ jobs:
       
       - name: Install Playwright browsers
         working-directory: ./sdk-tests/java
-        run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install chromium"
+        run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.classpathScope=test -D exec.args="install --with-deps chromium"
 
       - name: Create test-results directory
         run: mkdir -p test-results
