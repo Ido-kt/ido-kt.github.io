@@ -1,0 +1,19 @@
+<!--testconfig
+    "testedClass": "Rules.VisibilityMisuse",
+    "expect": {
+        "passedNodes": ["div"]
+    }
+-->
+<html>
+  <head>
+    <style>
+      .out-of-screen {
+        position: absolute;
+        left: -9999px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="out-of-screen" aria-hidden="true">Some invisible content</div>
+  </body>
+</html>

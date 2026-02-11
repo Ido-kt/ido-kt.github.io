@@ -1,0 +1,14 @@
+<!--testconfig
+    "testedClass": "Rules.MenuBarAvoid",
+    "expect": {
+        "failedNodes": ["#test-subject1", "#test-subject2"]
+    }
+-->
+<div id="test-subject1" role="menubar" aria-label="Main navigation">
+  <div role="menuitem" aria-haspopup="true" tabindex="0" aria-expanded="false" id="fileMenuButton" onclick="toggleMenu('fileMenu')">File</div>
+  <div role="menuitem" aria-haspopup="true" tabindex="0" aria-expanded="false" id="editMenuButton" onclick="toggleMenu('editMenu')">Edit</div>
+</div>
+<div id="test-subject2" role="menubar" aria-label="Secondary navigation">
+  <div role="menuitem" aria-haspopup="true" tabindex="0" aria-expanded="false">File</div>
+  <div role="menuitem" aria-haspopup="true" tabindex="0" aria-expanded="false">Edit</div>
+</div>

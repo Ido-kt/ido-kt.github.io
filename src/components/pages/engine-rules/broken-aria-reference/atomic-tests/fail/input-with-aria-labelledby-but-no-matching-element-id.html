@@ -1,0 +1,8 @@
+<!--testconfig
+    "testedClass": "Rules.BrokenAriaReference",
+    "expect": {
+        "failedNodes": ["input"]
+    }
+-->
+<input aria-labelledby="label" />
+<div id="label-bad-id">Some label</div>

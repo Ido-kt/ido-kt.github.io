@@ -1,0 +1,10 @@
+<!--testconfig
+    "testedClass": "Rules.AriaLabelledByHasReference",
+    "expect": {
+        "failedNodes": ["#labelled-by", "#labelled-by-2"]
+    }
+-->
+<input id="labelled-by" aria-labelledby="labelled-2" />
+<div id="label-bad-id-1">Some label</div>
+<input id="labelled-by-2" aria-labelledby="label" />
+<div id="label-bad-id">Some label</div>

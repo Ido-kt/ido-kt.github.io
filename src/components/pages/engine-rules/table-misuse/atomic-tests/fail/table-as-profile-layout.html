@@ -1,0 +1,28 @@
+<!--testconfig
+    "testedClass": "Rules.TableMisuse",
+    "expect": {
+        "failedNodes": ["table"]
+    }
+-->
+<table>
+    <tr>
+        <td rowspan="3"><img src="path/to/profile-picture.jpg" alt="Profile Picture"></td>
+        <td><strong>Full Name:</strong> John Doe</td>
+    </tr>
+    <tr>
+        <td><strong>Email:</strong> johndoe@example.com</td>
+    </tr>
+    <tr>
+        <td><strong>Last Online:</strong> 2021-10-15</td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <h3>Comments:</h3>
+            <ul>
+                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                <li>Nulla facilisi. Sed sed semper nisl.</li>
+                <li>Etiam auctor, nunc at ultrices tincidunt, velit nunc tincidunt urna, in tincidunt nunc nunc ac nunc.</li>
+            </ul>
+        </td>
+    </tr>
+</table>

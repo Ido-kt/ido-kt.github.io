@@ -1,0 +1,9 @@
+<!--testconfig
+    "testedClass": "Rules.RegionMainContentSingle",
+    "expect": {
+        "failedNodes": ["#redundant-1", "#redundant-2"]
+    }
+-->
+<div role="main">Some main content</div>
+<div role="main" id="redundant-1">Some main content</div>
+<div role="main" id="redundant-2">Some main content</div>

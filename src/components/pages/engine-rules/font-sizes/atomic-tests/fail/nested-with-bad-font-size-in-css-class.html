@@ -1,0 +1,28 @@
+<!--testconfig
+    "testedClass": "Rules.FontSizes",
+    "expect": {
+        "failedNodes": ["#div1", "#p1", "#span1", "#p2"]
+    }
+-->
+<style>
+  .bad-font-size {
+    font-size: 10px;
+  }
+</style>
+<div>
+  <div id="div1" style="font-size: 8px">
+    This is a div with font-size 8px.
+    <p id="p1">
+      This is a paragraph.
+      <span id="span1" class="bad-font-size"> This is a span with no style or class. </span>
+    </p>
+  </div>
+  <div id="div2" style="font-size: 12px">
+    <p id="p2" style="font-size: 6px">
+      This is a paragraph with font-size 14px.
+      <span id="span2" class="bad-font-size">
+        <!-- This is a span with no text -->
+      </span>
+    </p>
+  </div>
+</div>

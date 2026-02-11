@@ -1,0 +1,9 @@
+<!--testconfig
+    "testedClass": "Rules.VisibleTextPartOfAccessibleName",
+    "expect": {
+        "failedNodes": ["a"]
+    }
+-->
+<label id="l1">this is a car, and some clarification</label>
+<label id="l2">this is a pole, and some cash</label>
+<a href="#" aria-labelledby="l1 l2">this is a test</a>

@@ -1,0 +1,65 @@
+<!--testconfig
+    "testedClass": "Rules.CaptchaAccessibleProvider",
+    "expect": {
+        "passedNodes": ["#recaptcha-demo"]
+    }
+-->
+
+<div class="sample-form">
+  <form id="recaptcha-demo-form" method="POST">
+    <fieldset>
+      <legend>Sample Form with ReCAPTCHA</legend>
+      <ul>
+        <li><label for="input1">First Name</label><input class="jfk-textinput" id="input1" name="input1" type="text"
+                                                         value="Jane" disabled="" aria-disabled="true"></li>
+        <li><label for="input2">Last Name</label><input class="jfk-textinput" id="input2" name="input2" type="text"
+                                                        value="Smith" disabled="" aria-disabled="true"></li>
+        <li><label for="input3">Email</label><input class="jfk-textinput" id="input3" name="input3" type="text"
+                                                    value="stopallbots@gmail.com" disabled="" aria-disabled="true"></li>
+        <li><p>Pick your favorite color:</p><label class="jfk-radiobutton-label" for="option1"><input
+          class="jfk-radiobutton-checked" type="radio" id="option1" name="radios" value="option1" disabled=""
+          aria-disabled="true" checked="" aria-checked="true">Red</label><label class="jfk-radiobutton-label"
+                                                                                for="option2"><input
+          class="jfk-radiobutton" type="radio" id="option2" name="radios" value="option2" disabled=""
+          aria-disabled="true">Green</label></li>
+        <li>
+          <div class=""><!-- BEGIN: ReCAPTCHA implementation example. -->
+            <div id="recaptcha-demo" class="g-recaptcha" data-sitekey="6Le-wvkSAAAAAPBMRTvw0Q4Muexq9bi0DJwx_mJ-"
+                 data-callback="onSuccess" data-action="action">
+              <div style="width: 304px; height: 78px;">
+                <div>
+                  <iframe title="reCAPTCHA" width="304" height="78" role="presentation" name="a-s741wbvbp2g"
+                          frameborder="0" scrolling="no"
+                          sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation"
+                          src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6Le-wvkSAAAAAPBMRTvw0Q4Muexq9bi0DJwx_mJ-&amp;co=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbTo0NDM.&amp;hl=en&amp;v=TqxSU0dsOd2Q9IbI7CpFnJLD&amp;size=normal&amp;sa=action&amp;cb=3sw5r1renlh1"></iframe>
+                </div>
+                <textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response"
+                          style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea>
+              </div>
+              <iframe style="display: none;"></iframe>
+            </div>
+            <script nonce="">
+              var onSuccess = function(response) {
+                var errorDivs = document.getElementsByClassName("recaptcha-error");
+                if (errorDivs.length) {
+                  errorDivs[0].className = "";
+                }
+                var errorMsgs = document.getElementsByClassName("recaptcha-error-message");
+                if (errorMsgs.length) {
+                  errorMsgs[0].parentNode.removeChild(errorMsgs[0]);
+                }
+              };</script><!-- Optional noscript fallback. -->
+            <noscript>
+              <div style="width: 302px; height: 462px;">
+                <iframe src="/recaptcha/api/fallback?k=6Le-wvkSAAAAAPBMRTvw0Q4Muexq9bi0DJwx_mJ-" frameborder="0"
+                        scrolling="no"></iframe>
+                <div><textarea id="g-recaptcha-response" name="g-recaptcha-response"
+                               class="g-recaptcha-response"></textarea></div>
+              </div>
+              <br></noscript><!-- END: ReCAPTCHA implementation example. --></div>
+        </li>
+        <li><input id="recaptcha-demo-submit" type="submit" value="Submit"></li>
+      </ul>
+    </fieldset>
+  </form>
+</div>

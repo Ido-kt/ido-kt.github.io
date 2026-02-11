@@ -1,0 +1,30 @@
+.slicknav_menu {
+  display: none;
+}
+
+@media screen and (max-width: 40em) {
+  /* #menu is the original menu */
+  .js #menu {
+    display: none;
+  }
+
+  .js .slicknav_menu {
+    display: block;
+  }
+}
+.list-item {
+  border: 1px solid #ccc;
+  margin: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+.table {
+  width: 100%;
+  margin-top: 10px;
+  border-collapse: collapse;
+}
+.table th,
+.table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}

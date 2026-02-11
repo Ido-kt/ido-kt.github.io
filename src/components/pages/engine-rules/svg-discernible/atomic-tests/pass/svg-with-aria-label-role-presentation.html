@@ -1,0 +1,12 @@
+<!--testconfig
+    "testedClass": "Rules.SVGDiscernible",
+    "expect": {
+        "passedNodes": ["svg"]
+    }
+-->
+
+<!-- This test is skipped because PerceivableTraitDiscernibleText uses srVisibleText which uses isExplicitlyHiddenFromScreenReader which must be adjusted with isAffectedByRolePresentation -->
+<svg aria-label="Image description" role="presentation" style="width:100px;height:100px;" >
+    <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
+</svg>
+

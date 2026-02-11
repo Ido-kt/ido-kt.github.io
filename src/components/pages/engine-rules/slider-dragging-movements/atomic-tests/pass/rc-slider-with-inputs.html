@@ -1,0 +1,720 @@
+<!--testconfig
+    "testedClass": "Rules.SliderDraggingMovements",
+    "expect": {
+        "failedNodes": [],
+        "passedNodes": [".rc-slider"]
+    },
+    "skip": true
+-->
+<!-- The test is in skip because the inputs are inside the 3 parent of the rc-slider, https://www.ibuypower.com/gaming-laptops/asus-laptops-->
+<div
+  class="inline-flex w-fit flex-col items-center justify-center px-5"
+  style="
+    align-items: center;
+    block-size: 106px;
+    caret-color: rgb(13, 13, 13);
+    color: rgb(13, 13, 13);
+    column-rule-color: rgb(13, 13, 13);
+    display: flex;
+    flex-direction: column;
+    height: 106px;
+    inline-size: 235.266px;
+    justify-content: center;
+    min-block-size: auto;
+    min-height: auto;
+    min-inline-size: auto;
+    min-width: auto;
+    outline-color: rgb(13, 13, 13);
+    padding-inline: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    perspective-origin: 117.633px 53px;
+    text-decoration-color: rgb(13, 13, 13);
+    text-emphasis-color: rgb(13, 13, 13);
+    transform-origin: 117.633px 53px;
+    width: 235.266px;
+    -webkit-text-fill-color: rgb(13, 13, 13);
+    -webkit-text-stroke-color: rgb(13, 13, 13);
+  "
+>
+  <div
+    class="inline-flex w-fit justify-between gap-2 px-2"
+    style="
+      block-size: 44px;
+      caret-color: rgb(13, 13, 13);
+      color: rgb(13, 13, 13);
+      gap: 8px;
+      column-rule-color: rgb(13, 13, 13);
+      display: flex;
+      height: 44px;
+      inline-size: 195.266px;
+      justify-content: space-between;
+      min-block-size: auto;
+      min-height: auto;
+      min-inline-size: auto;
+      min-width: auto;
+      outline-color: rgb(13, 13, 13);
+      padding-inline: 8px;
+      padding-left: 8px;
+      padding-right: 8px;
+      perspective-origin: 97.6328px 22px;
+      text-decoration-color: rgb(13, 13, 13);
+      text-emphasis-color: rgb(13, 13, 13);
+      transform-origin: 97.6328px 22px;
+      width: 195.266px;
+      -webkit-text-fill-color: rgb(13, 13, 13);
+      -webkit-text-stroke-color: rgb(13, 13, 13);
+    "
+  >
+    <div
+      class="inline-flex w-fit flex-col items-center justify-center"
+      style="
+        align-items: center;
+        block-size: 44px;
+        caret-color: rgb(13, 13, 13);
+        color: rgb(13, 13, 13);
+        column-rule-color: rgb(13, 13, 13);
+        display: flex;
+        flex-direction: column;
+        height: 44px;
+        inline-size: 73.6406px;
+        justify-content: center;
+        min-block-size: auto;
+        min-height: auto;
+        min-inline-size: auto;
+        min-width: auto;
+        outline-color: rgb(13, 13, 13);
+        perspective-origin: 36.8203px 22px;
+        text-decoration-color: rgb(13, 13, 13);
+        text-emphasis-color: rgb(13, 13, 13);
+        transform-origin: 36.8203px 22px;
+        width: 73.6406px;
+        -webkit-text-fill-color: rgb(13, 13, 13);
+        -webkit-text-stroke-color: rgb(13, 13, 13);
+      "
+    >
+      <p
+        class="text-xs text-gray-400"
+        style="
+          block-size: 16px;
+          caret-color: rgb(156, 163, 175);
+          color: rgb(156, 163, 175);
+          column-rule-color: rgb(156, 163, 175);
+          font-size: 12px;
+          height: 16px;
+          inline-size: 22.9766px;
+          line-height: 16px;
+          min-block-size: auto;
+          min-height: auto;
+          min-inline-size: auto;
+          min-width: auto;
+          outline-color: rgb(156, 163, 175);
+          perspective-origin: 11.4844px 8px;
+          text-decoration-color: rgb(156, 163, 175);
+          text-emphasis-color: rgb(156, 163, 175);
+          transform-origin: 11.4883px 8px;
+          width: 22.9766px;
+          -webkit-text-fill-color: rgb(156, 163, 175);
+          -webkit-text-stroke-color: rgb(156, 163, 175);
+        "
+      >
+        Min
+      </p>
+      <div
+        class="flex w-full flex-row items-center rounded border-none p-1 shadow-newContainer"
+        style="
+          align-items: center;
+          block-size: 28px;
+          border-block-style: none;
+          border-radius: 4px;
+          border-style: none;
+          border-end-end-radius: 4px;
+          border-end-start-radius: 4px;
+          border-inline-style: none;
+          border-start-end-radius: 4px;
+          border-start-start-radius: 4px;
+          box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(153, 153, 153, 0.6) 0px 0px 4px 0px;
+          caret-color: rgb(13, 13, 13);
+          color: rgb(13, 13, 13);
+          column-rule-color: rgb(13, 13, 13);
+          display: flex;
+          height: 28px;
+          inline-size: 73.6484px;
+          min-block-size: auto;
+          min-height: auto;
+          min-inline-size: auto;
+          min-width: auto;
+          outline-color: rgb(13, 13, 13);
+          padding-block: 4px;
+          padding: 4px;
+          padding-inline: 4px;
+          perspective-origin: 36.8203px 14px;
+          text-decoration-color: rgb(13, 13, 13);
+          text-emphasis-color: rgb(13, 13, 13);
+          transform-origin: 36.8242px 14px;
+          width: 73.6484px;
+          -webkit-text-fill-color: rgb(13, 13, 13);
+          -webkit-text-stroke-color: rgb(13, 13, 13);
+        "
+      >
+        <span
+          class="w-fit px-1 text-center text-xs font-bold"
+          style="
+            block-size: 16px;
+            caret-color: rgb(13, 13, 13);
+            color: rgb(13, 13, 13);
+            column-rule-color: rgb(13, 13, 13);
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            height: 16px;
+            inline-size: 15.6562px;
+            line-height: 16px;
+            min-block-size: auto;
+            min-height: auto;
+            min-inline-size: auto;
+            min-width: auto;
+            outline-color: rgb(13, 13, 13);
+            padding-inline: 4px;
+            padding-left: 4px;
+            padding-right: 4px;
+            perspective-origin: 7.82812px 8px;
+            text-align: center;
+            text-decoration-color: rgb(13, 13, 13);
+            text-emphasis-color: rgb(13, 13, 13);
+            transform-origin: 7.82812px 8px;
+            width: 15.6562px;
+            -webkit-text-fill-color: rgb(13, 13, 13);
+            -webkit-text-stroke-color: rgb(13, 13, 13);
+          "
+          >$</span
+        ><input
+          class="w-[50px] border-none p-0 text-sm font-bold outline-none"
+          type="string"
+          min="800"
+          value="800"
+          style="
+            block-size: 20px;
+            border-block-style: none;
+            border-block-width: 0px;
+            border-style: none;
+            border-width: 0px;
+            border-inline-style: none;
+            border-inline-width: 0px;
+            caret-color: rgb(13, 13, 13);
+            color: rgb(13, 13, 13);
+            column-rule-color: rgb(13, 13, 13);
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            height: 20px;
+            inline-size: 50px;
+            line-height: 20px;
+            min-block-size: auto;
+            min-height: auto;
+            min-inline-size: auto;
+            min-width: auto;
+            outline: rgba(0, 0, 0, 0) solid 2px;
+            outline-offset: 2px;
+            padding-inline-start: 0px;
+            padding-left: 0px;
+            perspective-origin: 25px 10px;
+            text-decoration-color: rgb(13, 13, 13);
+            text-emphasis-color: rgb(13, 13, 13);
+            transform-origin: 25px 10px;
+            width: 50px;
+            -webkit-text-fill-color: rgb(13, 13, 13);
+            -webkit-text-stroke-color: rgb(13, 13, 13);
+          "
+        />
+      </div>
+    </div>
+    <p
+      class="self-end"
+      style="
+        align-self: flex-end;
+        block-size: 24px;
+        caret-color: rgb(13, 13, 13);
+        color: rgb(13, 13, 13);
+        column-rule-color: rgb(13, 13, 13);
+        height: 24px;
+        inline-size: 16px;
+        min-block-size: auto;
+        min-height: auto;
+        min-inline-size: auto;
+        min-width: auto;
+        outline-color: rgb(13, 13, 13);
+        perspective-origin: 8px 12px;
+        text-decoration-color: rgb(13, 13, 13);
+        text-emphasis-color: rgb(13, 13, 13);
+        transform-origin: 8px 12px;
+        width: 16px;
+        -webkit-text-fill-color: rgb(13, 13, 13);
+        -webkit-text-stroke-color: rgb(13, 13, 13);
+      "
+    >
+      —
+    </p>
+    <div
+      class="inline-flex flex-col items-center justify-start"
+      style="
+        align-items: center;
+        block-size: 44px;
+        caret-color: rgb(13, 13, 13);
+        color: rgb(13, 13, 13);
+        column-rule-color: rgb(13, 13, 13);
+        display: flex;
+        flex-direction: column;
+        height: 44px;
+        inline-size: 73.6406px;
+        justify-content: flex-start;
+        min-block-size: auto;
+        min-height: auto;
+        min-inline-size: auto;
+        min-width: auto;
+        outline-color: rgb(13, 13, 13);
+        perspective-origin: 36.8203px 22px;
+        text-decoration-color: rgb(13, 13, 13);
+        text-emphasis-color: rgb(13, 13, 13);
+        transform-origin: 36.8203px 22px;
+        width: 73.6406px;
+        -webkit-text-fill-color: rgb(13, 13, 13);
+        -webkit-text-stroke-color: rgb(13, 13, 13);
+      "
+    >
+      <p
+        class="text-xs text-gray-400"
+        style="
+          block-size: 16px;
+          caret-color: rgb(156, 163, 175);
+          color: rgb(156, 163, 175);
+          column-rule-color: rgb(156, 163, 175);
+          font-size: 12px;
+          height: 16px;
+          inline-size: 25.2656px;
+          line-height: 16px;
+          min-block-size: auto;
+          min-height: auto;
+          min-inline-size: auto;
+          min-width: auto;
+          outline-color: rgb(156, 163, 175);
+          perspective-origin: 12.6328px 8px;
+          text-decoration-color: rgb(156, 163, 175);
+          text-emphasis-color: rgb(156, 163, 175);
+          transform-origin: 12.6328px 8px;
+          width: 25.2656px;
+          -webkit-text-fill-color: rgb(156, 163, 175);
+          -webkit-text-stroke-color: rgb(156, 163, 175);
+        "
+      >
+        Max
+      </p>
+      <div
+        class="flex w-fit flex-row items-center rounded border-none p-1 shadow-newContainer"
+        style="
+          align-items: center;
+          block-size: 28px;
+          border-block-style: none;
+          border-radius: 4px;
+          border-style: none;
+          border-end-end-radius: 4px;
+          border-end-start-radius: 4px;
+          border-inline-style: none;
+          border-start-end-radius: 4px;
+          border-start-start-radius: 4px;
+          box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(153, 153, 153, 0.6) 0px 0px 4px 0px;
+          caret-color: rgb(13, 13, 13);
+          color: rgb(13, 13, 13);
+          column-rule-color: rgb(13, 13, 13);
+          display: flex;
+          height: 28px;
+          inline-size: 73.6484px;
+          min-block-size: auto;
+          min-height: auto;
+          min-inline-size: auto;
+          min-width: auto;
+          outline-color: rgb(13, 13, 13);
+          padding-block: 4px;
+          padding: 4px;
+          padding-inline: 4px;
+          perspective-origin: 36.8203px 14px;
+          text-decoration-color: rgb(13, 13, 13);
+          text-emphasis-color: rgb(13, 13, 13);
+          transform-origin: 36.8242px 14px;
+          width: 73.6484px;
+          -webkit-text-fill-color: rgb(13, 13, 13);
+          -webkit-text-stroke-color: rgb(13, 13, 13);
+        "
+      >
+        <span
+          class="w-fit px-1 text-center text-xs font-bold"
+          style="
+            block-size: 16px;
+            caret-color: rgb(13, 13, 13);
+            color: rgb(13, 13, 13);
+            column-rule-color: rgb(13, 13, 13);
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            height: 16px;
+            inline-size: 15.6562px;
+            line-height: 16px;
+            min-block-size: auto;
+            min-height: auto;
+            min-inline-size: auto;
+            min-width: auto;
+            outline-color: rgb(13, 13, 13);
+            padding-inline: 4px;
+            padding-left: 4px;
+            padding-right: 4px;
+            perspective-origin: 7.82812px 8px;
+            text-align: center;
+            text-decoration-color: rgb(13, 13, 13);
+            text-emphasis-color: rgb(13, 13, 13);
+            transform-origin: 7.82812px 8px;
+            width: 15.6562px;
+            -webkit-text-fill-color: rgb(13, 13, 13);
+            -webkit-text-stroke-color: rgb(13, 13, 13);
+          "
+          >$</span
+        ><input
+          class="w-[50px] border-none p-0 text-sm font-bold outline-none"
+          max="7000"
+          value="4300"
+          style="
+            block-size: 20px;
+            border-block-style: none;
+            border-block-width: 0px;
+            border-style: none;
+            border-width: 0px;
+            border-inline-style: none;
+            border-inline-width: 0px;
+            caret-color: rgb(13, 13, 13);
+            color: rgb(13, 13, 13);
+            column-rule-color: rgb(13, 13, 13);
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            height: 20px;
+            inline-size: 50px;
+            line-height: 20px;
+            min-block-size: auto;
+            min-height: auto;
+            min-inline-size: auto;
+            min-width: auto;
+            outline: rgba(0, 0, 0, 0) solid 2px;
+            outline-offset: 2px;
+            padding-inline-start: 0px;
+            padding-left: 0px;
+            perspective-origin: 25px 10px;
+            text-decoration-color: rgb(13, 13, 13);
+            text-emphasis-color: rgb(13, 13, 13);
+            transform-origin: 25px 10px;
+            width: 50px;
+            -webkit-text-fill-color: rgb(13, 13, 13);
+            -webkit-text-stroke-color: rgb(13, 13, 13);
+          "
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    class="mt-7 w-full px-3 pb-5"
+    style="
+      block-size: 34px;
+      caret-color: rgb(13, 13, 13);
+      color: rgb(13, 13, 13);
+      column-rule-color: rgb(13, 13, 13);
+      height: 34px;
+      inline-size: 195.266px;
+      margin-block-start: 28px;
+      margin-top: 28px;
+      min-block-size: auto;
+      min-height: auto;
+      min-inline-size: auto;
+      min-width: auto;
+      outline-color: rgb(13, 13, 13);
+      padding-block-end: 20px;
+      padding-bottom: 20px;
+      padding-inline: 12px;
+      padding-left: 12px;
+      padding-right: 12px;
+      perspective-origin: 97.6328px 17px;
+      text-decoration-color: rgb(13, 13, 13);
+      text-emphasis-color: rgb(13, 13, 13);
+      transform-origin: 97.6328px 17px;
+      width: 195.266px;
+      -webkit-text-fill-color: rgb(13, 13, 13);
+      -webkit-text-stroke-color: rgb(13, 13, 13);
+    "
+  >
+    <div
+      class="relative flex w-full !flex-row items-center justify-center"
+      style="
+        align-items: center;
+        block-size: 14px;
+        inset: 0px;
+        caret-color: rgb(13, 13, 13);
+        color: rgb(13, 13, 13);
+        column-rule-color: rgb(13, 13, 13);
+        display: flex;
+        height: 14px;
+        inline-size: 171.266px;
+        inset-block: 0px;
+        inset-inline: 0px;
+        justify-content: center;
+        outline-color: rgb(13, 13, 13);
+        perspective-origin: 85.6328px 7px;
+        position: relative;
+        text-decoration-color: rgb(13, 13, 13);
+        text-emphasis-color: rgb(13, 13, 13);
+        transform-origin: 85.6328px 7px;
+        width: 171.266px;
+        -webkit-text-fill-color: rgb(13, 13, 13);
+        -webkit-text-stroke-color: rgb(13, 13, 13);
+      "
+    >
+      <div
+        class="rc-slider"
+        style="
+          block-size: 14px;
+          border-radius: 6px;
+          border-end-end-radius: 6px;
+          border-end-start-radius: 6px;
+          border-start-end-radius: 6px;
+          border-start-start-radius: 6px;
+          inset: 0px;
+          caret-color: rgb(13, 13, 13);
+          color: rgb(13, 13, 13);
+          column-rule-color: rgb(13, 13, 13);
+          height: 14px;
+          inline-size: 171.266px;
+          inset-block: 0px;
+          inset-inline: 0px;
+          min-block-size: auto;
+          min-height: auto;
+          min-inline-size: auto;
+          min-width: auto;
+          outline-color: rgb(13, 13, 13);
+          padding-block: 5px;
+          padding-bottom: 5px;
+          padding-top: 5px;
+          perspective-origin: 85.6328px 7px;
+          position: relative;
+          text-decoration-color: rgb(13, 13, 13);
+          text-emphasis-color: rgb(13, 13, 13);
+          touch-action: none;
+          transform-origin: 85.6328px 7px;
+          width: 171.266px;
+          -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+          -webkit-text-fill-color: rgb(13, 13, 13);
+          -webkit-text-stroke-color: rgb(13, 13, 13);
+        "
+      >
+        <div
+          class="rc-slider-rail"
+          style="
+            background-color: rgba(220, 220, 220, 0.38);
+            block-size: 5px;
+            border-radius: 6px;
+            border-end-end-radius: 6px;
+            border-end-start-radius: 6px;
+            border-start-end-radius: 6px;
+            border-start-start-radius: 6px;
+            inset: 5px 0px 4px;
+            caret-color: rgb(13, 13, 13);
+            color: rgb(13, 13, 13);
+            column-rule-color: rgb(13, 13, 13);
+            height: 5px;
+            inline-size: 171.266px;
+            inset-block: 5px 4px;
+            inset-inline: 0px;
+            outline-color: rgb(13, 13, 13);
+            perspective-origin: 85.6328px 2.5px;
+            position: absolute;
+            text-decoration-color: rgb(13, 13, 13);
+            text-emphasis-color: rgb(13, 13, 13);
+            transform-origin: 85.6328px 2.5px;
+            width: 171.266px;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-text-fill-color: rgb(13, 13, 13);
+            -webkit-text-stroke-color: rgb(13, 13, 13);
+          "
+        ></div>
+        <div
+          class="rc-slider-track rc-slider-track-1"
+          style="
+            background-color: rgb(254, 27, 27);
+            block-size: 5px;
+            border-radius: 6px;
+            border-end-end-radius: 6px;
+            border-end-start-radius: 6px;
+            border-start-end-radius: 6px;
+            border-start-start-radius: 6px;
+            inset: 5px 74.5859px 4px 0px;
+            caret-color: rgb(13, 13, 13);
+            color: rgb(13, 13, 13);
+            column-rule-color: rgb(13, 13, 13);
+            height: 5px;
+            inline-size: 96.6797px;
+            inset-block: 5px 4px;
+            inset-inline: 0px 74.5859px;
+            outline-color: rgb(13, 13, 13);
+            perspective-origin: 48.3359px 2.5px;
+            position: absolute;
+            text-decoration-color: rgb(13, 13, 13);
+            text-emphasis-color: rgb(13, 13, 13);
+            transform-origin: 48.3398px 2.5px;
+            width: 96.6797px;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-text-fill-color: rgb(13, 13, 13);
+            -webkit-text-stroke-color: rgb(13, 13, 13);
+          "
+        ></div>
+        <div
+          class="rc-slider-step"
+          style="
+            block-size: 4px;
+            inset: 5px 0px;
+            caret-color: rgb(13, 13, 13);
+            color: rgb(13, 13, 13);
+            column-rule-color: rgb(13, 13, 13);
+            height: 4px;
+            inline-size: 171.266px;
+            inset-block: 5px;
+            inset-inline: 0px;
+            outline-color: rgb(13, 13, 13);
+            perspective-origin: 85.6328px 2px;
+            position: absolute;
+            text-decoration-color: rgb(13, 13, 13);
+            text-emphasis-color: rgb(13, 13, 13);
+            transform-origin: 85.6328px 2px;
+            width: 171.266px;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-text-fill-color: rgb(13, 13, 13);
+            -webkit-text-stroke-color: rgb(13, 13, 13);
+          "
+        ></div>
+        <div
+          tabindex="0"
+          class="rc-slider-handle rc-slider-handle-1"
+          role="slider"
+          aria-valuemin="800"
+          aria-valuemax="7000"
+          aria-valuenow="800"
+          aria-disabled="false"
+          style="
+            border: 2px solid rgb(254, 27, 27);
+            background-color: rgb(255, 255, 255);
+            block-size: 17px;
+            border-block-color: rgb(254, 27, 27);
+            border-block-width: 2px;
+            border-radius: 50%;
+            border-end-end-radius: 50%;
+            border-end-start-radius: 50%;
+            border-inline-color: rgb(254, 27, 27);
+            border-inline-width: 2px;
+            border-start-end-radius: 50%;
+            border-start-start-radius: 50%;
+            inset: 5px 161.266px -2px 0px;
+            caret-color: rgb(13, 13, 13);
+            color: rgb(13, 13, 13);
+            column-rule-color: rgb(13, 13, 13);
+            cursor: grab;
+            height: 17px;
+            inline-size: 17px;
+            inset-block: 5px -2px;
+            inset-inline: 0px 161.266px;
+            margin-block-start: -6px;
+            margin-inline-start: -7px;
+            margin-left: -7px;
+            margin-top: -6px;
+            outline-color: rgb(13, 13, 13);
+            perspective-origin: 8.5px 8.5px;
+            position: absolute;
+            text-decoration-color: rgb(13, 13, 13);
+            text-emphasis-color: rgb(13, 13, 13);
+            touch-action: pan-x;
+            transform-origin: 8.5px 8.5px;
+            width: 17px;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-text-fill-color: rgb(13, 13, 13);
+            -webkit-text-stroke-color: rgb(13, 13, 13);
+          "
+        ></div>
+        <div
+          tabindex="0"
+          class="rc-slider-handle rc-slider-handle-2"
+          role="slider"
+          aria-valuemin="800"
+          aria-valuemax="7000"
+          aria-valuenow="4300"
+          aria-disabled="false"
+          style="
+            border: 2px solid rgb(254, 27, 27);
+            background-color: rgb(255, 255, 255);
+            block-size: 17px;
+            border-block-color: rgb(254, 27, 27);
+            border-block-width: 2px;
+            border-radius: 50%;
+            border-end-end-radius: 50%;
+            border-end-start-radius: 50%;
+            border-inline-color: rgb(254, 27, 27);
+            border-inline-width: 2px;
+            border-start-end-radius: 50%;
+            border-start-start-radius: 50%;
+            inset: 5px 64.5859px -2px 96.6797px;
+            caret-color: rgb(13, 13, 13);
+            color: rgb(13, 13, 13);
+            column-rule-color: rgb(13, 13, 13);
+            cursor: grab;
+            height: 17px;
+            inline-size: 17px;
+            inset-block: 5px -2px;
+            inset-inline: 96.6797px 64.5859px;
+            margin-block-start: -6px;
+            margin-inline-start: -7px;
+            margin-left: -7px;
+            margin-top: -6px;
+            outline-color: rgb(13, 13, 13);
+            perspective-origin: 8.5px 8.5px;
+            position: absolute;
+            text-decoration-color: rgb(13, 13, 13);
+            text-emphasis-color: rgb(13, 13, 13);
+            touch-action: pan-x;
+            transform-origin: 8.5px 8.5px;
+            width: 17px;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-text-fill-color: rgb(13, 13, 13);
+            -webkit-text-stroke-color: rgb(13, 13, 13);
+          "
+        ></div>
+        <div
+          class="rc-slider-mark"
+          style="
+            inset: 18px 0px -4px;
+            caret-color: rgb(13, 13, 13);
+            color: rgb(13, 13, 13);
+            column-rule-color: rgb(13, 13, 13);
+            font-size: 12px;
+            inline-size: 171.266px;
+            inset-block: 18px -4px;
+            inset-inline: 0px;
+            line-height: 18px;
+            outline-color: rgb(13, 13, 13);
+            perspective-origin: 85.6328px 0px;
+            position: absolute;
+            text-decoration-color: rgb(13, 13, 13);
+            text-emphasis-color: rgb(13, 13, 13);
+            transform-origin: 85.6328px 0px;
+            width: 171.266px;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-text-fill-color: rgb(13, 13, 13);
+            -webkit-text-stroke-color: rgb(13, 13, 13);
+          "
+        ></div>
+      </div>
+    </div>
+  </div>
+</div>
+<style></style>

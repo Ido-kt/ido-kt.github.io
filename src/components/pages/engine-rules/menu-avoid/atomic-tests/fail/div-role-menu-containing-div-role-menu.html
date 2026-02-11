@@ -1,0 +1,14 @@
+<!--testconfig
+    "testedClass": "Rules.MenuAvoid",
+    "expect": {
+        "failedNodes": ["#test-subject1", "#fileMenu"]
+    }
+-->
+<div id="test-subject1" role="menu" aria-label="Main navigation">
+  <div role="menuitem" aria-haspopup="true" tabindex="0" aria-expanded="false" id="fileMenuButton" onclick="toggleMenu('fileMenu')">File</div>
+  <div id="fileMenu" role="menu" aria-labelledby="fileMenuButton">
+    <div role="menuitem" tabindex="-1" onclick="newFile()">New</div>
+    <div role="menuitem" tabindex="-1" onclick="openFile()">Open</div>
+    <div role="menuitem" tabindex="-1" onclick="saveFile()">Save</div>
+  </div>
+</div>

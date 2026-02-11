@@ -1,0 +1,27 @@
+<!--testconfig
+    "testedClass": "Rules.TableNotNested",
+    "expect": {
+        "failedNodes": ["#nested-table1", "#nested-table2"],
+        "passedNodes": ["#not-nested-table"]
+    }
+-->
+<table id="not-nested-table">
+  <th>Table #2</th>
+  <tr>
+    <td>
+      <table id="nested-table1">
+        <th>Table #3</th>
+        <tr>
+          <td>
+            <table id="nested-table2">
+              <tr>
+                <td>Tickets</td>
+                <td>5</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>

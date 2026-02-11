@@ -1,0 +1,18 @@
+<!--testconfig
+    "testedClass": "Rules.InteractiveTargetSize",
+    "expect": {
+        "failedNodes": [],
+        "passedNodes": [".interactive-small", ".interactive-big", ".interactive"]
+    },
+    "skip": true
+-->
+<style>
+  .interactive {
+    margin: 10px;
+  }
+</style>
+<button class="interactive-small" style="width: 20px; height: 20px; background-color: red"></button>
+<div></div>
+<button class="interactive-big" style="width: 24px; height: 24px"></button>
+<div></div>
+<button class="interactive" style="width: 20px; height: 20px; background-color: red"></button>

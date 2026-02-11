@@ -1,0 +1,10 @@
+<!--testconfig
+    "testedClass": "Rules.ImageMismatch",
+    "expect": {
+        "failedNodes": ["img"]
+    }
+-->
+<picture>
+    <source srcset="https://www.example.com/image.webp" type="image/webp">
+    <img role="table" src="https://www.example.com/image.jpg" alt="Example Image">
+</picture>

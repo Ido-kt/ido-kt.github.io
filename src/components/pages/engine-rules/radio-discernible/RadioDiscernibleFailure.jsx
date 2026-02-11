@@ -1,0 +1,231 @@
+import React from "react";
+import EngineIssueFailure from "../../../layout/engineIssueFailure";
+
+const RadioDiscernibleFailure = () => {
+  const ruleId = "radio-discernible";
+  const title = `Radio controls should have a label`;
+  const description = `Screen readers rely on properly coded and associated labels to announce the purpose of a form field. A radio control without an identifiable label may prevent screen reader users from completing the form.`;
+  const helpText = `Assign a label to each radio control using <label for> with a matching id (or wrapping the <label> around the control), or ARIA attributes such as aria-label or aria-labelledby.`;
+  const fixSteps = [
+  "Review the HTML structure",
+  "Apply proper accessibility attributes",
+  "Test with screen readers"
+  ];
+  const htmlExamples = [
+  { filename: "button role radio no label", content: `<button role="radio" style="width: 15px; height: 15px; border: solid 1px blue"></button>` },
+  { filename: "custom radio no label", content: `<div class="radio-wrapper-1" tabindex="0" role="radio" aria-checked="false" style="display: inline-block">
+  <input class="substituted" type="radio" aria-hidden="true" />
+  <span></span>
+</div>
+<b class="pointer">I agree to the terms</b>
+<style>
+  .radio-wrapper-1 *,
+  .radio-wrapper-1 ::after,
+  .radio-wrapper-1 ::before {
+    box-sizing: border-box;
+  }
+  .radio-wrapper-1 [type="radio"].substituted {
+    margin: 0;
+    width: 0;
+    height: 0;
+    display: inline;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  .radio-wrapper-1 [type="radio"].substituted + span:before {
+    content: "";
+    display: inline-block;
+    vertical-align: top;
+    height: 1.15em;
+    width: 1.15em;
+    margin-right: 0.6em;
+    color: rgba(0, 0, 0, 0.275);
+    border: solid 0.06em;
+    box-shadow: 0 0 0.04em, 0 0.06em 0.16em -0.03em inset, 0 0 0 0.07em transparent inset;
+    border-radius: 0.2em;
+    background: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xml:space="preserve" fill="white" viewBox="0 0 9 9"><rect x="0" y="4.3" transform="matrix(-0.707 -0.7072 0.7072 -0.707 0.5891 10.4702)" width="4.3" height="1.6" /><rect x="2.2" y="2.9" transform="matrix(-0.7071 0.7071 -0.7071 -0.7071 12.1877 2.9833)" width="6.1" height="1.7" /></svg>')
+        no-repeat center,
+      white;
+    background-size: 0;
+    will-change: color, border, background, background-size, box-shadow;
+    transform: translate3d(0, 0, 0);
+    transition: color 0.1s, border 0.1s, background 0.15s, box-shadow 0.1s;
+  }
+  .radio-wrapper-1 [type="radio"].substituted:enabled:active + span:before,
+  .radio-wrapper-1 [type="radio"].substituted:enabled + span:active:before {
+    box-shadow: 0 0 0.04em, 0 0.06em 0.16em -0.03em transparent inset, 0 0 0 0.07em rgba(0, 0, 0, 0.1) inset;
+    background-color: #f0f0f0;
+  }
+  .radio-wrapper-1 [type="radio"].substituted:checked + span:before {
+    background-color: #3b99fc;
+    background-size: 0.75em;
+    color: rgba(0, 0, 0, 0.075);
+  }
+  .radio-wrapper-1 [type="radio"].substituted:checked:enabled:active + span:before,
+  .radio-wrapper-1 [type="radio"].substituted:checked:enabled + span:active:before {
+    background-color: #0a7ffb;
+    color: rgba(0, 0, 0, 0.275);
+  }
+  .radio-wrapper-1 [type="radio"].substituted:focus + span:before {
+    box-shadow: 0 0 0.04em, 0 0.06em 0.16em -0.03em transparent inset, 0 0 0 0.07em rgba(0, 0, 0, 0.1) inset, 0 0 0 3.3px rgba(65, 159, 255, 0.55), 0 0 0 5px rgba(65, 159, 255, 0.3);
+  }
+  .radio-wrapper-1 [type="radio"].substituted:focus:active + span:before,
+  .radio-wrapper-1 [type="radio"].substituted:focus + span:active:before {
+    box-shadow: 0 0 0.04em, 0 0.06em 0.16em -0.03em transparent inset, 0 0 0 0.07em rgba(0, 0, 0, 0.1) inset, 0 0 0 3.3px rgba(65, 159, 255, 0.55), 0 0 0 5px rgba(65, 159, 255, 0.3);
+  }
+  .radio-wrapper-1 [type="radio"].substituted:disabled + span:before {
+    opacity: 0.5;
+  }
+
+  .radio-wrapper-1 [type="radio"].substituted.dark + span:before {
+    color: rgba(255, 255, 255, 0.275);
+    background-color: #222;
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xml:space="preserve" fill="rgba(34, 34, 34, 0.999)" viewBox="0 0 9 9"><rect x="0" y="4.3" transform="matrix(-0.707 -0.7072 0.7072 -0.707 0.5891 10.4702)" width="4.3" height="1.6" /><rect x="2.2" y="2.9" transform="matrix(-0.7071 0.7071 -0.7071 -0.7071 12.1877 2.9833)" width="6.1" height="1.7" /></svg>');
+  }
+  .radio-wrapper-1 [type="radio"].substituted.dark:enabled:active + span:before,
+  .radio-wrapper-1 [type="radio"].substituted.dark:enabled + span:active:before {
+    background-color: #444;
+    box-shadow: 0 0 0.04em, 0 0.06em 0.16em -0.03em transparent inset, 0 0 0 0.07em rgba(255, 255, 255, 0.1) inset;
+  }
+  .radio-wrapper-1 [type="radio"].substituted.dark:checked + span:before {
+    background-color: #a97035;
+    color: rgba(255, 255, 255, 0.075);
+  }
+  .radio-wrapper-1 [type="radio"].substituted.dark:checked:enabled:active + span:before,
+  .radio-wrapper-1 [type="radio"].substituted.dark:checked:enabled + span:active:before {
+    background-color: #c68035;
+    color: rgba(0, 0, 0, 0.275);
+  }
+  .radio-wrapper-1 [type="radio"].substituted + span {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  .pointer {
+    cursor: pointer;
+  }
+</style>` },
+  { filename: "input radio color value", content: `<style>
+  .circle {
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+  }
+  .orange {
+    background-color: #ff6b16;
+  }
+</style>
+<div>
+  <input type="radio" id="oo" value="orange" />
+  <label for="oo"><div class="orange circle"></div></label>
+</div>` },
+  { filename: "input radio", content: `<input type="radio" value="orange" />` },
+  { filename: "role radio 2", content: `<div class="radio-wrapper-1" tabindex="0" role="radio" aria-checked="false" style="display: inline-block">
+  <input class="substituted" type="radio" aria-hidden="true" />
+  <span></span>
+</div>
+<b class="pointer">I agree to the terms</b>
+<style>
+  .radio-wrapper-1 *,
+  .radio-wrapper-1 ::after,
+  .radio-wrapper-1 ::before {
+    box-sizing: border-box;
+  }
+  .radio-wrapper-1 [type="radio"].substituted {
+    margin: 0;
+    width: 0;
+    height: 0;
+    display: inline;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  .radio-wrapper-1 [type="radio"].substituted + span:before {
+    content: "";
+    display: inline-block;
+    vertical-align: top;
+    height: 1.15em;
+    width: 1.15em;
+    margin-right: 0.6em;
+    color: rgba(0, 0, 0, 0.275);
+    border: solid 0.06em;
+    box-shadow: 0 0 0.04em, 0 0.06em 0.16em -0.03em inset, 0 0 0 0.07em transparent inset;
+    border-radius: 0.2em;
+    background: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xml:space="preserve" fill="white" viewBox="0 0 9 9"><rect x="0" y="4.3" transform="matrix(-0.707 -0.7072 0.7072 -0.707 0.5891 10.4702)" width="4.3" height="1.6" /><rect x="2.2" y="2.9" transform="matrix(-0.7071 0.7071 -0.7071 -0.7071 12.1877 2.9833)" width="6.1" height="1.7" /></svg>')
+        no-repeat center,
+      white;
+    background-size: 0;
+    will-change: color, border, background, background-size, box-shadow;
+    transform: translate3d(0, 0, 0);
+    transition: color 0.1s, border 0.1s, background 0.15s, box-shadow 0.1s;
+  }
+  .radio-wrapper-1 [type="radio"].substituted:enabled:active + span:before,
+  .radio-wrapper-1 [type="radio"].substituted:enabled + span:active:before {
+    box-shadow: 0 0 0.04em, 0 0.06em 0.16em -0.03em transparent inset, 0 0 0 0.07em rgba(0, 0, 0, 0.1) inset;
+    background-color: #f0f0f0;
+  }
+  .radio-wrapper-1 [type="radio"].substituted:checked + span:before {
+    background-color: #3b99fc;
+    background-size: 0.75em;
+    color: rgba(0, 0, 0, 0.075);
+  }
+  .radio-wrapper-1 [type="radio"].substituted:checked:enabled:active + span:before,
+  .radio-wrapper-1 [type="radio"].substituted:checked:enabled + span:active:before {
+    background-color: #0a7ffb;
+    color: rgba(0, 0, 0, 0.275);
+  }
+  .radio-wrapper-1 [type="radio"].substituted:focus + span:before {
+    box-shadow: 0 0 0.04em, 0 0.06em 0.16em -0.03em transparent inset, 0 0 0 0.07em rgba(0, 0, 0, 0.1) inset, 0 0 0 3.3px rgba(65, 159, 255, 0.55), 0 0 0 5px rgba(65, 159, 255, 0.3);
+  }
+  .radio-wrapper-1 [type="radio"].substituted:focus:active + span:before,
+  .radio-wrapper-1 [type="radio"].substituted:focus + span:active:before {
+    box-shadow: 0 0 0.04em, 0 0.06em 0.16em -0.03em transparent inset, 0 0 0 0.07em rgba(0, 0, 0, 0.1) inset, 0 0 0 3.3px rgba(65, 159, 255, 0.55), 0 0 0 5px rgba(65, 159, 255, 0.3);
+  }
+  .radio-wrapper-1 [type="radio"].substituted:disabled + span:before {
+    opacity: 0.5;
+  }
+
+  .radio-wrapper-1 [type="radio"].substituted.dark + span:before {
+    color: rgba(255, 255, 255, 0.275);
+    background-color: #222;
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xml:space="preserve" fill="rgba(34, 34, 34, 0.999)" viewBox="0 0 9 9"><rect x="0" y="4.3" transform="matrix(-0.707 -0.7072 0.7072 -0.707 0.5891 10.4702)" width="4.3" height="1.6" /><rect x="2.2" y="2.9" transform="matrix(-0.7071 0.7071 -0.7071 -0.7071 12.1877 2.9833)" width="6.1" height="1.7" /></svg>');
+  }
+  .radio-wrapper-1 [type="radio"].substituted.dark:enabled:active + span:before,
+  .radio-wrapper-1 [type="radio"].substituted.dark:enabled + span:active:before {
+    background-color: #444;
+    box-shadow: 0 0 0.04em, 0 0.06em 0.16em -0.03em transparent inset, 0 0 0 0.07em rgba(255, 255, 255, 0.1) inset;
+  }
+  .radio-wrapper-1 [type="radio"].substituted.dark:checked + span:before {
+    background-color: #a97035;
+    color: rgba(255, 255, 255, 0.075);
+  }
+  .radio-wrapper-1 [type="radio"].substituted.dark:checked:enabled:active + span:before,
+  .radio-wrapper-1 [type="radio"].substituted.dark:checked:enabled + span:active:before {
+    background-color: #c68035;
+    color: rgba(0, 0, 0, 0.275);
+  }
+  .radio-wrapper-1 [type="radio"].substituted + span {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  .pointer {
+    cursor: pointer;
+  }
+</style>` },
+  { filename: "role radio", content: `<button role="radio" style="width: 15px; height: 15px; border: solid 1px blue"></button>` }
+  ];
+
+  return (
+    <EngineIssueFailure
+      ruleId={ruleId}
+      title={title}
+      description={description}
+      helpText={helpText}
+      fixSteps={fixSteps}
+      htmlExamples={htmlExamples}
+    />
+  );
+};
+
+export default RadioDiscernibleFailure;

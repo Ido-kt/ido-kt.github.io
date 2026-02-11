@@ -1,0 +1,19 @@
+<!--testconfig
+    "testedClass": "Rules.HeadingOrder",
+    "expect": {
+        "passedNodes": ["h1"],
+        "failedNodes": ["div", "h3"]
+    }
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Example Page</title>
+  </head>
+  <body>
+    <h1>Regular H1 Heading</h1>
+    <div role="heading" aria-level="3">H3</div>
+    <h3>Regular H3 Heading</h3>
+  </body>
+</html>

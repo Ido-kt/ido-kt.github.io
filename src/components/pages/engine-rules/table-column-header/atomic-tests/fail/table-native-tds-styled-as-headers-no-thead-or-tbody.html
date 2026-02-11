@@ -1,0 +1,34 @@
+<!--testconfig
+    "testedClass": "Rules.TableColumnHeader",
+    "expect": {
+        "failedNodes": [".test-subject", ".test-subject", ".test-subject", ".test-subject"]
+    },
+    "skip": true
+-->
+<style>
+  .test-subject {
+    font-weight: bold;
+  }
+</style>
+<table>
+  <tr>
+    <td class="test-subject">
+      <span>First Name</span>
+    </td>
+    <td class="test-subject">
+      <span>Last Name</span>
+    </td>
+    <td class="test-subject">
+      <span>Company Name</span>
+    </td>
+    <td class="test-subject">
+      <span>Job Title</span>
+    </td>
+  </tr>
+  <tr>
+    <td>John</td>
+    <td>Doe</td>
+    <td>Google</td>
+    <td>Sales</td>
+  </tr>
+</table>

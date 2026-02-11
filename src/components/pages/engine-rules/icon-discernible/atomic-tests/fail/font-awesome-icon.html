@@ -1,0 +1,14 @@
+<!--testconfig
+    "testedClass": "Rules.IconDiscernible",
+    "expect": {
+        "failedNodes": ["i", "span", "div"]
+    },
+    "skip": true
+-->
+<!-- classifier returns "\f005" as discernible text, which is partially corrent, because the screen reader attmpts to read it and shows "[?]" -->
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<i class="fa fa-star"></i>
+<span class="fa fa-star"></span>
+<div class="fa fa-star"></div>

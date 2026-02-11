@@ -1,0 +1,21 @@
+<!--testconfig
+    "testedClass": "Rules.VisibilityMisuse",
+    "expect": {
+        "passedNodes": [],
+        "inapplicableNodes": ["div"]
+    }
+-->
+<html>
+  <head>
+    <style>
+      .out-of-screen {
+        position: absolute;
+        left: -9999px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- why is it detected as screen reader only?  -->
+    <div class="out-of-screen">This text is still visible to screen reader</div>
+  </body>
+</html>

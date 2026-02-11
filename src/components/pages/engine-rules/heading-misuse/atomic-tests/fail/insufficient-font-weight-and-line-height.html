@@ -1,0 +1,25 @@
+<!--testconfig
+    "testedClass": "Rules.HeadingMisuse",
+    "expect": {
+        "failedNodes": ["h2"]
+    }
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <style>
+      body {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.2rem;
+      }
+      .insufficient-style {
+        font-size: 20px; /* Larger than the base font size */
+        font-weight: 400; /* Same weight as the base */
+        line-height: 1.2rem; /* Same line height as the base */
+      }
+    </style>
+
+    <h2 role="heading" class="insufficient-style">Heading with insufficient weight and line height</h2>
+  </body>
+</html>

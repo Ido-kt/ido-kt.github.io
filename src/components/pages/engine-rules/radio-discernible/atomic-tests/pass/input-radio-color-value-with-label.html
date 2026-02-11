@@ -1,0 +1,21 @@
+<!--testconfig
+    "testedClass": "Rules.RadioDiscernible",
+    "expect": {
+        "passedNodes": ["input"]
+    }
+-->
+<style>
+  .circle {
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+  }
+  .orange {
+    background-color: #ff6b16;
+  }
+</style>
+<div>
+  <input type="radio" id="oo" value="orange" />
+  <label for="oo"><div class="orange circle" aria-label="orange"></div></label>
+</div>

@@ -1,0 +1,18 @@
+<!--testconfig
+    "testedClass": "Rules.RequiredFormFieldAriaRequired",
+    "expect": {
+        "failedNodes": ["#email1"]
+    }
+-->
+
+<form>
+  <div id="tbLabel">Email Address *</div>
+  <div
+    role="textbox"
+    contenteditable
+    aria-labelledby="tblabel"
+    id="email1"
+    aria-required
+    style="border: red 1px solid"></div>
+    <button type="submit">Submit</button>
+</form>

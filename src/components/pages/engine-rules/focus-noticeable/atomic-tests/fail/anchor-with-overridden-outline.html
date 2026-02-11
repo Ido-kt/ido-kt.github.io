@@ -1,0 +1,13 @@
+<!--testconfig
+    "testedClass": "Rules.FocusNoticeable",
+    "expect": {
+        "failedNodes": ["#test-subject"]
+    }
+-->
+<style>
+  #test-subject:focus {
+    outline: none;
+  }
+</style>
+<a id="test-subject" href="#info">info</a>
+<div id="info">Some Info</div>

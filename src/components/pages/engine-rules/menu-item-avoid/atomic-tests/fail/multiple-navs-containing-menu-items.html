@@ -1,0 +1,20 @@
+<!--testconfig
+    "testedClass": "Rules.MenuItemAvoid",
+    "expect": {
+        "failedNodes": ["#test-subject-1", "#test-subject-2"]
+    }
+-->
+<nav>
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a id="test-subject-1" role="menuitem" href="#">About</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+<nav>
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a id="test-subject-2" role="menuitem" href="#">About</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>

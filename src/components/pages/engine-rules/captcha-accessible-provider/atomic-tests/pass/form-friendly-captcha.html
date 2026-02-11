@@ -1,0 +1,17 @@
+<!--testconfig
+    "testedClass": "Rules.CaptchaAccessibleProvider",
+    "expect": {
+        "passedNodes": ["#test-subject"]
+    }
+-->
+
+<form method="POST">
+
+  <label for="comment-area">Leave a comment below and submit.</label>
+  <textarea class="mt-2 w-80" id="comment-area" name="comment" rows="4" placeholder="Hello world"></textarea>
+
+  <div id="test-subject" class="frc-captcha mt-2" data-sitekey="FCMGEMUD2LR7ICLH" data-attached="1" style="position: relative; height: 70px; padding: 0px; width: 316px; max-width: 100%; max-height: 100%; overflow: hidden; border-radius: 4px;"><input type="hidden" name="frc-captcha-response" value=".UNACTIVATED" style="display: none;"><iframe allow="clipboard-write" frameborder="0" src="./widget?origin=https%3A%2F%2Fglobal.frcapi.com&amp;sess_id=5K6zs25uw5TA&amp;sess_c=2&amp;comm_id=w_o8croJOg1PVd&amp;sdk_v=0.1.5&amp;v=1&amp;agent_id=a_kQMdtPwRLcM6&amp;lang=en&amp;sitekey=FCMGEMUD2LR7ICLH&amp;ts=1718714513534" class="frc-i-widget" data--frc-frame-id="w_o8croJOg1PVd" style="border: 0px; position: absolute; width: 100%; height: 100%;"></iframe><div class="frc-banner" style="position: absolute; bottom: 2px; right: 6px; line-height: 1;"><a href="https://friendlycaptcha.com" rel="noopener" target="_blank" style="text-decoration: none; font-weight: 500; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif; line-height: 1; letter-spacing: -0.0125rem; font-size: 10px; color: rgb(119, 119, 119);">Friendly Captcha</a></div></div>
+  <noscript>You need to enable Javascript to complete the anti-spam check.</noscript>
+
+  <button class="mt-2" type="submit">Submit</button>
+</form>

@@ -1,0 +1,27 @@
+<!--testconfig
+    "testedClass": "Rules.MenuTriggerClickable",
+    "expect": {
+        "failedNodes": [],
+        "passedNodes": ["#test-subject"]
+    }
+-->
+<style>
+  #submenu {
+    display: none;
+  }
+</style>
+<nav>
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+    <li>
+      <a id="test-subject" href="#" aria-haspopup="true" aria-expanded="false" aria-controls="submenu">Services</a>
+      <ul id="submenu" aria-hidden="true">
+        <li><a href="#">Web Design</a></li>
+        <li><a href="#">Graphic Design</a></li>
+        <li><a href="#">SEO</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>

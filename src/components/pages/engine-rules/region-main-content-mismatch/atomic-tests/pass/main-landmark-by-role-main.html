@@ -1,0 +1,16 @@
+<!--testconfig
+    "testedClass": "Rules.RegionMainContentMismatch",
+    "expect": {
+        "passedNodes": ["div"]
+    }
+-->
+<!DOCTYPE html>
+<html>
+  <body>
+    <header>Header content</header>
+    <div role="main">
+      <section style="height: 600px;">Nested main content</section>
+    </div>
+    <footer>Footer content</footer>
+  </body>
+</html>

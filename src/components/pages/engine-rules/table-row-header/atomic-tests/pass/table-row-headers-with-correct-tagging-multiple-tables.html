@@ -1,0 +1,33 @@
+<!--testconfig
+    "testedClass": "Rules.TableRowHeader",
+    "expect": {
+        "passedNodes": [".test-subject", ".test-subject", ".test-subject",".test-subject"]
+    }
+-->
+<style>
+  td, th {
+    border: 1px solid black;
+    width: 100px;
+  }
+</style>
+
+<table>
+  <tr>
+    <th class="test-subject">Row 1</th>
+    <td>Row 1, Cell 1</td>
+  </tr>
+  <tr>
+    <th class="test-subject">Row 2</th>
+    <td>Row 2, Cell 1</td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <th class="test-subject">Row 1</th>
+    <td>Row 1, Cell 1</td>
+  </tr>
+  <tr>
+    <th class="test-subject">Row 2</th>
+    <td>Row 2, Cell 1</td>
+  </tr>
+</table>

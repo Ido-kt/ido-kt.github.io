@@ -1,0 +1,9 @@
+<!--testconfig
+    "testedClass": "Rules.VisibleTextPartOfAccessibleName",
+    "expect": {
+        "inapplicableNodes": []
+    }
+-->
+<!-- This email text field does not need to have its visible text match the accessible name. The content of a textfield shows its value instead of its label; it does not support name from content. The label is usually adjacent to the textfield instead. -->
+<div>E-mail</div>
+<input type="email" aria-label="E-mail" value="Contact" />

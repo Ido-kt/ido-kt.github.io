@@ -1,0 +1,28 @@
+<!--testconfig
+    "testedClass": "Rules.HeadingMismatch",
+    "expect": {
+        "passedNodes": ["div.text-xl"]
+    }
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Example Page</title>
+  </head>
+  <body>
+    <style>
+      body {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      .text-xl {
+        font-size: 20px;
+        font-weight: 400;
+      }
+    </style>
+
+    <div class="text-xl" role="heading">Big Heading</div>
+    <p>Regular body text</p>
+  </body>
+</html>

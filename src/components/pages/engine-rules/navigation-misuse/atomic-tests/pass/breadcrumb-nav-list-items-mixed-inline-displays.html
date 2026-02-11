@@ -1,0 +1,86 @@
+<!--testconfig
+    "testedClass": "Rules.NavigationMisuse",
+    "expect": {
+        "failedNodes": [],
+        "passedNodes": [],
+        "inapplicableNodes": ["nav.breadcrumbs"]
+    }
+-->
+
+<nav class="breadcrumbs" itemtype="https://schema.org/BreadcrumbList">
+  <li itemprop="itemListElement" itemtype="http://schema.org/ListItem">
+    <a itemprop="item" href="/blog/" data-wpel-link="internal">
+      <span itemprop="name">Blog</span>
+      <span itemprop="name">Blog</span>
+    </a>
+  </li>
+  <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+    <a data-utm-content="breadcrumbs" itemprop="item" href="/blog/1">
+      <span itemprop="name">Security</span>
+      <meta itemprop="position" content="2" />
+    </a>
+  </li>
+  <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+    <a data-utm-content="breadcrumbs" itemprop="item" href="/blog/1/2">
+      <span itemprop="name">Security</span>
+      <meta itemprop="position" content="2" />
+    </a>
+  </li>
+  <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+    <a data-utm-content="breadcrumbs" itemprop="item" href="/blog/1/2/3">
+      <span itemprop="name">Security</span>
+      <meta itemprop="position" content="2" />
+    </a>
+  </li>
+</nav>
+
+<style>
+  .breadcrumbs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .breadcrumbs li {
+    display: inline;
+    font-family: var(--font-family-primary);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 32px;
+    color: #7c889d;
+  }
+
+  .breadcrumbs li:not(:last-child) {
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: -moz-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .breadcrumbs li:not(:last-child):after {
+    content: "";
+    width: 12px;
+    height: 16px;
+    margin: 0 3px 0 8px;
+    display: inline-block;
+    background-image: url(./icon-slash.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+
+  .breadcrumbs li a {
+    color: var(--color-green);
+    font-weight: 700;
+  }
+
+  .breadcrumbs li a:hover {
+    color: var(--color-green-hover);
+  }
+</style>

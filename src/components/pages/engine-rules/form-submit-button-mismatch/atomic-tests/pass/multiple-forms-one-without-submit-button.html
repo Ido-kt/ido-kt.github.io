@@ -1,0 +1,16 @@
+<!--testconfig
+    "testedClass": "Rules.FormSubmitButtonMismatch",
+    "expect": {
+        "passedNodes": ["input[type='submit']"],
+        "failedNodes": []
+    }
+-->
+<form id="submit-1">
+  <input type="text" />
+  <input type="password" />
+  <input type="submit">
+</form>
+<form id="missing-submit-2">
+  <input type="text" />
+  <input type="password" />
+</form>

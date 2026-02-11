@@ -1,0 +1,820 @@
+<!--testconfig
+    "testedClass": "Rules.CarouselDraggingMovements",
+    "expect": {
+        "passedNodes": [".slick-initialized"]
+    }
+-->
+<div
+  class="halo-row brand-layout--slider column-5 brands-slider halo-slider sm-column-2 md-column-3 slick-initialized slick-slider"
+  data-brands-slider=""
+  data-rows="5"
+  data-arrows="true"
+  data-dots="false"
+  data-center-mode="false"
+  data-rows-mobile="2"
+  data-autoplay="false"
+  data-autoplay-speed="3000"
+  style="
+    --row-distance-style: -5px;
+    block-size: 100px;
+    inset: 0px;
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    height: 100px;
+    inline-size: 741px;
+    inset-block: 0px;
+    inset-inline: 0px;
+    margin-inline: -8px;
+    margin-left: -8px;
+    margin-right: -8px;
+    perspective-origin: 370.5px 50px;
+    position: relative;
+    touch-action: pan-y;
+    transform-origin: 370.5px 50px;
+    user-select: none;
+    width: 741px;
+  "
+>
+  <button
+    type="button"
+    class="slick-prev slick-arrow slick-disabled"
+    aria-label="Previous"
+    role="button"
+    aria-disabled="true"
+    style="
+      display: none;
+      background-color: rgb(255, 255, 255);
+      block-size: 35px;
+      border-block: 1px solid rgb(255, 255, 255);
+      border-color: rgb(255, 255, 255);
+      border-radius: 50%;
+      border-style: solid;
+      border-width: 1px;
+      border-end-end-radius: 50%;
+      border-end-start-radius: 50%;
+      border-inline: 1px solid rgb(255, 255, 255);
+      border-start-end-radius: 50%;
+      border-start-start-radius: 50%;
+      box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 6px 0px;
+      font-size: 0px;
+      height: 35px;
+      inline-size: 35px;
+      inset-block-start: 50%;
+      inset-inline-start: 0px;
+      left: 0px;
+      line-height: 0px;
+      opacity: 0.4;
+      padding-block: 8px;
+      padding: 8px;
+      padding-inline: 8px;
+      perspective-origin: 50% 50%;
+      pointer-events: none;
+      position: absolute;
+      top: 50%;
+      transform-origin: 50% 50%;
+      transition-duration: 0.3s;
+      user-select: none;
+      width: 35px;
+      z-index: 1;
+    "
+  >
+    <svg
+      xmlns="/"
+      viewBox="0 0 24 24"
+      style="
+        block-size: 22px;
+        border-block-color: rgb(0, 0, 0);
+        border-color: rgb(0, 0, 0);
+        border-inline-color: rgb(0, 0, 0);
+        caret-color: rgb(0, 0, 0);
+        color: rgb(0, 0, 0);
+        column-rule-color: rgb(0, 0, 0);
+        cursor: pointer;
+        fill: rgb(0, 0, 0);
+        font-family: Arial;
+        font-size: 0px;
+        height: 22px;
+        inline-size: 22px;
+        line-height: 0px;
+        max-block-size: 100%;
+        max-height: 100%;
+        max-inline-size: 100%;
+        max-width: 100%;
+        outline-color: rgb(0, 0, 0);
+        overflow-block: hidden;
+        overflow-clip-margin: content-box;
+        overflow-inline: hidden;
+        overflow: hidden;
+        perspective-origin: 50% 50%;
+        pointer-events: none;
+        stroke: rgba(0, 0, 0, 0);
+        text-align: center;
+        text-decoration-color: rgb(0, 0, 0);
+        text-emphasis-color: rgb(0, 0, 0);
+        transform-origin: 50% 50%;
+        user-select: none;
+        width: 22px;
+        -webkit-text-fill-color: rgb(0, 0, 0);
+        -webkit-text-stroke-color: rgb(0, 0, 0);
+      "
+    >
+      <path d="M 7.75 1.34375 L 6.25 2.65625 L 14.65625 12 L 6.25 21.34375 L 7.75 22.65625 L 16.75 12.65625 L 17.34375 12 L 16.75 11.34375 Z"></path>
+    </svg>
+  </button>
+  <div
+    aria-live="polite"
+    class="slick-list draggable"
+    style="
+      block-size: 100px;
+      inset: 0px;
+      display: block;
+      height: 100px;
+      inline-size: 741px;
+      inset-block: 0px;
+      inset-inline: 0px;
+      min-block-size: auto;
+      min-height: auto;
+      min-inline-size: auto;
+      min-width: auto;
+      overflow-block: hidden;
+      overflow-inline: hidden;
+      overflow: hidden;
+      perspective-origin: 370.5px 50px;
+      position: relative;
+      transform: matrix(1, 0, 0, 1, 0, 0);
+      transform-origin: 370.5px 50px;
+      user-select: none;
+      width: 741px;
+    "
+  >
+    <div
+      class="slick-track"
+      style="opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0); block-size: 100px; inset: 0px; display: block; height: 100px; inline-size: 930px; inset-block: 0px; inset-inline: 0px; margin-inline-end: -189px; margin-right: -189px; perspective-origin: 465px 50px; position: relative; transform-origin: 465px 50px; user-select: none; width: 930px"
+      role="listbox"
+      data-id="0"
+    >
+      <div
+        class="halo-item block-image_zJVTQT slick-slide slick-current slick-active"
+        id="block-image_zJVTQT"
+        style="
+          --item-distance-style: 5px;
+          --title_color: #000000;
+          --title_color_hover: #3e8cc4;
+          --color_des: #3c3c3c;
+          block-size: 100px;
+          display: block;
+          float: left;
+          height: 100px;
+          inline-size: 186px;
+          min-block-size: 1px;
+          min-height: 1px;
+          padding-inline: 8px;
+          padding-left: 8px;
+          padding-right: 8px;
+          perspective-origin: 93px 50px;
+          transform-origin: 93px 50px;
+          user-select: none;
+          width: 186px;
+        "
+        data-slick-index="0"
+        aria-hidden="false"
+        tabindex="-1"
+        role="option"
+        aria-describedby="slick-slide00"
+      >
+        <div class="wrapper-content" style="--border_radius: 0px; --animation-order: 1; block-size: 100px; display: block; height: 100px; inline-size: 170px; perspective-origin: 85px 50px; transform-origin: 85px 50px; user-select: none; width: 170px">
+          <div
+            class="wrapper-image"
+            style="
+              align-items: center;
+              background-color: rgb(255, 255, 255);
+              block-size: 100px;
+              border-block: 1px solid rgba(0, 0, 0, 0.15);
+              border-color: rgba(0, 0, 0, 0.15);
+              border-radius: 4px;
+              border-style: solid;
+              border-width: 1px;
+              border-end-end-radius: 4px;
+              border-end-start-radius: 4px;
+              border-inline: 1px solid rgba(0, 0, 0, 0.15);
+              border-start-end-radius: 4px;
+              border-start-start-radius: 4px;
+              display: flex;
+              height: 100px;
+              inline-size: 170px;
+              justify-content: center;
+              overflow-block: hidden;
+              overflow-inline: hidden;
+              overflow: hidden;
+              padding-block: 8px;
+              padding: 8px 20px;
+              padding-inline: 20px;
+              perspective-origin: 85px 50px;
+              transform-origin: 85px 50px;
+              user-select: none;
+              width: 170px;
+            "
+          >
+            <a
+              class=""
+              title=""
+              href="/collections/birkenstock"
+              aria-label="COMFORT ONE SHOES"
+              tabindex="0"
+              style="
+                block-size: 20.75px;
+                border-radius: 0%;
+                border-end-end-radius: 0%;
+                border-end-start-radius: 0%;
+                border-start-end-radius: 0%;
+                border-start-start-radius: 0%;
+                display: block;
+                height: 20.75px;
+                inline-size: 128px;
+                min-block-size: auto;
+                min-height: auto;
+                min-inline-size: auto;
+                min-width: auto;
+                perspective-origin: 64px 10.375px;
+                transform-origin: 64px 10.375px;
+                user-select: none;
+                width: 128px;
+              "
+            >
+              <img
+                data-srcset="//comfortoneshoes.com/cdn/shop/files/birkenstock_blue-195_165x.png?v=1753277492 165w,//comfortoneshoes.com/cdn/shop/files/birkenstock_blue-195_170x.png?v=1753277492 170w,//comfortoneshoes.com/cdn/shop/files/birkenstock_blue-195_185x.png?v=1753277492 185w"
+                loading="lazy"
+                sizes="(min-width: 1100px) 195px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                alt=""
+                size="195"
+                class="ls-is-cached lazyloaded"
+                style="
+                  margin: 0px auto;
+                  block-size: 20.75px;
+                  border-radius: 0%;
+                  border-end-end-radius: 0%;
+                  border-end-start-radius: 0%;
+                  border-start-end-radius: 0%;
+                  border-start-start-radius: 0%;
+                  cursor: pointer;
+                  height: 20.75px;
+                  inline-size: 128px;
+                  perspective-origin: 64px 10.375px;
+                  transform-origin: 64px 10.375px;
+                  user-select: none;
+                  width: 128px;
+                "
+                srcset="//comfortoneshoes.com/cdn/shop/files/birkenstock_blue-195_165x.png?v=1753277492 165w, //comfortoneshoes.com/cdn/shop/files/birkenstock_blue-195_170x.png?v=1753277492 170w, //comfortoneshoes.com/cdn/shop/files/birkenstock_blue-195_185x.png?v=1753277492 185w" /><span
+                class="data-lazy-loading"
+                style="cursor: pointer; user-select: none"
+              ></span
+            ></a>
+          </div>
+        </div>
+      </div>
+      <div
+        class="halo-item block-image_Cw6LYD slick-slide slick-active"
+        id="block-image_Cw6LYD"
+        style="
+          --item-distance-style: 5px;
+          --title_color: #000000;
+          --title_color_hover: #3e8cc4;
+          --color_des: #3c3c3c;
+          block-size: 100px;
+          display: block;
+          float: left;
+          height: 100px;
+          inline-size: 186px;
+          min-block-size: 1px;
+          min-height: 1px;
+          padding-inline: 8px;
+          padding-left: 8px;
+          padding-right: 8px;
+          perspective-origin: 93px 50px;
+          transform-origin: 93px 50px;
+          user-select: none;
+          width: 186px;
+        "
+        data-slick-index="1"
+        aria-hidden="false"
+        tabindex="-1"
+        role="option"
+        aria-describedby="slick-slide01"
+      >
+        <div class="wrapper-content" style="--border_radius: 0px; --animation-order: 2; block-size: 100px; display: block; height: 100px; inline-size: 170px; perspective-origin: 85px 50px; transform-origin: 85px 50px; user-select: none; width: 170px">
+          <div
+            class="wrapper-image"
+            style="
+              align-items: center;
+              background-color: rgb(255, 255, 255);
+              block-size: 100px;
+              border-block: 1px solid rgba(0, 0, 0, 0.15);
+              border-color: rgba(0, 0, 0, 0.15);
+              border-radius: 4px;
+              border-style: solid;
+              border-width: 1px;
+              border-end-end-radius: 4px;
+              border-end-start-radius: 4px;
+              border-inline: 1px solid rgba(0, 0, 0, 0.15);
+              border-start-end-radius: 4px;
+              border-start-start-radius: 4px;
+              display: flex;
+              height: 100px;
+              inline-size: 170px;
+              justify-content: center;
+              overflow-block: hidden;
+              overflow-inline: hidden;
+              overflow: hidden;
+              padding-block: 8px;
+              padding: 8px 20px;
+              padding-inline: 20px;
+              perspective-origin: 85px 50px;
+              transform-origin: 85px 50px;
+              user-select: none;
+              width: 170px;
+            "
+          >
+            <a
+              class=""
+              title=""
+              href="/collections/ugg"
+              aria-label="COMFORT ONE SHOES"
+              tabindex="0"
+              style="
+                block-size: 55px;
+                border-radius: 0%;
+                border-end-end-radius: 0%;
+                border-end-start-radius: 0%;
+                border-start-end-radius: 0%;
+                border-start-start-radius: 0%;
+                display: block;
+                height: 55px;
+                inline-size: 120px;
+                min-block-size: auto;
+                min-height: auto;
+                min-inline-size: auto;
+                min-width: auto;
+                perspective-origin: 60px 27.5px;
+                transform-origin: 60px 27.5px;
+                user-select: none;
+                width: 120px;
+              "
+            >
+              <img
+                data-srcset="//comfortoneshoes.com/cdn/shop/files/ugg-tiny_bc164fa2-12e4-45c4-aacd-366068847e58.png?v=1753277193
+"
+                loading="lazy"
+                sizes="(min-width: 1100px) 120px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                alt=""
+                size="120"
+                class="ls-is-cached lazyloaded"
+                style="margin: 0px auto; block-size: 55px; border-radius: 0%; border-end-end-radius: 0%; border-end-start-radius: 0%; border-start-end-radius: 0%; border-start-start-radius: 0%; cursor: pointer; height: 55px; inline-size: 120px; perspective-origin: 60px 27.5px; transform-origin: 60px 27.5px; user-select: none; width: 120px"
+                srcset="//comfortoneshoes.com/cdn/shop/files/ugg-tiny_bc164fa2-12e4-45c4-aacd-366068847e58.png?v=1753277193" /><span class="data-lazy-loading" style="cursor: pointer; user-select: none"></span
+            ></a>
+          </div>
+        </div>
+      </div>
+      <div
+        class="halo-item block-image_JfTNP6 slick-slide slick-active"
+        id="block-image_JfTNP6"
+        style="
+          --item-distance-style: 5px;
+          --title_color: #000000;
+          --title_color_hover: #3e8cc4;
+          --color_des: #3c3c3c;
+          block-size: 100px;
+          display: block;
+          float: left;
+          height: 100px;
+          inline-size: 186px;
+          min-block-size: 1px;
+          min-height: 1px;
+          padding-inline: 8px;
+          padding-left: 8px;
+          padding-right: 8px;
+          perspective-origin: 93px 50px;
+          transform-origin: 93px 50px;
+          user-select: none;
+          width: 186px;
+        "
+        data-slick-index="2"
+        aria-hidden="false"
+        tabindex="-1"
+        role="option"
+        aria-describedby="slick-slide02"
+      >
+        <div class="wrapper-content" style="--border_radius: 0px; --animation-order: 3; block-size: 100px; display: block; height: 100px; inline-size: 170px; perspective-origin: 85px 50px; transform-origin: 85px 50px; user-select: none; width: 170px">
+          <div
+            class="wrapper-image"
+            style="
+              align-items: center;
+              background-color: rgb(255, 255, 255);
+              block-size: 100px;
+              border-block: 1px solid rgba(0, 0, 0, 0.15);
+              border-color: rgba(0, 0, 0, 0.15);
+              border-radius: 4px;
+              border-style: solid;
+              border-width: 1px;
+              border-end-end-radius: 4px;
+              border-end-start-radius: 4px;
+              border-inline: 1px solid rgba(0, 0, 0, 0.15);
+              border-start-end-radius: 4px;
+              border-start-start-radius: 4px;
+              display: flex;
+              height: 100px;
+              inline-size: 170px;
+              justify-content: center;
+              overflow-block: hidden;
+              overflow-inline: hidden;
+              overflow: hidden;
+              padding-block: 8px;
+              padding: 8px 20px;
+              padding-inline: 20px;
+              perspective-origin: 85px 50px;
+              transform-origin: 85px 50px;
+              user-select: none;
+              width: 170px;
+            "
+          >
+            <a
+              class=""
+              title=""
+              href="/collections/hoka"
+              aria-label="COMFORT ONE SHOES"
+              tabindex="0"
+              style="
+                block-size: 128px;
+                border-radius: 0%;
+                border-end-end-radius: 0%;
+                border-end-start-radius: 0%;
+                border-start-end-radius: 0%;
+                border-start-start-radius: 0%;
+                display: block;
+                height: 128px;
+                inline-size: 128px;
+                min-block-size: auto;
+                min-height: auto;
+                min-inline-size: auto;
+                min-width: auto;
+                perspective-origin: 64px 64px;
+                transform-origin: 64px 64px;
+                user-select: none;
+                width: 128px;
+              "
+            >
+              <img
+                data-srcset="//comfortoneshoes.com/cdn/shop/files/c963ae59acf2704cc95d433092a64a6c90a2aef8_165x.png?v=1752816379 165w,//comfortoneshoes.com/cdn/shop/files/c963ae59acf2704cc95d433092a64a6c90a2aef8_170x.png?v=1752816379 170w,//comfortoneshoes.com/cdn/shop/files/c963ae59acf2704cc95d433092a64a6c90a2aef8_185x.png?v=1752816379 185w,//comfortoneshoes.com/cdn/shop/files/c963ae59acf2704cc95d433092a64a6c90a2aef8_198x.png?v=1752816379 198w,//comfortoneshoes.com/cdn/shop/files/c963ae59acf2704cc95d433092a64a6c90a2aef8_205x.png?v=1752816379 205w,//comfortoneshoes.com/cdn/shop/files/c963ae59acf2704cc95d433092a64a6c90a2aef8_210x.png?v=1752816379 210w,//comfortoneshoes.com/cdn/shop/files/c963ae59acf2704cc95d433092a64a6c90a2aef8_220x.png?v=1752816379 220w"
+                loading="lazy"
+                sizes="(min-width: 1100px) 240px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                alt=""
+                size="240"
+                class="ls-is-cached lazyloaded"
+                style="margin: 0px auto; block-size: 128px; border-radius: 0%; border-end-end-radius: 0%; border-end-start-radius: 0%; border-start-end-radius: 0%; border-start-start-radius: 0%; cursor: pointer; height: 128px; inline-size: 128px; perspective-origin: 64px 64px; transform-origin: 64px 64px; user-select: none; width: 128px"
+                srcset="
+                  //comfortoneshoes.com/cdn/shop/files/c963ae59acf2704cc95d433092a64a6c90a2aef8_165x.png?v=1752816379 165w,
+                  //comfortoneshoes.com/cdn/shop/files/c963ae59acf2704cc95d433092a64a6c90a2aef8_170x.png?v=1752816379 170w,
+                  //comfortoneshoes.com/cdn/shop/files/c963ae59acf2704cc95d433092a64a6c90a2aef8_185x.png?v=1752816379 185w,
+                  //comfortoneshoes.com/cdn/shop/files/c963ae59acf2704cc95d433092a64a6c90a2aef8_198x.png?v=1752816379 198w,
+                  //comfortoneshoes.com/cdn/shop/files/c963ae59acf2704cc95d433092a64a6c90a2aef8_205x.png?v=1752816379 205w,
+                  //comfortoneshoes.com/cdn/shop/files/c963ae59acf2704cc95d433092a64a6c90a2aef8_210x.png?v=1752816379 210w,
+                  //comfortoneshoes.com/cdn/shop/files/c963ae59acf2704cc95d433092a64a6c90a2aef8_220x.png?v=1752816379 220w
+                " /><span class="data-lazy-loading" style="cursor: pointer; user-select: none"></span
+            ></a>
+          </div>
+        </div>
+      </div>
+      <div
+        class="halo-item block-image_cWA3x4 slick-slide slick-active"
+        id="block-image_cWA3x4"
+        style="
+          --item-distance-style: 5px;
+          --title_color: #000000;
+          --title_color_hover: #3e8cc4;
+          --color_des: #3c3c3c;
+          block-size: 100px;
+          display: block;
+          float: left;
+          height: 100px;
+          inline-size: 186px;
+          min-block-size: 1px;
+          min-height: 1px;
+          padding-inline: 8px;
+          padding-left: 8px;
+          padding-right: 8px;
+          perspective-origin: 93px 50px;
+          transform-origin: 93px 50px;
+          user-select: none;
+          width: 186px;
+        "
+        data-slick-index="3"
+        aria-hidden="false"
+        tabindex="-1"
+        role="option"
+        aria-describedby="slick-slide03"
+      >
+        <div class="wrapper-content" style="--border_radius: 0px; --animation-order: 4; block-size: 100px; display: block; height: 100px; inline-size: 170px; perspective-origin: 85px 50px; transform-origin: 85px 50px; user-select: none; width: 170px">
+          <div
+            class="wrapper-image"
+            style="
+              align-items: center;
+              background-color: rgb(255, 255, 255);
+              block-size: 100px;
+              border-block: 1px solid rgba(0, 0, 0, 0.15);
+              border-color: rgba(0, 0, 0, 0.15);
+              border-radius: 4px;
+              border-style: solid;
+              border-width: 1px;
+              border-end-end-radius: 4px;
+              border-end-start-radius: 4px;
+              border-inline: 1px solid rgba(0, 0, 0, 0.15);
+              border-start-end-radius: 4px;
+              border-start-start-radius: 4px;
+              display: flex;
+              height: 100px;
+              inline-size: 170px;
+              justify-content: center;
+              overflow-block: hidden;
+              overflow-inline: hidden;
+              overflow: hidden;
+              padding-block: 8px;
+              padding: 8px 20px;
+              padding-inline: 20px;
+              perspective-origin: 85px 50px;
+              transform-origin: 85px 50px;
+              user-select: none;
+              width: 170px;
+            "
+          >
+            <a
+              class=""
+              title=""
+              href="/collections/on-running"
+              aria-label="COMFORT ONE SHOES"
+              tabindex="0"
+              style="
+                block-size: 74px;
+                border-radius: 0%;
+                border-end-end-radius: 0%;
+                border-end-start-radius: 0%;
+                border-start-end-radius: 0%;
+                border-start-start-radius: 0%;
+                display: block;
+                height: 74px;
+                inline-size: 37px;
+                min-block-size: auto;
+                min-height: auto;
+                min-inline-size: auto;
+                min-width: auto;
+                perspective-origin: 18.5px 37px;
+                transform-origin: 18.5px 37px;
+                user-select: none;
+                width: 37px;
+              "
+            >
+              <img
+                data-srcset="//comfortoneshoes.com/cdn/shop/files/on-tiny-logo.png?v=1753128464
+"
+                loading="lazy"
+                sizes="(min-width: 1100px) 37px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                alt=""
+                size="37"
+                class="ls-is-cached lazyloaded"
+                style="margin: 0px auto; block-size: 74px; border-radius: 0%; border-end-end-radius: 0%; border-end-start-radius: 0%; border-start-end-radius: 0%; border-start-start-radius: 0%; cursor: pointer; height: 74px; inline-size: 37px; perspective-origin: 18.5px 37px; transform-origin: 18.5px 37px; user-select: none; width: 37px"
+                srcset="//comfortoneshoes.com/cdn/shop/files/on-tiny-logo.png?v=1753128464" /><span class="data-lazy-loading" style="cursor: pointer; user-select: none"></span
+            ></a>
+          </div>
+        </div>
+      </div>
+      <div
+        class="halo-item block-image_CkW4PD slick-slide"
+        id="block-image_CkW4PD"
+        style="
+          --item-distance-style: 5px;
+          --title_color: #000000;
+          --title_color_hover: #3e8cc4;
+          --color_des: #3c3c3c;
+          block-size: 100px;
+          display: block;
+          float: left;
+          height: 100px;
+          inline-size: 186px;
+          min-block-size: 1px;
+          min-height: 1px;
+          padding-inline: 8px;
+          padding-left: 8px;
+          padding-right: 8px;
+          perspective-origin: 93px 50px;
+          transform-origin: 93px 50px;
+          user-select: none;
+          width: 186px;
+        "
+        data-slick-index="4"
+        aria-hidden="true"
+        tabindex="-1"
+        role="option"
+        aria-describedby="slick-slide04"
+      >
+        <div class="wrapper-content" style="--border_radius: 0px; --animation-order: 5; block-size: 100px; display: block; height: 100px; inline-size: 170px; perspective-origin: 85px 50px; transform-origin: 85px 50px; user-select: none; width: 170px">
+          <div
+            class="wrapper-image"
+            style="
+              align-items: center;
+              background-color: rgb(255, 255, 255);
+              block-size: 100px;
+              border-block: 1px solid rgba(0, 0, 0, 0.15);
+              border-color: rgba(0, 0, 0, 0.15);
+              border-radius: 4px;
+              border-style: solid;
+              border-width: 1px;
+              border-end-end-radius: 4px;
+              border-end-start-radius: 4px;
+              border-inline: 1px solid rgba(0, 0, 0, 0.15);
+              border-start-end-radius: 4px;
+              border-start-start-radius: 4px;
+              display: flex;
+              height: 100px;
+              inline-size: 170px;
+              justify-content: center;
+              overflow-block: hidden;
+              overflow-inline: hidden;
+              overflow: hidden;
+              padding-block: 8px;
+              padding: 8px 20px;
+              padding-inline: 20px;
+              perspective-origin: 85px 50px;
+              transform-origin: 85px 50px;
+              user-select: none;
+              width: 170px;
+            "
+          >
+            <a
+              class=""
+              title=""
+              href="/collections/hartjes"
+              aria-label="COMFORT ONE SHOES"
+              tabindex="-1"
+              style="
+                block-size: 18.6797px;
+                border-radius: 0%;
+                border-end-end-radius: 0%;
+                border-end-start-radius: 0%;
+                border-start-end-radius: 0%;
+                border-start-start-radius: 0%;
+                display: block;
+                height: 18.6797px;
+                inline-size: 128px;
+                min-block-size: auto;
+                min-height: auto;
+                min-inline-size: auto;
+                min-width: auto;
+                perspective-origin: 64px 9.33594px;
+                transform-origin: 64px 9.33984px;
+                user-select: none;
+                width: 128px;
+              "
+            >
+              <img
+                data-srcset="//comfortoneshoes.com/cdn/shop/files/hartjes-black-195_165x.png?v=1753277582 165w,//comfortoneshoes.com/cdn/shop/files/hartjes-black-195_170x.png?v=1753277582 170w,//comfortoneshoes.com/cdn/shop/files/hartjes-black-195_185x.png?v=1753277582 185w"
+                loading="lazy"
+                sizes="(min-width: 1100px) 195px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                alt=""
+                size="195"
+                class="ls-is-cached lazyloaded"
+                style="
+                  margin: 0px auto;
+                  block-size: 18.6797px;
+                  border-radius: 0%;
+                  border-end-end-radius: 0%;
+                  border-end-start-radius: 0%;
+                  border-start-end-radius: 0%;
+                  border-start-start-radius: 0%;
+                  cursor: pointer;
+                  height: 18.6797px;
+                  inline-size: 128px;
+                  perspective-origin: 64px 9.33594px;
+                  transform-origin: 64px 9.33984px;
+                  user-select: none;
+                  width: 128px;
+                "
+                srcset="//comfortoneshoes.com/cdn/shop/files/hartjes-black-195_165x.png?v=1753277582 165w, //comfortoneshoes.com/cdn/shop/files/hartjes-black-195_170x.png?v=1753277582 170w, //comfortoneshoes.com/cdn/shop/files/hartjes-black-195_185x.png?v=1753277582 185w" /><span
+                class="data-lazy-loading"
+                style="cursor: pointer; user-select: none"
+              ></span
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button
+    type="button"
+    class="slick-next slick-arrow"
+    aria-label="Next"
+    role="button"
+    style="
+      background-color: rgb(255, 255, 255);
+      block-size: 35px;
+      border-block: 1px solid rgb(255, 255, 255);
+      border-color: rgb(255, 255, 255);
+      border-radius: 50%;
+      border-style: solid;
+      border-width: 1px;
+      border-end-end-radius: 50%;
+      border-end-start-radius: 50%;
+      border-inline: 1px solid rgb(255, 255, 255);
+      border-start-end-radius: 50%;
+      border-start-start-radius: 50%;
+      inset: 50px 0px 15px 706px;
+      box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 6px 0px;
+      display: block;
+      font-size: 0px;
+      height: 35px;
+      inline-size: 35px;
+      inset-block: 50px 15px;
+      inset-inline: 706px 0px;
+      line-height: 0px;
+      padding-block: 8px;
+      padding: 8px;
+      padding-inline: 8px;
+      perspective-origin: 17.5px 17.5px;
+      position: absolute;
+      transform: matrix(1, 0, 0, 1, 0, -17.5);
+      transform-origin: 17.5px 17.5px;
+      transition-duration: 0.3s;
+      user-select: none;
+      width: 35px;
+      z-index: 1;
+    "
+    aria-disabled="false"
+  >
+    <svg
+      xmlns="/"
+      viewBox="0 0 24 24"
+      style="
+        block-size: 17px;
+        border-block-color: rgb(0, 0, 0);
+        border-color: rgb(0, 0, 0);
+        border-inline-color: rgb(0, 0, 0);
+        caret-color: rgb(0, 0, 0);
+        color: rgb(0, 0, 0);
+        column-rule-color: rgb(0, 0, 0);
+        cursor: pointer;
+        fill: rgb(0, 0, 0);
+        font-family: Arial;
+        font-size: 0px;
+        height: 17px;
+        inline-size: 17px;
+        line-height: 0px;
+        max-block-size: 100%;
+        max-height: 100%;
+        max-inline-size: 100%;
+        max-width: 100%;
+        outline-color: rgb(0, 0, 0);
+        overflow-block: hidden;
+        overflow-clip-margin: content-box;
+        overflow-inline: hidden;
+        overflow: hidden;
+        perspective-origin: 8.5px 8.5px;
+        stroke: rgba(0, 0, 0, 0);
+        text-align: center;
+        text-decoration-color: rgb(0, 0, 0);
+        text-emphasis-color: rgb(0, 0, 0);
+        transform-origin: 8.5px 8.5px;
+        user-select: none;
+        width: 17px;
+        -webkit-text-fill-color: rgb(0, 0, 0);
+        -webkit-text-stroke-color: rgb(0, 0, 0);
+      "
+    >
+      <path d="M 7.75 1.34375 L 6.25 2.65625 L 14.65625 12 L 6.25 21.34375 L 7.75 22.65625 L 16.75 12.65625 L 17.34375 12 L 16.75 11.34375 Z"></path>
+    </svg>
+  </button>
+</div>
+<style>
+  [data-id="0"]::after {
+    block-size: 0px;
+    clear: both;
+    content: "";
+    display: table;
+    height: 0px;
+    inline-size: 0px;
+    perspective-origin: 0px 0px;
+    transform-origin: 0px 0px;
+    user-select: none;
+    width: 0px;
+    --row-distance-style: -5px;
+  }
+  [data-id="0"]::before {
+    block-size: 0px;
+    content: "";
+    display: table;
+    height: 0px;
+    inline-size: 0px;
+    perspective-origin: 0px 0px;
+    transform-origin: 0px 0px;
+    user-select: none;
+    width: 0px;
+    --row-distance-style: -5px;
+  }
+</style>

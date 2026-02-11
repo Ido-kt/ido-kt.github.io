@@ -1,0 +1,24 @@
+<!--testconfig
+    "testedClass": "Rules.SelectOptionMismatch",
+    "expect": {
+        "passedNodes": ["[role=option]", "[role=option]", "[role=option]", "[role=option]", "[role=option]"],
+        "failedNodes": ["#test-subject"]
+    }
+-->
+
+<form>
+    <div class="custom-select">
+        <button role="combobox">Select an option...</button>
+        <div role="listbox" style="opacity: 0">
+            <div role="option" onclick="">Option 1</div>
+            <div role="option" onclick="">Option 2</div>
+            <div role="option" onclick="">Option 3</div>
+            <div>
+                Sub-options
+                <div role="option" onclick="">Sub-option 1</div>
+                <div id="test-subject" onclick="">Sub-option 2</div>
+                <div role="option" onclick="">Sub-option 3</div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,22 @@
+<!--testconfig
+    "testedClass": "Rules.MenuTriggerMisuse",
+    "expect": {
+        "failedNodes": ["#test-subject"]
+    },
+    "skip": true
+-->
+
+<nav aria-label="Main"></nav>
+<ul>
+  <li><a href="/home">Home</a></li>
+  <li><a href="/shop">Shop</a></li>
+  <li class="has-submenu">
+    <a href="#" aria-expanded="false"> Space Bears </a>
+    <ul>
+      <li><a aria-haspopup="true" aria-expanded="false" id="test-subject" href="/space-bear-6">Space Bear 6</a></li>
+      <li><a href="/space-bear-6-plus">Space Bear 6 Plus</a></li>
+    </ul>
+  </li>
+  <li><a href="/mars-cars">Mars Cars</a></li>
+  <li><a href="/contact">Contact</a></li>
+</ul>

@@ -1,0 +1,10 @@
+<!--testconfig
+    "testedClass": "Rules.AriaDescribedByHasReference",
+    "expect": {
+        "passedNodes": ["input", "input"]
+    }
+-->
+<input id="describedby-by" aria-describedby="description" />
+<div id="description">Some description</div>
+<input id="describedby-by-2" aria-describedby="description-2" />
+<div id="description-2">Some description</div>

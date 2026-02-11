@@ -1,0 +1,35 @@
+<!--testconfig
+    "testedClass": "Rules.SalePriceDiscernible",
+    "expect": {
+        "passedNodes": ["span.price-regular"]
+    }
+-->
+<style>
+  .product {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .price {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .price-regular {
+    text-decoration: line-through;
+  }
+
+  .price-sale {
+    color: red;
+  }
+
+</style>
+
+<div>
+  <div class="product">
+    <div class="price">
+      <span class="price-regular" aria-label="was">$100</span>
+      <span class="price-sale">$90</span>
+    </div>
+  </div>
+</div>

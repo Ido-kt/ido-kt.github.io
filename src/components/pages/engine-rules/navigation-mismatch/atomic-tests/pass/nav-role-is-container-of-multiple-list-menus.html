@@ -1,0 +1,27 @@
+<!--testconfig
+    "testedClass": "Rules.NavigationMismatch",
+    "expect": {
+        "failedNodes": [],
+        "passedNodes": ["div[role=navigation]"]
+    }
+-->
+<div>
+  <div role="navigation">
+    <ul>
+      <li>
+        <a href="#main-content">Skip to main content</a>
+      </li>
+      <li>
+        <a href="#footer">Skip to footer</a>
+      </li>
+    </ul>
+    <ul>
+      <li>
+        <a href="#main-content">Skip to main content</a>
+      </li>
+      <li>
+        <a href="#footer">Skip to footer</a>
+      </li>
+    </ul>
+  </div>
+</div>

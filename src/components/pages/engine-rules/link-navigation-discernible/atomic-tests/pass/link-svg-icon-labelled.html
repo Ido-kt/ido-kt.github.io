@@ -1,0 +1,27 @@
+<!--testconfig
+    "testedClass": "Rules.LinkNavigationDiscernible",
+    "expect": {
+        "passedNodes": ["#test-subject"]
+    }
+-->
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+</style>
+
+<a id="test-subject" href="/search">
+  <svg style="width:100px;height:100px;" >
+    <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
+  </svg>
+  <span class="sr-only">Search</span>
+</a>

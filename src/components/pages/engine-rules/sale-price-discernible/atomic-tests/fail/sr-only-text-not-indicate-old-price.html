@@ -1,0 +1,26 @@
+<!--testconfig
+    "testedClass": "Rules.SalePriceDiscernible",
+    "expect": {
+        "failedNodes": ["span.line-through"]
+    }
+-->
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+
+  .line-through {
+    text-decoration: line-through;
+  }
+</style>
+<div id="price">
+  Price: <span class="line-through"><span class="sr-only" aria-label="some label">tada</span>$200</span> <span>$100</span>
+</div>

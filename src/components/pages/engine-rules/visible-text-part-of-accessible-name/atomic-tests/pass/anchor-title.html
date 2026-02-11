@@ -1,0 +1,9 @@
+<!--testconfig
+    "testedClass": "Rules.VisibleTextPartOfAccessibleName",
+    "expect": {
+        "passedNodes": [],
+        "inapplicableNodes": ["a"]
+    }
+-->
+<!-- NOTE: according to ACT, title attribute is not applicable and should pass https://www.w3.org/WAI/standards-guidelines/act/rules/2ee8b8/proposed/#applicability -->
+<a href="#" title="foo">foo bar</a>

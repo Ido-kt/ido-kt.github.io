@@ -1,0 +1,11 @@
+<!--testconfig
+    "testedClass": "Rules.TabbableVisible",
+    "expect": {
+        "passedNodes": []
+    }
+-->
+<!-- none of them is tabbable so passedNodes and failedNodes arrays stay empty -->
+<div style="opacity: 0">
+  <input tabindex="-1" type="text" />
+  <button tabindex="-1">Click</button>
+</div>

@@ -1,0 +1,56 @@
+<!--testconfig
+    "testedClass": "Rules.TableHeaders",
+    "expect": {
+        "failedNodes": ["#test-subject1", "#test-subject2"]
+    }
+-->
+<table id="test-subject1">
+    <thead>
+    <tr>
+        <td>Car Model</td>
+        <td>Price</td>
+        <td>Speed</td>
+        <td>Year of Release</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Toyota Camry</td>
+        <td>$25,000</td>
+        <td>120 mph</td>
+        <td>2022</td>
+    </tr>
+    <tr>
+        <td>Honda Civic</td>
+        <td>$20,000</td>
+        <td>110 mph</td>
+        <td>2021</td>
+    </tr>
+    <tr>
+        <td>Ford Mustang</td>
+        <td>$35,000</td>
+        <td>150 mph</td>
+        <td>2022</td>
+    </tr>
+    </tbody>
+</table>
+<div id="test-subject2" role="table">
+    <div role="row">
+        <div>Toyota Camry</div>
+        <div>$25,000</div>
+        <div>120 mph</div>
+        <div>2022</div>
+    </div>
+    <div role="row">
+        <div>Honda Civic</div>
+        <div>$20,000</div>
+        <div>110 mph</div>
+        <div>2021</div>
+    </div>
+    <div role="row">
+        <div>Ford Mustang</div>
+        <div>$35,000</div>
+        <div>150 mph</div>
+        <div>2022</div>
+    </div>
+</div>

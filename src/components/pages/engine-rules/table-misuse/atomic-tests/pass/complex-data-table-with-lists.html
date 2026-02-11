@@ -1,0 +1,87 @@
+<!--testconfig
+    "testedClass": "Rules.TableMisuse",
+    "expect": {
+        "passedNodes": ["table"]
+    }
+-->
+
+<style>
+    table {
+        display: table;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        display: table-cell;
+        padding: 10px;
+        border: 1px solid black;
+    }
+</style>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Images</th>
+            <th>Names in Different Languages</th>
+            <th>Users Who Liked It</th>
+            <th>Price Range</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Pizza</td>
+            <td>
+                <img src="pizza1.jpg" alt="Pizza 1">
+                <img src="pizza2.jpg" alt="Pizza 2">
+            </td>
+            <td>
+                <ul>
+                    <li>Pizza</li>
+                    <li>Pizza</li>
+                    <li>Pizza</li>
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    <li>
+                        <img src="user1.jpg" alt="User 1">
+                        User 1
+                    </li>
+                    <li>
+                        <img src="user2.jpg" alt="User 2">
+                        User 2
+                    </li>
+                </ul>
+            </td>
+            <td>$10 - $20</td>
+        </tr>
+        <tr>
+            <td>Burger</td>
+            <td>
+                <img src="burger1.jpg" alt="Burger 1">
+                <img src="burger2.jpg" alt="Burger 2">
+            </td>
+            <td>
+                <ul>
+                    <li>Burger</li>
+                    <li>Burger</li>
+                    <li>Burger</li>
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    <li>
+                        <img src="user4.jpg" alt="User 4">
+                        User 4
+                    </li>
+                    <li>
+                        <img src="user5.jpg" alt="User 5">
+                        User 5
+                    </li>
+                </ul>
+            </td>
+            <td>$5 - $15</td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,19 @@
+<!--testconfig
+    "testedClass": "Rules.VisibilityMisuse",
+    "expect": {
+        "inapplicableNodes": ["#parent"]
+    }
+-->
+
+<div id="parent" style="height: 0.5px; width: 0.5px; overflow: hidden">
+    <div id="child" style="position: fixed">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M10.83 3.296a2.452 2.452 0 0 1 2.339 0c.36.195.665.48.882.831l7.615 12.392a2.247 2.247 0 0 1 .002 2.35 2.347 2.347 0 0 1-.882.834c-.36.196-.763.297-1.17.297H4.384c-.408 0-.811-.101-1.17-.297a2.347 2.347 0 0 1-.883-.834 2.247 2.247 0 0 1 .002-2.35L9.95 4.127c.217-.351.523-.636.882-.831ZM12 9a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0v-3a1 1 0 0 1 1-1Zm1 7a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              fill="currentColor"
+            ></path>
+        </svg>
+    </div>
+</div>

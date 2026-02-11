@@ -1,0 +1,146 @@
+import React from "react";
+import EngineIssueSuccess from "../../../layout/engineIssueSuccess";
+
+const TabPanelMisuseSuccess = () => {
+  const ruleId = "tab-panel-misuse";
+  const title = `Only elements that function as tab panels should receive role="tabpanel"`;
+  const description = `Applying role="tabpanel" to an element without a corresponding tab misleads screen reader users by announcing it as tab content, even though no controlling tab exists.`;
+  const helpText = `Remove role="tabpanel" from the failing element.`;
+  const bestPractices = [
+  "Follow proper HTML semantics",
+  "Ensure screen reader compatibility",
+  "Test with assistive technologies"
+  ];
+  const htmlExamples = [
+  { filename: "tab panels role tabpanel", content: `<div class="tabs">
+  <h3 id="tablist-1">Danish Composers</h3>
+  <div role="tablist" aria-labelledby="tablist-1" class="automatic">
+    <button id="tab-1" type="button" role="tab" aria-selected="true" aria-controls="tabpanel-1">
+      <span class="focus">Maria Ahlefeldt</span>
+    </button>
+    <button id="tab-2" type="button" role="tab" aria-selected="false" aria-controls="tabpanel-2" tabindex="-1">
+      <span class="focus">Carl Andersen</span>
+    </button>
+    <button id="tab-3" type="button" role="tab" aria-selected="false" aria-controls="tabpanel-3" tabindex="-1">
+      <span class="focus">Ida da Fonseca</span>
+    </button>
+    <button id="tab-4" type="button" role="tab" aria-selected="false" aria-controls="tabpanel-4" tabindex="-1">
+      <span class="focus">Peter Müller</span>
+    </button>
+  </div>
+
+  <div id="tabpanel-1" role="tabpanel" tabindex="0" aria-labelledby="tab-1">
+    <p>
+      Maria Theresia Ahlefeldt (16 January 1755 – 20 December 1810) was a Danish, (originally German), composer. She is known as the first female composer in Denmark. Maria Theresia composed music for several ballets, operas, and plays of the royal theatre. She was given good critic as a composer and described as a “<span lang="da"
+        >virkelig Tonekunstnerinde</span
+      >” ('a True Artist of Music').
+    </p>
+  </div>
+  <div id="tabpanel-2" role="tabpanel" tabindex="0" aria-labelledby="tab-2" class="is-hidden">
+    <p>
+      Carl Joachim Andersen (29 April 1847 – 7 May 1909) was a Danish flutist, conductor and composer born in Copenhagen, son of the flutist Christian Joachim Andersen. Both as a virtuoso and as composer of flute music, he is considered one of the best of his time. He was considered to be a tough leader and teacher and demanded as such a lot from
+      his orchestras but through that style he reached a high level.
+    </p>
+  </div>
+  <div id="tabpanel-3" role="tabpanel" tabindex="0" aria-labelledby="tab-3" class="is-hidden">
+    <p>
+      Ida Henriette da Fonseca (July 27, 1802 – July 6, 1858) was a Danish opera singer and composer. Ida Henriette da Fonseca was the daughter of Abraham da Fonseca (1776–1849) and Marie Sofie Kiærskou (1784–1863). She and her sister Emilie da Fonseca were students of Giuseppe Siboni, choir master of the Opera in Copenhagen. She was given a place
+      at the royal Opera alongside her sister the same year she debuted in 1827.
+    </p>
+  </div>
+  <div id="tabpanel-4" role="tabpanel" tabindex="0" aria-labelledby="tab-4" class="is-hidden">
+    <p>Peter Erasmus Lange-Müller (1 December 1850 – 26 February 1926) was a Danish composer and pianist. His compositional style was influenced by Danish folk music and by the work of Robert Schumann; Johannes Brahms; and his Danish countrymen, including J.P.E. Hartmann.</p>
+  </div>
+</div>
+<style>
+  .tabs {
+    font-family: "lucida grande", sans-serif;
+  }
+
+  [role="tablist"] {
+    min-width: 100%;
+  }
+
+  [role="tab"],
+  [role="tab"]:focus,
+  [role="tab"]:hover {
+    display: inline-block;
+    position: relative;
+    z-index: 2;
+    top: 2px;
+    margin: 0;
+    margin-top: 4px;
+    padding: 3px 3px 4px;
+    border: 1px solid hsl(219deg 1% 72%);
+    border-bottom: 2px solid hsl(219deg 1% 72%);
+    border-radius: 5px 5px 0 0;
+    background: hsl(220deg 20% 94%);
+    outline: none;
+    font-weight: bold;
+    max-width: 22%;
+    overflow: hidden;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  [role="tab"][aria-selected="true"] {
+    padding: 2px 2px 4px;
+    margin-top: 0;
+    border-width: 2px;
+    border-top-width: 6px;
+    border-top-color: rgb(36 116 214);
+    border-bottom-color: hsl(220deg 43% 99%);
+    background: hsl(220deg 43% 99%);
+  }
+
+  [role="tab"][aria-selected="false"] {
+    border-bottom: 1px solid hsl(219deg 1% 72%);
+  }
+
+  [role="tab"] span.focus {
+    display: inline-block;
+    margin: 2px;
+    padding: 4px 6px;
+  }
+
+  [role="tab"]:hover span.focus,
+  [role="tab"]:focus span.focus,
+  [role="tab"]:active span.focus {
+    padding: 2px 4px;
+    border: 2px solid rgb(36 116 214);
+    border-radius: 3px;
+  }
+
+  [role="tabpanel"] {
+    padding: 5px;
+    border: 2px solid hsl(219deg 1% 72%);
+    border-radius: 0 5px 5px;
+    background: hsl(220deg 43% 99%);
+    min-height: 10em;
+    width: 100%;
+    overflow: auto;
+  }
+
+  [role="tabpanel"].is-hidden {
+    display: none;
+  }
+
+  [role="tabpanel"] p {
+    margin: 0;
+  }
+</style>` }
+  ];
+
+  return (
+    <EngineIssueSuccess
+      ruleId={ruleId}
+      title={title}
+      description={description}
+      helpText={helpText}
+      bestPractices={bestPractices}
+      htmlExamples={htmlExamples}
+    />
+  );
+};
+
+export default TabPanelMisuseSuccess;

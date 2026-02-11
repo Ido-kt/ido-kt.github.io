@@ -1,0 +1,15 @@
+<!--testconfig
+    "testedClass": "Rules.InteractiveTargetSize",
+    "expect": {
+        "failedNodes": [],
+        "passedNodes": [".interactive-big", ".interactive-small"]
+    }
+-->
+<html>
+  <head></head>
+  <body style="height: 100px">
+    <button class="interactive interactive-big" style="width: 80px; height: 80px; background-color: red; position: absolute"></button>
+    <div></div>
+    <button class="interactive interactive-small" style="width: 24px; height: 24px; background-color: yellow; position: absolute"></button>
+  </body>
+</html>

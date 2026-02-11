@@ -1,0 +1,17 @@
+<!--testconfig
+    "testedClass": "Rules.FormMismatch",
+    "expect": {
+        "passedNodes": ["form", "div[role='form']"],
+        "failedNodes": []
+    }
+-->
+<form>
+  <input type="text" />
+  <input type="password" />
+  <input type="submit" />
+</form>
+<div role="form">
+  <input type="text" />
+  <input type="password" />
+  <input type="submit" />
+</div>

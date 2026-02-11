@@ -1,0 +1,8 @@
+<!--testconfig
+    "testedClass": "Rules.InteractiveNotTabbable",
+    "expect": {
+        "failedNodes": ["span"]
+    }
+-->
+
+<span onclick="alert('Hello, user!')" style="cursor: pointer">Interactive but without tabindex - should not be included in the passedNodes array</span>

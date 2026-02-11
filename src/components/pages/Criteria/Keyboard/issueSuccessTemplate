@@ -1,0 +1,11 @@
+import React from "react";
+import IssueSuccess from "../../../../../layout/issueSuccess";
+
+const itemDescription = " Success";
+
+export default () => (
+  <IssueSuccess
+    itemContent={<></>}
+    itemDescription={itemDescription}
+  />
+);

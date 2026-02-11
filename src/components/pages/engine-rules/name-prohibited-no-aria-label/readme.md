@@ -1,0 +1,147 @@
+## Basis
+
+W3 resource:
+[](https://www.w3.org/TR/html-aria/#docconformance)
+
+Provides an exhausting list called: __"Implicit ARIA semantics (explicitly assigning these in markup is NOT RECOMMENDED)"__
+
+Below are the elements categorized into those that have implicit roles and those that don't.
+
+## List of elements that has no implicit role (based on the table in W3's reference)
+- abbr
+- audio
+- base
+- br
+- canvas
+- cite
+- col
+- colgroup
+- dd
+- dl
+- dt
+- embed
+- figcaption
+- head
+- iframe
+- inputtype=color
+- inputtype=date
+- inputtype=datetime-local
+- inputtype=file
+- inputtype=hidden
+- inputtype=month
+- inputtype=password
+- inputtype=time
+- inputtype=week
+- kbd
+- label
+- legend
+- link
+- map
+- mark
+- meta
+- noscript
+- object
+- param
+- picture
+- rp
+- rt
+- ruby
+- script
+- slot
+- source
+- style
+- template
+- title
+- track
+- var
+- video
+- wbr
+
+## List of elements that has implicit roles (based on the table in W3's reference)
+- a with href (role=link)
+- a without href (role=generic)
+- address (role=group)
+- area with href (role=link)
+- area without href (role=generic)
+- article (role=article)
+- aside (role=complementary)
+- autonomous custom element (Role exposed from author defined ElementInternalsOtherwise role=generic)
+- b (role=generic)
+- bdi (role=generic)
+- bdo (role=generic)
+- blockquote (role=blockquote)
+- body (role=generic)
+- button (role=button)
+- caption (role=caption)
+- code (role=code)
+- data (role=generic)
+- datalist (role=listbox)
+- del (role=deletion)
+- details (role=group)
+- dfn (role=term)
+- dialog (role=dialog)
+- div (role=generic)
+- em (role=emphasis)
+- fieldset (role=group)
+- figure (role=figure)
+- footer (If not a descendant of an article, aside, main, navor section element, or an element with role=article, complementary,main, navigation or regionthen role=contentinfoOtherwise, role=generic)
+- form (role=form)
+- form-associated custom element (Role exposed from author defined ElementInternalsOtherwise role=generic)
+- h1 to h6 (role=heading,aria-level = the number in the element's tag name)
+- header (If not a descendant of an article, aside, main,nav or section element, or an element with role=article,complementary, main, navigation or region then role=bannerOtherwise, role=generic)
+- hgroup (role=group)
+- hr (role=separator)
+- html (role=document)
+- i (role=generic)
+- img with an accessible name. (If the img has non-empty alt (alt=\"some text\") or an accessible name is provided another img naming method:role=img)
+- img with no accessible name. (If the img has an empty alt (alt=\"\") and lacks any other img naming methods:role=none, role=presentationIf the img lacks an alt attribute and lacks any other img naming methods:role=img)
+- input type=button (role=button)
+- input type=checkbox (role=checkbox)
+- input type=emailwith no list attribute (role=textbox)
+- input type=image (role=button)
+- input type=number (role=spinbutton)
+- input type=radio (role=radio)
+- input type=range (role=slider)
+- input type=reset (role=button)
+- input type=search,with no list attribute (role=searchbox)
+- input type=submit (role=button)
+- input type=tel, with no list attribute (role=textbox)
+- input type=textor with a missing or invalid type, with no list attribute (role=textbox)
+- input type=text,search,tel,url,email,or with a missing or invalid type, with a list attribute (role=combobox)
+- input type=urlwith no list attribute (role=textbox)
+- ins (role=insertion)
+- li (If the li is a child of a list element (ul, ol, menu)role=listitem.Otherwise, if the li is not a child of a list element it is exposed as a role=generic.)
+- main (role=main)
+- math (role=math)
+- menu (role=list)
+- meter (role=meter)
+- nav (role=navigation)
+- ol (role=list)
+- optgroup (role=group)
+- option element that is in a list of options or thatrepresents a suggestion in a datalist (role=option)
+- output (role=status)
+- p (role=paragraph)
+- pre (role=generic)
+- progress (role=progressbar)
+- q (role=generic)
+- s (role=deletion)
+- samp (role=generic)
+- search (role=search)
+- section (role=region if thesection element has an accessible nameOtherwise, role=generic)
+- select (with NO multiple attribute and NO sizeattribute having value greater than 1) (role=combobox)
+- select (with a multiple attribute or a size attributehaving value greater than 1) (role=listbox)
+- small (role=generic)
+- span (role=generic)
+- strong (role=strong)
+- sub (role=subscript)
+- sup (role=superscript)
+- SVG (role=graphics-document as defined bySVG AAM)
+- table (role=table)
+- tbody (role=rowgroup)
+- textarea (role=textbox)
+- tfoot (role=rowgroup)
+- thead (role=rowgroup)
+- time (role=time)
+- tr (role=row)
+- u (role=generic)
+- ul (role=list)

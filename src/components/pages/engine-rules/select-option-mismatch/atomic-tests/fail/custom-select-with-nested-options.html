@@ -1,0 +1,19 @@
+<!--testconfig
+    "testedClass": "Rules.SelectOptionMismatch",
+    "expect": {
+        "passedNodes": ["[role=option]", "[role=option]", "[role=option]", "[role=option]"],
+        "failedNodes": ["#test-subject"]
+    }
+-->
+<div class="custom-select">
+  <button class="select-box">Select an option</button>
+  <div class="options">
+    <div class="option">Option 1
+      <div class="nested-option" role="option" class="nested-option">Suboption 1</div>
+      <div class="nested-option" id="test-subject" class="nested-option">Suboption 2</div>
+      <div class="nested-option" role="option" class="nested-option">Suboption 3</div>
+    </div>
+    <div class="option" role="option" class="option">Option 2</div>
+    <div class="option" role="option" class="option">Option 3</div>
+  </div>
+</div>

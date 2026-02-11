@@ -1,0 +1,24 @@
+<!--testconfig
+    "testedClass": "Rules.SelectOptionMismatch",
+    "expect": {
+        "passedNodes": ["[role=option]"],
+        "failedNodes": ["#test-subject"]
+    }
+-->
+<div class="custom-select">
+  <button class="select-box">Select an option</button>
+  <div class="accordion">
+    <div role="option" class="accordion-item">
+      <div class="accordion-header">Header 1</div>
+      <div class="accordion-content">
+        <div class="content">Content 1</div>
+      </div>
+    </div>
+    <div id="test-subject" class="accordion-item">
+      <div class="accordion-header">Header 2</div>
+      <div class="accordion-content">
+        <div class="content">Content 2</div>
+      </div>
+    </div>
+  </div>
+</div>

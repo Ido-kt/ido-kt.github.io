@@ -1,0 +1,50 @@
+<!--testconfig
+    "testedClass": "Rules.NavigationMismatch",
+    "expect": {
+        "failedNodes": ["#test-subject"]
+    }
+-->
+
+<style>
+  #test-subject {
+    width: fit-content;
+  }
+</style>
+
+<div>
+  <h2>My site</h2>
+  <div id="test-subject">
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li>
+        <a href="#about">About</a>
+        <ul>
+          <li>
+            <a href="#team">Our Team</a>
+            <ul>
+              <li><a href="#leadership">Leadership</a></li>
+              <li><a href="#staff">Staff</a></li>
+            </ul>
+          </li>
+          <li><a href="#history">History</a></li>
+          <li><a href="#mission">Mission</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#services">Services</a>
+        <ul>
+          <li><a href="#consulting">Consulting</a></li>
+          <li>
+            <a href="#development">Development</a>
+            <ul>
+              <li><a href="#webdev">Web Development</a></li>
+              <li><a href="#appdev">App Development</a></li>
+            </ul>
+          </li>
+          <li><a href="#support">Support</a></li>
+        </ul>
+      </li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</div>

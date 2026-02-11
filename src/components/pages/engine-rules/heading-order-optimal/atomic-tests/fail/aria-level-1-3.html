@@ -1,0 +1,25 @@
+<!--testconfig
+    "testedClass": "Rules.HeadingOrderOptimal",
+    "expect": {
+        "passedNodes": ["[aria-level='1']"],
+        "failedNodes": ["[aria-level='3']"]
+    }
+-->
+<style>
+    [aria-level="1"] {
+        font-size: 2em;
+        font-weight: bold;
+    }
+    [aria-level="3"] {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+</style>
+
+<br>
+<br>
+<br>
+<br>
+
+<div role="heading" aria-level="1">Heading 1</div>
+<div role="heading" aria-level="3">Heading 3</div>

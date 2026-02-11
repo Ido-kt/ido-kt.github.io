@@ -1,0 +1,396 @@
+import React from "react";
+import EngineIssueFailure from "../../../layout/engineIssueFailure";
+
+const NoUiSliderSinglePointerFailure = () => {
+  const ruleId = "no-ui-slider-single-pointer";
+  const title = `A slider should be operated with a single pointer`;
+  const description = `A slider should be operable with a single pointer`;
+  const helpText = `Ensure that the slider can be operated with a single pointer. For example by using the \\`;
+  const fixSteps = [
+  "Review the HTML structure",
+  "Apply proper accessibility attributes",
+  "Test with screen readers"
+  ];
+  const htmlExamples = [
+  { filename: "no ui slider behaviour drag", content: `<div
+  id="slider"
+  class="noUi-target noUi-ltr noUi-horizontal noUi-txt-dir-ltr"
+  style="
+    background-color: rgb(250, 250, 250);
+    block-size: 18px;
+    border-block: 1px solid rgb(211, 211, 211);
+    border-color: rgb(211, 211, 211);
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    border-end-end-radius: 4px;
+    border-end-start-radius: 4px;
+    border-inline: 1px solid rgb(211, 211, 211);
+    border-start-end-radius: 4px;
+    border-start-start-radius: 4px;
+    inset: 0px;
+    box-shadow: rgb(240, 240, 240) 0px 1px 1px 0px inset, rgb(187, 187, 187) 0px 3px 6px -5px;
+    height: 18px;
+    inline-size: 340px;
+    inset-block: 0px;
+    inset-inline: 0px;
+    perspective-origin: 170px 9px;
+    position: relative;
+    touch-action: none;
+    transform-origin: 170px 9px;
+    user-select: none;
+    width: 340px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  "
+>
+  <div class="noUi-base" style="block-size: 16px; inset: 0px; height: 16px; inline-size: 338px; inset-block: 0px; inset-inline: 0px; perspective-origin: 169px 8px; position: relative; touch-action: none; transform-origin: 169px 8px; user-select: none; width: 338px; z-index: 1; -webkit-tap-highlight-color: rgba(0, 0, 0, 0)">
+    <div
+      class="noUi-connects"
+      style="
+        block-size: 16px;
+        border-radius: 3px;
+        border-end-end-radius: 3px;
+        border-end-start-radius: 3px;
+        border-start-end-radius: 3px;
+        border-start-start-radius: 3px;
+        inset: 0px;
+        height: 16px;
+        inline-size: 338px;
+        inset-block: 0px;
+        inset-inline: 0px;
+        overflow-block: hidden;
+        overflow-inline: hidden;
+        overflow: hidden;
+        perspective-origin: 169px 8px;
+        position: relative;
+        touch-action: none;
+        transform-origin: 169px 8px;
+        user-select: none;
+        width: 338px;
+        z-index: 0;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      "
+    >
+      <div
+        class="noUi-connect noUi-draggable"
+        style="
+          transform: matrix(0.333333, 0, 0, 1, 112.667, 0);
+          background-color: rgb(63, 184, 175);
+          block-size: 16px;
+          inset: 0px;
+          cursor: ew-resize;
+          height: 16px;
+          inline-size: 338px;
+          inset-block: 0px;
+          inset-inline: 0px;
+          perspective-origin: 169px 8px;
+          position: absolute;
+          touch-action: none;
+          transform-origin: 0px 0px;
+          user-select: none;
+          width: 338px;
+          will-change: transform;
+          z-index: 1;
+          -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        "
+      ></div>
+    </div>
+    <div
+      class="noUi-origin"
+      style="
+        transform: matrix(1, 0, 0, 1, -225.333, 0);
+        z-index: 5;
+        inset: 0px 0px 16px;
+        inline-size: 338px;
+        inset-block: 0px 16px;
+        inset-inline: 0px;
+        perspective-origin: 169px 0px;
+        position: absolute;
+        touch-action: none;
+        transform-origin: 0px 0px;
+        user-select: none;
+        width: 338px;
+        will-change: transform;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      "
+    >
+      <div
+        class="noUi-handle noUi-handle-lower"
+        data-handle="0"
+        tabindex="0"
+        role="slider"
+        aria-orientation="horizontal"
+        aria-valuemin="20.0"
+        aria-valuemax="60.0"
+        aria-valuenow="40.0"
+        aria-valuetext="40.00"
+        data-id="0"
+        style="
+          backface-visibility: hidden;
+          background-color: rgb(255, 255, 255);
+          block-size: 28px;
+          border-block: 1px solid rgb(217, 217, 217);
+          border-color: rgb(217, 217, 217);
+          border-radius: 3px;
+          border-style: solid;
+          border-width: 1px;
+          border-end-end-radius: 3px;
+          border-end-start-radius: 3px;
+          border-inline: 1px solid rgb(217, 217, 217);
+          border-start-end-radius: 3px;
+          border-start-start-radius: 3px;
+          inset: -6px -17px -22px 321px;
+          box-shadow: rgb(255, 255, 255) 0px 0px 1px 0px inset, rgb(235, 235, 235) 0px 1px 7px 0px inset, rgb(187, 187, 187) 0px 3px 6px -3px;
+          cursor: default;
+          height: 28px;
+          inline-size: 34px;
+          inset-block: -6px -22px;
+          inset-inline: 321px -17px;
+          perspective-origin: 17px 14px;
+          position: absolute;
+          touch-action: none;
+          transform-origin: 17px 14px;
+          user-select: none;
+          width: 34px;
+          -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        "
+      >
+        <div class="noUi-touch-area" style="block-size: 26px; cursor: default; height: 26px; inline-size: 32px; perspective-origin: 16px 13px; touch-action: none; transform-origin: 16px 13px; user-select: none; width: 32px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0)"></div>
+      </div>
+    </div>
+    <div
+      class="noUi-origin"
+      style="
+        transform: matrix(1, 0, 0, 1, -112.667, 0);
+        z-index: 4;
+        inset: 0px 0px 16px;
+        inline-size: 338px;
+        inset-block: 0px 16px;
+        inset-inline: 0px;
+        perspective-origin: 169px 0px;
+        position: absolute;
+        touch-action: none;
+        transform-origin: 0px 0px;
+        user-select: none;
+        width: 338px;
+        will-change: transform;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      "
+    >
+      <div
+        class="noUi-handle noUi-handle-upper"
+        data-handle="1"
+        tabindex="0"
+        role="slider"
+        aria-orientation="horizontal"
+        aria-valuemin="40.0"
+        aria-valuemax="80.0"
+        aria-valuenow="60.0"
+        aria-valuetext="60.00"
+        data-id="1"
+        style="
+          backface-visibility: hidden;
+          background-color: rgb(255, 255, 255);
+          block-size: 28px;
+          border-block: 1px solid rgb(217, 217, 217);
+          border-color: rgb(217, 217, 217);
+          border-radius: 3px;
+          border-style: solid;
+          border-width: 1px;
+          border-end-end-radius: 3px;
+          border-end-start-radius: 3px;
+          border-inline: 1px solid rgb(217, 217, 217);
+          border-start-end-radius: 3px;
+          border-start-start-radius: 3px;
+          inset: -6px -17px -22px 321px;
+          box-shadow: rgb(255, 255, 255) 0px 0px 1px 0px inset, rgb(235, 235, 235) 0px 1px 7px 0px inset, rgb(187, 187, 187) 0px 3px 6px -3px;
+          cursor: default;
+          height: 28px;
+          inline-size: 34px;
+          inset-block: -6px -22px;
+          inset-inline: 321px -17px;
+          perspective-origin: 17px 14px;
+          position: absolute;
+          touch-action: none;
+          transform-origin: 17px 14px;
+          user-select: none;
+          width: 34px;
+          -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        "
+      >
+        <div class="noUi-touch-area" style="block-size: 26px; cursor: default; height: 26px; inline-size: 32px; perspective-origin: 16px 13px; touch-action: none; transform-origin: 16px 13px; user-select: none; width: 32px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0)"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  [data-id="0"]::after {
+    background-color: rgb(232, 231, 230);
+    block-size: 14px;
+    bottom: 6px;
+    content: "";
+    cursor: default;
+    display: block;
+    height: 14px;
+    inline-size: 1px;
+    inset-block-end: 6px;
+    inset-block-start: 6px;
+    inset-inline-end: 14px;
+    inset-inline-start: 17px;
+    left: 17px;
+    perspective-origin: 0.5px 7px;
+    position: absolute;
+    right: 14px;
+    top: 6px;
+    transform-origin: 0.5px 7px;
+    user-select: none;
+    width: 1px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+  [data-id="0"]::before {
+    background-color: rgb(232, 231, 230);
+    block-size: 14px;
+    bottom: 6px;
+    content: "";
+    cursor: default;
+    display: block;
+    height: 14px;
+    inline-size: 1px;
+    inset-block-end: 6px;
+    inset-block-start: 6px;
+    inset-inline-end: 17px;
+    inset-inline-start: 14px;
+    left: 14px;
+    perspective-origin: 0.5px 7px;
+    position: absolute;
+    right: 17px;
+    top: 6px;
+    transform-origin: 0.5px 7px;
+    user-select: none;
+    width: 1px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+  [data-id="1"]::after {
+    background-color: rgb(232, 231, 230);
+    block-size: 14px;
+    bottom: 6px;
+    content: "";
+    cursor: default;
+    display: block;
+    height: 14px;
+    inline-size: 1px;
+    inset-block-end: 6px;
+    inset-block-start: 6px;
+    inset-inline-end: 14px;
+    inset-inline-start: 17px;
+    left: 17px;
+    perspective-origin: 0.5px 7px;
+    position: absolute;
+    right: 14px;
+    top: 6px;
+    transform-origin: 0.5px 7px;
+    user-select: none;
+    width: 1px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+  [data-id="1"]::before {
+    background-color: rgb(232, 231, 230);
+    block-size: 14px;
+    bottom: 6px;
+    content: "";
+    cursor: default;
+    display: block;
+    height: 14px;
+    inline-size: 1px;
+    inset-block-end: 6px;
+    inset-block-start: 6px;
+    inset-inline-end: 17px;
+    inset-inline-start: 14px;
+    left: 14px;
+    perspective-origin: 0.5px 7px;
+    position: absolute;
+    right: 17px;
+    top: 6px;
+    transform-origin: 0.5px 7px;
+    user-select: none;
+    width: 1px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+</style>
+<style>
+  [data-id="0"]::after {
+    background-color: rgb(232, 231, 230);
+    block-size: 14px;
+    bottom: 6px;
+    content: "";
+    cursor: default;
+    display: block;
+    height: 14px;
+    inline-size: 1px;
+    inset-block-end: 6px;
+    inset-block-start: 6px;
+    inset-inline-end: 14px;
+    inset-inline-start: 17px;
+    left: 17px;
+    perspective-origin: 0.5px 7px;
+    position: absolute;
+    right: 14px;
+    top: 6px;
+    transform-origin: 0.5px 7px;
+    user-select: none;
+    width: 1px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+  [data-id="0"]::before {
+    background-color: rgb(232, 231, 230);
+    block-size: 14px;
+    bottom: 6px;
+    content: "";
+    cursor: default;
+    display: block;
+    height: 14px;
+    inline-size: 1px;
+    inset-block-end: 6px;
+    inset-block-start: 6px;
+    inset-inline-end: 17px;
+    inset-inline-start: 14px;
+    left: 14px;
+    perspective-origin: 0.5px 7px;
+    position: absolute;
+    right: 17px;
+    top: 6px;
+    transform-origin: 0.5px 7px;
+    user-select: none;
+    width: 1px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+</style>
+<script type="module">
+  import noUiSlider from "../assets/nouislider.mjs";
+  var tapSlider = document.getElementById("slider");
+
+  noUiSlider.create(tapSlider, {
+    start: [40, 60],
+    behaviour: "drag",
+    connect: true,
+    range: {
+      min: 20,
+      max: 80,
+    },
+  });
+</script>` }
+  ];
+
+  return (
+    <EngineIssueFailure
+      ruleId={ruleId}
+      title={title}
+      description={description}
+      helpText={helpText}
+      fixSteps={fixSteps}
+      htmlExamples={htmlExamples}
+    />
+  );
+};
+
+export default NoUiSliderSinglePointerFailure;

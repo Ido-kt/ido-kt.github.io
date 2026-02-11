@@ -1,0 +1,22 @@
+<!--testconfig
+    "testedClass": "Rules.NavigationSubmenuDiscernible",
+    "expect": {
+        "passedNodes": ["#sub-menu"],
+        "failedNodes": []
+    }
+-->
+
+<nav>
+  <ul>
+    <li>
+      <button id="sub-menu-button" aria-expanded="false">About</button>
+      <ul id="sub-menu" aria-label="About Menu">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">Contact</a>
+    </li>
+  </ul>
+</nav>

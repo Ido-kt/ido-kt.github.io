@@ -1,0 +1,10 @@
+<!--testconfig
+    "testedClass": "Rules.VisibilityMisuse",
+    "expect": {
+        "inapplicableNodes": ["div"]
+    }
+-->
+
+<!-- The element is inapplicable because it is detected as SR-Only -->
+
+<div style="clip: rect(1px, 1px, 1px, 1px); position: absolute;">Hidden text</div>

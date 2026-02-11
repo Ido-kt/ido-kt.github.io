@@ -1,0 +1,10 @@
+<!--testconfig
+    "testedClass": "Rules.VisibilityMismatch",
+    "expect": {
+        "failedNodes": ["#test"],
+        "inapplicableNodes": ["#child"]
+    }
+-->
+<div id="test" aria-hidden="true">
+  <div style="position: fixed" id="child">child</div>
+</div>

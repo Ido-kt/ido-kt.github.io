@@ -1,0 +1,8 @@
+<!--testconfig
+    "testedClass": "Rules.InteractiveNotTabbable",
+    "expect": {
+        "passedNodes": ["button", "div"]
+    }
+-->
+<button>Click here</button>
+<div role="button" onclick="alert('Hello, user!')" tabindex="0">or here</div>
