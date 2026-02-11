@@ -21,3 +21,27 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# SDK integration tests
+/sdk-tests/node/node_modules/
+/sdk-tests/node/test-results/
+/sdk-tests/node/playwright-report/
+/sdk-tests/node/.npmrc
+/sdk-tests/node/package-lock.json
+
+/sdk-tests/python/test-results/
+/sdk-tests/python/reports/
+/sdk-tests/python/__pycache__/
+/sdk-tests/python/.pytest_cache/
+/sdk-tests/python/**/__pycache__/
+/sdk-tests/python/**/.pytest_cache/
+
+/sdk-tests/java/test-results/
+/sdk-tests/java/target/
+/sdk-tests/java/.m2/
+
+# SDK packages (add packages here when testing locally)
+# Uncomment the line below to ignore committed packages if needed
+# /sdk-tests/packages/*.tgz
+# /sdk-tests/packages/*.whl
+# /sdk-tests/packages/*.jar
