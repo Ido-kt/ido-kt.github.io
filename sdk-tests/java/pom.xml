@@ -21,13 +21,7 @@
         <junit.version>5.10.0</junit.version>
     </properties>
 
-    <!-- GCP Artifact Registry repository (used by registry install job) -->
-    <repositories>
-        <repository>
-            <id>accessflow-registry</id>
-            <url>${env.GCP_SDK_MAVEN_REGISTRY_URL}</url>
-        </repository>
-    </repositories>
+    <!-- GCP Artifact Registry repository (configured in settings.xml for registry install job) -->
 
     <dependencies>
         <!-- AccessFlow SDK -->
