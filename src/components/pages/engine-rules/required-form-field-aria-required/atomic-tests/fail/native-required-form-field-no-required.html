@@ -1,0 +1,12 @@
+<!--testconfig
+    "testedClass": "Rules.RequiredFormFieldAriaRequired",
+    "expect": {
+        "failedNodes": ["#email"]
+    }
+-->
+
+<form>
+  <label for="email">Email *</label>
+  <input id="email" type="email" style="border: red 1px solid">
+  <button type="submit">Submit</button>
+</form>

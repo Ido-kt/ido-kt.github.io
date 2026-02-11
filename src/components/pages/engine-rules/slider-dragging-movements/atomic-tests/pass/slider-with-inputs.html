@@ -1,0 +1,415 @@
+<!--testconfig
+    "testedClass": "Rules.SliderDraggingMovements",
+    "expect": {
+        "failedNodes": [],
+        "passedNodes": [".filter__price__range"]
+    }
+-->
+<div
+  class="filter-group__content"
+  data-collapsible-content=""
+  style="
+    animation-duration: 0.3s;
+    animation-name: fadeInUp;
+    animation-timing-function: ease-in;
+    block-size: 110px;
+    display: grid;
+    font-size: 13.2px;
+    grid-template-columns: 340px;
+    grid-template-rows: 110px;
+    height: 110px;
+    inline-size: 340px;
+    perspective-origin: 170px 55px;
+    transform-origin: 170px 55px;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-in;
+    width: 340px;
+  "
+>
+  <div class="filter__price" data-range-holder="" style="block-size: 98px; font-size: 13.2px; height: 98px; inline-size: 340px; margin-block-start: 12px; margin-top: 12px; min-block-size: auto; min-height: auto; min-inline-size: auto; min-width: auto; perspective-origin: 170px 49px; transform-origin: 170px 49px; width: 340px">
+    <range-slider
+      class="filter__price__range range is-initialized"
+      data-range-slider=""
+      data-range-filter-update=""
+      data-se-min="0"
+      data-se-step="1"
+      data-se-min-value="0"
+      data-se-max-value="248"
+      data-se-max="248"
+      style="block-size: 36px; inset: 0px; display: block; font-size: 13.2px; height: 36px; inline-size: 356px; inset-block: 0px; inset-inline: 0px; margin-inline: -8px; margin-left: -8px; margin-right: -8px; perspective-origin: 178px 18px; position: relative; transform-origin: 178px 18px; user-select: none; width: 356px"
+    >
+      <div
+        class="range__dot range__dot--left"
+        data-range-left=""
+        style="block-size: 36px; inset: 0px 320px 0px 0px; font-size: 13.2px; height: 36px; inline-size: 36px; inset-block: 0px; inset-inline: 0px 320px; padding-block: 8px; padding: 8px; padding-inline: 8px; perspective-origin: 18px 18px; position: absolute; transform-origin: 18px 18px; user-select: none; width: 36px; z-index: 2"
+      >
+        <span
+          style="
+            background-color: rgb(0, 0, 0);
+            block-size: 20px;
+            border-block-style: solid;
+            border-block-width: 1px;
+            border-radius: 50%;
+            border-style: solid;
+            border-width: 1px;
+            border-end-end-radius: 50%;
+            border-end-start-radius: 50%;
+            border-inline-style: solid;
+            border-inline-width: 1px;
+            border-start-end-radius: 50%;
+            border-start-start-radius: 50%;
+            cursor: pointer;
+            display: block;
+            font-size: 0px;
+            height: 20px;
+            inline-size: 20px;
+            perspective-origin: 10px 10px;
+            transform-origin: 10px 10px;
+            user-select: none;
+            width: 20px;
+          "
+          >&nbsp;</span
+        >
+      </div>
+      <div
+        class="range__dot range__dot--right"
+        data-range-right=""
+        style="block-size: 36px; inset: 0px 0px 0px 320px; font-size: 13.2px; height: 36px; inline-size: 36px; inset-block: 0px; inset-inline: 320px 0px; padding-block: 8px; padding: 8px; padding-inline: 8px; perspective-origin: 18px 18px; position: absolute; transform-origin: 18px 18px; user-select: none; width: 36px; z-index: 2"
+      >
+        <span
+          style="
+            background-color: rgb(0, 0, 0);
+            block-size: 20px;
+            border-block-style: solid;
+            border-block-width: 1px;
+            border-radius: 50%;
+            border-style: solid;
+            border-width: 1px;
+            border-end-end-radius: 50%;
+            border-end-start-radius: 50%;
+            border-inline-style: solid;
+            border-inline-width: 1px;
+            border-start-end-radius: 50%;
+            border-start-start-radius: 50%;
+            cursor: pointer;
+            display: block;
+            font-size: 0px;
+            height: 20px;
+            inline-size: 20px;
+            perspective-origin: 10px 10px;
+            transform-origin: 10px 10px;
+            user-select: none;
+            width: 20px;
+          "
+          >&nbsp;</span
+        >
+      </div>
+      <div
+        class="range__line"
+        style="
+          block-size: 4px;
+          border-block-style: solid;
+          border-block-width: 1px;
+          border-radius: 4px;
+          border-style: solid;
+          border-width: 1px;
+          border-end-end-radius: 4px;
+          border-end-start-radius: 4px;
+          border-inline-style: solid;
+          border-inline-width: 1px;
+          border-start-end-radius: 4px;
+          border-start-start-radius: 4px;
+          inset: 16px 8px;
+          font-size: 13.2px;
+          height: 4px;
+          inline-size: 340px;
+          inset-block: 16px;
+          inset-inline: 8px;
+          overflow-block: hidden;
+          overflow-inline: hidden;
+          overflow: hidden;
+          perspective-origin: 170px 2px;
+          position: absolute;
+          transform-origin: 170px 2px;
+          user-select: none;
+          width: 340px;
+          z-index: 0;
+        "
+      >
+        <span data-range-line="" style="margin-left: 0px; background-color: rgb(0, 0, 0); block-size: 2px; display: block; font-size: 0px; height: 2px; inline-size: 320px; perspective-origin: 160px 1px; transform-origin: 160px 1px; user-select: none; width: 320px">&nbsp;</span>
+      </div>
+    </range-slider>
+
+    <script src="//www.alexandani.com/cdn/shop/t/792/assets/range-slider.js?v=172585113619389479691762276857" defer="defer" style="font-size: 13.2px"></script>
+
+    <div class="filter__price__fields" style="align-items: center; block-size: 37px; display: flex; font-size: 13.2px; height: 37px; inline-size: 340px; justify-content: flex-start; margin-block-end: 25px; margin-bottom: 25px; max-inline-size: 100%; max-width: 100%; perspective-origin: 170px 18.5px; transform-origin: 170px 18.5px; width: 340px">
+      <div
+        class="filter__price__field filter__price__from"
+        style="
+          align-items: center;
+          block-size: 37px;
+          border-block-style: solid;
+          border-block-width: 1px;
+          border-style: solid;
+          border-width: 1px;
+          border-inline-style: solid;
+          border-inline-width: 1px;
+          display: flex;
+          flex-basis: 0%;
+          flex-grow: 1;
+          font-size: 13.2px;
+          height: 37px;
+          inline-size: 160px;
+          max-inline-size: calc(50% - 10px);
+          max-width: calc(50% - 10px);
+          min-block-size: auto;
+          min-height: auto;
+          min-inline-size: auto;
+          min-width: auto;
+          padding-block: 8px;
+          padding-bottom: 8px;
+          padding-inline-start: 8px;
+          padding-left: 8px;
+          padding-top: 8px;
+          perspective-origin: 80px 18.5px;
+          transform-origin: 80px 18.5px;
+          width: 160px;
+        "
+      >
+        <span
+          class="filter__price__currency"
+          style="block-size: 17px; display: block; font-size: 13.2px; height: 17px; inline-size: 7.63281px; margin-inline-end: 5px; margin-right: 5px; min-block-size: auto; min-height: auto; min-inline-size: auto; min-width: auto; perspective-origin: 3.8125px 8.5px; transform-origin: 3.81641px 8.5px; width: 7.63281px"
+          >$</span
+        >
+
+        <input
+          data-field-price-min=""
+          class="filter__price__input"
+          name="filter.v.price.gte"
+          id="filter-price-from-Price-5"
+          type="number"
+          placeholder="0"
+          min="0"
+          max="248.00"
+          style="
+            appearance: none;
+            block-size: 19px;
+            border-block-color: rgba(0, 0, 0, 0);
+            border-color: rgba(0, 0, 0, 0);
+            border-inline-color: rgba(0, 0, 0, 0);
+            display: block;
+            flex-basis: 0%;
+            flex-grow: 1;
+            font-size: 13.2px;
+            height: 19px;
+            inline-size: 137.375px;
+            margin-block: 0px;
+            margin-bottom: 0px;
+            margin-top: 0px;
+            min-block-size: auto;
+            min-height: auto;
+            padding-block: 0px;
+            padding: 0px 3px;
+            padding-inline: 3px;
+            perspective-origin: 68.6875px 9.5px;
+            text-align: right;
+            transform-origin: 68.6875px 9.5px;
+            width: 137.375px;
+          "
+        />
+
+        <label
+          for="filter-price-from-Price-5"
+          style="
+            block-size: 1px;
+            inset: 67px 332px 44px 9px;
+            clip: rect(0px, 0px, 0px, 0px);
+            display: block;
+            font-size: 13.2px;
+            height: 1px;
+            inline-size: 1px;
+            inset-block: 67px 44px;
+            inset-inline: 9px 332px;
+            margin-block: -1px;
+            margin: -1px;
+            margin-inline: -1px;
+            overflow-block: hidden;
+            overflow-inline: hidden;
+            overflow: hidden;
+            perspective-origin: 0.5px 0.5px;
+            position: absolute;
+            transform-origin: 0.5px 0.5px;
+            width: 1px;
+          "
+          >From</label
+        >
+      </div>
+      <div
+        class="filter__price__spacer"
+        style="
+          block-size: 10px;
+          inset: 0px;
+          flex-basis: 20px;
+          flex-shrink: 0;
+          font-size: 0px;
+          height: 10px;
+          inline-size: 20px;
+          inset-block: 0px;
+          inset-inline: 0px;
+          min-block-size: auto;
+          min-height: auto;
+          min-inline-size: auto;
+          min-width: auto;
+          padding-block: 5px;
+          padding: 5px;
+          padding-inline: 5px;
+          perspective-origin: 10px 5px;
+          position: relative;
+          text-align: center;
+          transform-origin: 10px 5px;
+          width: 20px;
+        "
+        data-id="0"
+      >
+        -
+      </div>
+      <div
+        class="filter__price__field filter__price__to"
+        style="
+          align-items: center;
+          block-size: 37px;
+          border-block-style: solid;
+          border-block-width: 1px;
+          border-style: solid;
+          border-width: 1px;
+          border-inline-style: solid;
+          border-inline-width: 1px;
+          display: flex;
+          flex-basis: 0%;
+          flex-grow: 1;
+          font-size: 13.2px;
+          height: 37px;
+          inline-size: 160px;
+          max-inline-size: calc(50% - 10px);
+          max-width: calc(50% - 10px);
+          min-block-size: auto;
+          min-height: auto;
+          min-inline-size: auto;
+          min-width: auto;
+          padding-block: 8px;
+          padding-bottom: 8px;
+          padding-inline-start: 8px;
+          padding-left: 8px;
+          padding-top: 8px;
+          perspective-origin: 80px 18.5px;
+          transform-origin: 80px 18.5px;
+          width: 160px;
+        "
+      >
+        <span
+          class="filter__price__currency"
+          style="block-size: 17px; display: block; font-size: 13.2px; height: 17px; inline-size: 7.63281px; margin-inline-end: 5px; margin-right: 5px; min-block-size: auto; min-height: auto; min-inline-size: auto; min-width: auto; perspective-origin: 3.8125px 8.5px; transform-origin: 3.81641px 8.5px; width: 7.63281px"
+          >$</span
+        >
+
+        <input
+          data-field-price-max=""
+          class="filter__price__input"
+          name="filter.v.price.lte"
+          id="filter-price-to-Price-5"
+          type="number"
+          placeholder="248"
+          min="0"
+          max="248"
+          style="
+            appearance: none;
+            block-size: 19px;
+            border-block-color: rgba(0, 0, 0, 0);
+            border-color: rgba(0, 0, 0, 0);
+            border-inline-color: rgba(0, 0, 0, 0);
+            display: block;
+            flex-basis: 0%;
+            flex-grow: 1;
+            font-size: 13.2px;
+            height: 19px;
+            inline-size: 137.375px;
+            margin-block: 0px;
+            margin-bottom: 0px;
+            margin-top: 0px;
+            min-block-size: auto;
+            min-height: auto;
+            padding-block: 0px;
+            padding: 0px 3px;
+            padding-inline: 3px;
+            perspective-origin: 68.6875px 9.5px;
+            text-align: right;
+            transform-origin: 68.6875px 9.5px;
+            width: 137.375px;
+          "
+        />
+
+        <label
+          for="filter-price-to-Price-5"
+          style="
+            block-size: 1px;
+            inset: 67px 152px 44px 189px;
+            clip: rect(0px, 0px, 0px, 0px);
+            display: block;
+            font-size: 13.2px;
+            height: 1px;
+            inline-size: 1px;
+            inset-block: 67px 44px;
+            inset-inline: 189px 152px;
+            margin-block: -1px;
+            margin: -1px;
+            margin-inline: -1px;
+            overflow-block: hidden;
+            overflow-inline: hidden;
+            overflow: hidden;
+            perspective-origin: 0.5px 0.5px;
+            position: absolute;
+            transform-origin: 0.5px 0.5px;
+            width: 1px;
+          "
+          >To</label
+        >
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  [data-id="0"]::before {
+    background-color: rgb(0, 0, 0);
+    block-size: 1px;
+    bottom: 4px;
+    content: "";
+    display: block;
+    font-size: 0px;
+    height: 1px;
+    inline-size: 6px;
+    inset-block-end: 4px;
+    inset-block-start: 5px;
+    inset-inline-end: 7px;
+    inset-inline-start: 10px;
+    left: 10px;
+    margin-inline-start: -3px;
+    margin-left: -3px;
+    perspective-origin: 3px 0.5px;
+    position: absolute;
+    right: 7px;
+    text-align: center;
+    top: 5px;
+    transform-origin: 3px 0.5px;
+    width: 6px;
+    --padding-bottom: 0px;
+    --padding: calc(20px * 2);
+    --swatch-size: calc(1.5rem * 1);
+    --padding-top: 0px;
+    --full-screen: calc(369px - 94px);
+    --COLUMNS-MOBILE: 2;
+    --PT: 0px;
+    --width: 380px;
+    --PB: 0px;
+    --duration: 0.6s;
+    --COLUMNS-MEDIUM: 2;
+  }
+</style>

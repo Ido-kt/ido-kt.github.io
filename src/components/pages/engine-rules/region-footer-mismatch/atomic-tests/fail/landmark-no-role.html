@@ -1,0 +1,15 @@
+<!--testconfig
+    "testedClass": "Rules.RegionFooterMismatch",
+    "expect": {
+        "failedNodes": ["div.footer"]
+    }
+-->
+<!DOCTYPE html>
+<html>
+  <body>
+    <header>Header content</header>
+    <div style="height: 300px;">Smaller div</div>
+    <div id="larger" style="height: 700px;">Larger div</div>
+    <div class="footer">Footer content</div>
+  </body>
+</html>

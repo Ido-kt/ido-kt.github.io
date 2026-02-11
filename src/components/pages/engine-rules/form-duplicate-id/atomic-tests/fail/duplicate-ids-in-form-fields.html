@@ -1,0 +1,11 @@
+<!--testconfig
+    "testedClass": "Rules.FormDuplicateId",
+    "expect": {
+        "failedNodes": ["input", "input"]
+    }
+-->
+<form>
+  <input id="name" type="text" />
+  <input id="name" type="password" />
+  <button>Not a submit button</button>
+</form>

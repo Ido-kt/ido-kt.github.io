@@ -1,0 +1,11 @@
+<!--testconfig
+    "testedClass": "Rules.VisibleTextPartOfAccessibleName",
+    "expect": {
+        "passedNodes": ["button"]
+    },
+    "skip": true
+-->
+
+<!-- TODO: currently skipped because we don't have ability to detect non-text content (only if text is ambigous which is not suitable here) -->
+<!-- This button has visible text that does not need to be contained within the accessible name, because the “x” text node is non-text content. Note: this would need to meet SC 1.1.1 Non text content. -->
+<button aria-label="anything">X</button>

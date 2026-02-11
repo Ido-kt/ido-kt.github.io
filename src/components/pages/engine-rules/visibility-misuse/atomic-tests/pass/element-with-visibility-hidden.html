@@ -1,0 +1,14 @@
+<!--testconfig
+    "testedClass": "Rules.VisibilityMisuse",
+    "expect": {
+        "failedNodes": []
+    }
+-->
+<html>
+  <head> </head>
+  <body>
+    <div style="visibility: hidden">
+      <span style="visibility: visible"> Some visible content </span>
+    </div>
+  </body>
+</html>

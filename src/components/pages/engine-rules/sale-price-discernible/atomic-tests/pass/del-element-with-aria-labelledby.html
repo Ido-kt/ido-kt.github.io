@@ -1,0 +1,26 @@
+<!--testconfig
+    "testedClass": "Rules.SalePriceDiscernible",
+    "expect": {
+        "passedNodes": ["del"]
+    }
+-->
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+</style>
+<div>
+  Price:
+  <del aria-labelledby="old-price"
+    >$200
+    <span id="old-price" class="sr-only">old price</span>
+  </del>
+  <span>$100</span>
+</div>

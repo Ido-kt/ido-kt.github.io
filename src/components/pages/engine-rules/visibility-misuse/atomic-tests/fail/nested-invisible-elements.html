@@ -1,0 +1,16 @@
+<!--testconfig
+    "testedClass": "Rules.VisibilityMisuse",
+    "expect": {
+        "inapplicableNodes": ["div", "#test-subject"]
+    },
+    "skip": true
+-->
+
+<!-- This test is skipped because the span is perceivable visible (even though it shouldn't be) -->
+
+<div style="height: 0.5px; width: 0.5px; overflow: hidden">
+    <div id="test-subject">
+        This text is still visible to
+        <span class="should not appear in the failed nodes array as it's a child of a failed node">screen reader</span>
+    </div>
+</div>

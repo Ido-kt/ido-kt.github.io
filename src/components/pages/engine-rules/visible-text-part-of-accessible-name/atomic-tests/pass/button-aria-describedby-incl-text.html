@@ -1,0 +1,9 @@
+<!--testconfig
+    "testedClass": "Rules.VisibleTextPartOfAccessibleName",
+    "expect": {
+        "inapplicableNodes": ["button"]
+    }
+-->
+<!-- NOTE: according to ACT, aria-describedby attribute is not applicable and should pass https://www.w3.org/WAI/standards-guidelines/act/rules/2ee8b8/proposed/#applicability -->
+<p id="description">this is a test, and some description</p>
+" <button aria-describedby="description">this is a test</button>

@@ -1,0 +1,10 @@
+<!--testconfig
+    "testedClass": "Rules.VisibilityMisuse",
+    "expect": {
+        "inapplicableNodes": ["div"]
+    }
+-->
+
+<!-- The element is inapplicable because it is detected as SR-Only -->
+
+<div style="opacity: 0; position: absolute;">Hidden message</div>

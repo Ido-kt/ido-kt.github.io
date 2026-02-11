@@ -1,0 +1,15 @@
+<!--testconfig
+    "testedClass": "Rules.RegionMainContentMisuse",
+    "expect": {
+        "failedNodes": ["main"]
+    }
+-->
+<!DOCTYPE html>
+<html>
+  <body>
+    <header>Header content</header>
+    <main style="height: 300px">Smaller div</main>
+    <div id="larger" style="height: 700px">Larger div</div>
+    <footer>Footer content</footer>
+  </body>
+</html>

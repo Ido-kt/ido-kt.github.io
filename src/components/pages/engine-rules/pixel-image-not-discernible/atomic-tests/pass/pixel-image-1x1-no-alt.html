@@ -1,0 +1,8 @@
+<!--testconfig
+    "testedClass": "Rules.PixelImageNotDiscernible",
+    "expect": {
+      "failedNodes": []
+    }
+-->
+<!-- the image is not considered complaint image because there is no alt, so it will not be audited and will not show in any nodes array -->
+<img src="http://127.0.0.1:9000/tracker.png" width="1" height="1" alt="" />

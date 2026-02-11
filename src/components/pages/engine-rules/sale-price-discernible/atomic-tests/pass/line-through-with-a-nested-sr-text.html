@@ -1,0 +1,48 @@
+<!--testconfig
+    "testedClass": "Rules.SalePriceDiscernible",
+    "expect": {
+        "passedNodes": ["span.price-regular"]
+    }
+-->
+<style>
+  .product {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .price {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .price-regular {
+    text-decoration: line-through;
+  }
+
+  .price-sale {
+    color: red;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+</style>
+
+<div>
+  <div class="product">
+    <div class="price">
+      <span class="price-regular">
+        <span class="sr-only">original price</span>
+        $100
+      </span>
+      <span class="price-sale">$90</span>
+    </div>
+  </div>
+</div>

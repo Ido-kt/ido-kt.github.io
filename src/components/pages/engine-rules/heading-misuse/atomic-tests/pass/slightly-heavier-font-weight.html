@@ -1,0 +1,23 @@
+<!--testconfig
+    "testedClass": "Rules.HeadingMisuse",
+    "expect": {
+        "passedNodes": ["div"]
+    }
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <style>
+      body {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      .slightly-heavier {
+        font-size: 18px; /* Larger than base */
+        font-weight: 500; /* Heavier than base */
+      }
+    </style>
+
+    <div role="heading" aria-level="3" class="slightly-heavier">Heading with Slightly Heavier Weight</div>
+  </body>
+</html>

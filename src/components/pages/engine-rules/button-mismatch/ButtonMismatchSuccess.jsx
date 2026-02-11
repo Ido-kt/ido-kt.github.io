@@ -1,0 +1,648 @@
+import React from "react";
+import EngineIssueSuccess from "../../../layout/engineIssueSuccess";
+
+const ButtonMismatchSuccess = () => {
+  const ruleId = "button-mismatch";
+  const title = `Buttons should be tagged for assistive technology`;
+  const description = `If interactive elements cannot be identified as buttons, screen reader users may not realize the element is actionable, which can stop them from submitting forms, opening dialogs, or performing other intended actions.`;
+  const helpText = `Add role="button" to the custom navigation region, or use a HTML <button> element.`;
+  const bestPractices = [
+  "Follow proper HTML semantics",
+  "Ensure screen reader compatibility",
+  "Test with assistive technologies"
+  ];
+  const htmlExamples = [
+  { filename: "button as menu item", content: `<!-- Example taken from https://www.erstegroup.com/de/karriere/schuelerinnen -->
+<nav
+  role="navigation"
+  aria-label="Site menu"
+  class="css-179t5g5 evdsvoy7"
+  style="
+    block-size: 32px;
+    border-block-color: rgb(255, 255, 255);
+    border-color: rgb(255, 255, 255);
+    border-inline-color: rgb(255, 255, 255);
+    inset: 0px;
+    caret-color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+    column-rule-color: rgb(255, 255, 255);
+    height: 32px;
+    inline-size: 1039px;
+    inset-block: 0px;
+    inset-inline: 0px;
+    outline-color: rgb(255, 255, 255);
+    perspective-origin: 519.5px 16px;
+    position: relative;
+    text-decoration: none solid rgb(255, 255, 255);
+    text-emphasis-color: rgb(255, 255, 255);
+    transform-origin: 519.5px 16px;
+    width: 1039px;
+    z-index: 1;
+    -webkit-text-fill-color: rgb(255, 255, 255);
+    -webkit-text-stroke-color: rgb(255, 255, 255);
+  "
+>
+  <ul
+    role="menubar"
+    class="css-fm73dp evdsvoy6"
+    style="
+      block-size: 32px;
+      border-block-color: rgb(255, 255, 255);
+      border-color: rgb(255, 255, 255);
+      border-inline-color: rgb(255, 255, 255);
+      caret-color: rgb(255, 255, 255);
+      color: rgb(255, 255, 255);
+      column-rule-color: rgb(255, 255, 255);
+      display: flex;
+      height: 32px;
+      inline-size: 1039px;
+      outline-color: rgb(255, 255, 255);
+      perspective-origin: 519.5px 16px;
+      text-decoration: none solid rgb(255, 255, 255);
+      text-emphasis-color: rgb(255, 255, 255);
+      transform: matrix(1, 0, 0, 1, 0, 0);
+      transform-origin: 519.5px 16px;
+      transition-duration: 0.25s;
+      transition-property: transform;
+      transition-timing-function: ease-out;
+      width: 1039px;
+      -webkit-text-fill-color: rgb(255, 255, 255);
+      -webkit-text-stroke-color: rgb(255, 255, 255);
+    "
+  >
+    <li
+      role="none"
+      data-testid="nav-tab"
+      style="
+        block-size: 32px;
+        border-block-color: rgb(255, 255, 255);
+        border-color: rgb(255, 255, 255);
+        border-inline-color: rgb(255, 255, 255);
+        caret-color: rgb(255, 255, 255);
+        color: rgb(255, 255, 255);
+        column-rule-color: rgb(255, 255, 255);
+        display: flex;
+        flex-direction: column;
+        height: 32px;
+        inline-size: 105.969px;
+        list-style-type: none;
+        min-block-size: auto;
+        min-height: auto;
+        min-inline-size: auto;
+        min-width: auto;
+        outline-color: rgb(255, 255, 255);
+        perspective-origin: 52.9844px 16px;
+        text-decoration: none solid rgb(255, 255, 255);
+        text-emphasis-color: rgb(255, 255, 255);
+        transform-origin: 52.9844px 16px;
+        width: 105.969px;
+        -webkit-text-fill-color: rgb(255, 255, 255);
+        -webkit-text-stroke-color: rgb(255, 255, 255);
+      "
+    >
+      <button
+        aria-haspopup="true"
+        aria-expanded="false"
+        role="menuitem"
+        tabindex="0"
+        data-gem-id="header-nav-1"
+        class="css-nj6hzh evdsvoy5 btn--unstyled"
+        type="button"
+        style="
+          block-size: 32px;
+          border-block: 0px none rgb(255, 255, 255);
+          border-color: rgb(255, 255, 255);
+          border-style: none;
+          border-width: 0px;
+          border-inline: 0px none rgb(255, 255, 255);
+          caret-color: rgb(255, 255, 255);
+          color: rgb(255, 255, 255);
+          column-rule-color: rgb(255, 255, 255);
+          display: block;
+          font-weight: 600;
+          height: 32px;
+          inline-size: 105.969px;
+          list-style-type: none;
+          min-block-size: auto;
+          min-height: auto;
+          min-inline-size: auto;
+          min-width: auto;
+          outline-color: rgb(255, 255, 255);
+          padding-block: 4px;
+          padding: 4px 12px;
+          padding-inline: 12px;
+          perspective-origin: 52.9844px 16px;
+          text-decoration: none solid rgb(255, 255, 255);
+          text-emphasis-color: rgb(255, 255, 255);
+          text-wrap-mode: nowrap;
+          transform-origin: 52.9844px 16px;
+          transition-duration: 0.25s;
+          transition-property: background-color;
+          width: 105.969px;
+          -webkit-text-fill-color: rgb(255, 255, 255);
+          -webkit-text-stroke-color: rgb(255, 255, 255);
+        "
+      >
+        <span
+          class="wb"
+          style="
+            border-block-color: rgb(255, 255, 255);
+            border-color: rgb(255, 255, 255);
+            border-inline-color: rgb(255, 255, 255);
+            caret-color: rgb(255, 255, 255);
+            color: rgb(255, 255, 255);
+            column-rule-color: rgb(255, 255, 255);
+            cursor: pointer;
+            font-weight: 600;
+            list-style-type: none;
+            outline-color: rgb(255, 255, 255);
+            text-align: center;
+            text-decoration: none solid rgb(255, 255, 255);
+            text-emphasis-color: rgb(255, 255, 255);
+            text-wrap-mode: nowrap;
+            word-break: break-word;
+            -webkit-text-fill-color: rgb(255, 255, 255);
+            -webkit-text-stroke-color: rgb(255, 255, 255);
+          "
+          >Investoren</span
+        >
+      </button>
+    </li>
+    <li
+      role="none"
+      data-testid="nav-tab"
+      style="
+        block-size: 32px;
+        border-block-color: rgb(255, 255, 255);
+        border-color: rgb(255, 255, 255);
+        border-inline-color: rgb(255, 255, 255);
+        caret-color: rgb(255, 255, 255);
+        color: rgb(255, 255, 255);
+        column-rule-color: rgb(255, 255, 255);
+        display: flex;
+        flex-direction: column;
+        height: 32px;
+        inline-size: 133.438px;
+        list-style-type: none;
+        min-block-size: auto;
+        min-height: auto;
+        min-inline-size: auto;
+        min-width: auto;
+        outline-color: rgb(255, 255, 255);
+        perspective-origin: 66.7188px 16px;
+        text-decoration: none solid rgb(255, 255, 255);
+        text-emphasis-color: rgb(255, 255, 255);
+        transform-origin: 66.7188px 16px;
+        width: 133.438px;
+        -webkit-text-fill-color: rgb(255, 255, 255);
+        -webkit-text-stroke-color: rgb(255, 255, 255);
+      "
+    >
+      <button
+        aria-haspopup="true"
+        aria-expanded="false"
+        role="menuitem"
+        tabindex="-1"
+        data-gem-id="header-nav-2"
+        class="css-nj6hzh evdsvoy5 btn--unstyled"
+        type="button"
+        style="
+          block-size: 32px;
+          border-block: 0px none rgb(255, 255, 255);
+          border-color: rgb(255, 255, 255);
+          border-style: none;
+          border-width: 0px;
+          border-inline: 0px none rgb(255, 255, 255);
+          caret-color: rgb(255, 255, 255);
+          color: rgb(255, 255, 255);
+          column-rule-color: rgb(255, 255, 255);
+          display: block;
+          font-weight: 600;
+          height: 32px;
+          inline-size: 133.453px;
+          list-style-type: none;
+          min-block-size: auto;
+          min-height: auto;
+          min-inline-size: auto;
+          min-width: auto;
+          outline-color: rgb(255, 255, 255);
+          padding-block: 4px;
+          padding: 4px 12px;
+          padding-inline: 12px;
+          perspective-origin: 66.7188px 16px;
+          text-decoration: none solid rgb(255, 255, 255);
+          text-emphasis-color: rgb(255, 255, 255);
+          text-wrap-mode: nowrap;
+          transform-origin: 66.7266px 16px;
+          transition-duration: 0.25s;
+          transition-property: background-color;
+          width: 133.453px;
+          -webkit-text-fill-color: rgb(255, 255, 255);
+          -webkit-text-stroke-color: rgb(255, 255, 255);
+        "
+      >
+        <span
+          class="wb"
+          style="
+            border-block-color: rgb(255, 255, 255);
+            border-color: rgb(255, 255, 255);
+            border-inline-color: rgb(255, 255, 255);
+            caret-color: rgb(255, 255, 255);
+            color: rgb(255, 255, 255);
+            column-rule-color: rgb(255, 255, 255);
+            cursor: pointer;
+            font-weight: 600;
+            list-style-type: none;
+            outline-color: rgb(255, 255, 255);
+            text-align: center;
+            text-decoration: none solid rgb(255, 255, 255);
+            text-emphasis-color: rgb(255, 255, 255);
+            text-wrap-mode: nowrap;
+            word-break: break-word;
+            -webkit-text-fill-color: rgb(255, 255, 255);
+            -webkit-text-stroke-color: rgb(255, 255, 255);
+          "
+          >News &amp; Media</span
+        >
+      </button>
+    </li>
+    <li
+      role="none"
+      data-testid="nav-tab"
+      style="
+        block-size: 32px;
+        border-block-color: rgb(255, 255, 255);
+        border-color: rgb(255, 255, 255);
+        border-inline-color: rgb(255, 255, 255);
+        caret-color: rgb(255, 255, 255);
+        color: rgb(255, 255, 255);
+        column-rule-color: rgb(255, 255, 255);
+        display: flex;
+        flex-direction: column;
+        height: 32px;
+        inline-size: 135.391px;
+        list-style-type: none;
+        min-block-size: auto;
+        min-height: auto;
+        min-inline-size: auto;
+        min-width: auto;
+        outline-color: rgb(255, 255, 255);
+        perspective-origin: 67.6875px 16px;
+        text-decoration: none solid rgb(255, 255, 255);
+        text-emphasis-color: rgb(255, 255, 255);
+        transform-origin: 67.6953px 16px;
+        width: 135.391px;
+        -webkit-text-fill-color: rgb(255, 255, 255);
+        -webkit-text-stroke-color: rgb(255, 255, 255);
+      "
+    >
+      <button
+        aria-haspopup="true"
+        aria-expanded="false"
+        role="menuitem"
+        tabindex="-1"
+        data-gem-id="header-nav-3"
+        class="css-nj6hzh evdsvoy5 btn--unstyled"
+        type="button"
+        style="
+          block-size: 32px;
+          border-block: 0px none rgb(255, 255, 255);
+          border-color: rgb(255, 255, 255);
+          border-style: none;
+          border-width: 0px;
+          border-inline: 0px none rgb(255, 255, 255);
+          caret-color: rgb(255, 255, 255);
+          color: rgb(255, 255, 255);
+          column-rule-color: rgb(255, 255, 255);
+          display: block;
+          font-weight: 600;
+          height: 32px;
+          inline-size: 135.406px;
+          list-style-type: none;
+          min-block-size: auto;
+          min-height: auto;
+          min-inline-size: auto;
+          min-width: auto;
+          outline-color: rgb(255, 255, 255);
+          padding-block: 4px;
+          padding: 4px 12px;
+          padding-inline: 12px;
+          perspective-origin: 67.7031px 16px;
+          text-decoration: none solid rgb(255, 255, 255);
+          text-emphasis-color: rgb(255, 255, 255);
+          text-wrap-mode: nowrap;
+          transform-origin: 67.7031px 16px;
+          transition-duration: 0.25s;
+          transition-property: background-color;
+          width: 135.406px;
+          -webkit-text-fill-color: rgb(255, 255, 255);
+          -webkit-text-stroke-color: rgb(255, 255, 255);
+        "
+      >
+        <span
+          class="wb"
+          style="
+            border-block-color: rgb(255, 255, 255);
+            border-color: rgb(255, 255, 255);
+            border-inline-color: rgb(255, 255, 255);
+            caret-color: rgb(255, 255, 255);
+            color: rgb(255, 255, 255);
+            column-rule-color: rgb(255, 255, 255);
+            cursor: pointer;
+            font-weight: 600;
+            list-style-type: none;
+            outline-color: rgb(255, 255, 255);
+            text-align: center;
+            text-decoration: none solid rgb(255, 255, 255);
+            text-emphasis-color: rgb(255, 255, 255);
+            text-wrap-mode: nowrap;
+            word-break: break-word;
+            -webkit-text-fill-color: rgb(255, 255, 255);
+            -webkit-text-stroke-color: rgb(255, 255, 255);
+          "
+          >Firmenkunden</span
+        >
+      </button>
+    </li>
+    <li
+      role="none"
+      data-testid="nav-tab"
+      style="
+        block-size: 32px;
+        border-block-color: rgb(255, 255, 255);
+        border-color: rgb(255, 255, 255);
+        border-inline-color: rgb(255, 255, 255);
+        caret-color: rgb(255, 255, 255);
+        color: rgb(255, 255, 255);
+        column-rule-color: rgb(255, 255, 255);
+        display: flex;
+        flex-direction: column;
+        height: 32px;
+        inline-size: 127.141px;
+        list-style-type: none;
+        min-block-size: auto;
+        min-height: auto;
+        min-inline-size: auto;
+        min-width: auto;
+        outline-color: rgb(255, 255, 255);
+        perspective-origin: 63.5625px 16px;
+        text-decoration: none solid rgb(255, 255, 255);
+        text-emphasis-color: rgb(255, 255, 255);
+        transform-origin: 63.5703px 16px;
+        width: 127.141px;
+        -webkit-text-fill-color: rgb(255, 255, 255);
+        -webkit-text-stroke-color: rgb(255, 255, 255);
+      "
+    >
+      <a
+        href="/de/privatkunden"
+        role="menuitem"
+        target="_self"
+        tabindex="-1"
+        data-gem-id="header-nav-4"
+        class="wb css-1s3xdw2 evdsvoy4"
+        style="
+          block-size: 32px;
+          border-block-color: rgb(255, 255, 255);
+          border-color: rgb(255, 255, 255);
+          border-inline-color: rgb(255, 255, 255);
+          caret-color: rgb(255, 255, 255);
+          color: rgb(255, 255, 255);
+          column-rule-color: rgb(255, 255, 255);
+          cursor: pointer;
+          display: block;
+          font-weight: 600;
+          height: 32px;
+          inline-size: 127.156px;
+          list-style-type: none;
+          min-block-size: auto;
+          min-height: auto;
+          min-inline-size: auto;
+          min-width: auto;
+          outline-color: rgb(255, 255, 255);
+          padding-block: 4px;
+          padding: 4px 12px;
+          padding-inline: 12px;
+          perspective-origin: 63.5781px 16px;
+          text-align: left;
+          text-decoration: none solid rgb(255, 255, 255);
+          text-emphasis-color: rgb(255, 255, 255);
+          text-wrap-mode: nowrap;
+          transform-origin: 63.5781px 16px;
+          transition-duration: 0.25s;
+          transition-property: background-color;
+          width: 127.156px;
+          word-break: break-word;
+          -webkit-text-fill-color: rgb(255, 255, 255);
+          -webkit-text-stroke-color: rgb(255, 255, 255);
+        "
+        >Privatkunden</a
+      >
+    </li>
+    <li
+      role="none"
+      data-testid="nav-tab"
+      style="
+        block-size: 32px;
+        border-block-color: rgb(255, 255, 255);
+        border-color: rgb(255, 255, 255);
+        border-inline-color: rgb(255, 255, 255);
+        caret-color: rgb(255, 255, 255);
+        color: rgb(255, 255, 255);
+        column-rule-color: rgb(255, 255, 255);
+        display: flex;
+        flex-direction: column;
+        height: 32px;
+        inline-size: 139.469px;
+        list-style-type: none;
+        min-block-size: auto;
+        min-height: auto;
+        min-inline-size: auto;
+        min-width: auto;
+        outline-color: rgb(255, 255, 255);
+        perspective-origin: 69.7344px 16px;
+        text-decoration: none solid rgb(255, 255, 255);
+        text-emphasis-color: rgb(255, 255, 255);
+        transform-origin: 69.7344px 16px;
+        width: 139.469px;
+        -webkit-text-fill-color: rgb(255, 255, 255);
+        -webkit-text-stroke-color: rgb(255, 255, 255);
+      "
+    >
+      <button
+        aria-haspopup="true"
+        aria-expanded="false"
+        role="menuitem"
+        tabindex="-1"
+        data-gem-id="header-nav-5"
+        class="css-nj6hzh evdsvoy5 btn--unstyled"
+        type="button"
+        style="
+          block-size: 32px;
+          border-block: 0px none rgb(255, 255, 255);
+          border-color: rgb(255, 255, 255);
+          border-style: none;
+          border-width: 0px;
+          border-inline: 0px none rgb(255, 255, 255);
+          caret-color: rgb(255, 255, 255);
+          color: rgb(255, 255, 255);
+          column-rule-color: rgb(255, 255, 255);
+          display: block;
+          font-weight: 600;
+          height: 32px;
+          inline-size: 139.469px;
+          list-style-type: none;
+          min-block-size: auto;
+          min-height: auto;
+          min-inline-size: auto;
+          min-width: auto;
+          outline-color: rgb(255, 255, 255);
+          padding-block: 4px;
+          padding: 4px 12px;
+          padding-inline: 12px;
+          perspective-origin: 69.7344px 16px;
+          text-decoration: none solid rgb(255, 255, 255);
+          text-emphasis-color: rgb(255, 255, 255);
+          text-wrap-mode: nowrap;
+          transform-origin: 69.7344px 16px;
+          transition-duration: 0.25s;
+          transition-property: background-color;
+          width: 139.469px;
+          -webkit-text-fill-color: rgb(255, 255, 255);
+          -webkit-text-stroke-color: rgb(255, 255, 255);
+        "
+      >
+        <span
+          class="wb"
+          style="
+            border-block-color: rgb(255, 255, 255);
+            border-color: rgb(255, 255, 255);
+            border-inline-color: rgb(255, 255, 255);
+            caret-color: rgb(255, 255, 255);
+            color: rgb(255, 255, 255);
+            column-rule-color: rgb(255, 255, 255);
+            cursor: pointer;
+            font-weight: 600;
+            list-style-type: none;
+            outline-color: rgb(255, 255, 255);
+            text-align: center;
+            text-decoration: none solid rgb(255, 255, 255);
+            text-emphasis-color: rgb(255, 255, 255);
+            text-wrap-mode: nowrap;
+            word-break: break-word;
+            -webkit-text-fill-color: rgb(255, 255, 255);
+            -webkit-text-stroke-color: rgb(255, 255, 255);
+          "
+          >Finanzinstitute</span
+        >
+      </button>
+    </li>
+    <li
+      role="none"
+      data-testid="nav-tab"
+      style="
+        block-size: 32px;
+        border-block-color: rgb(255, 255, 255);
+        border-color: rgb(255, 255, 255);
+        border-inline-color: rgb(255, 255, 255);
+        caret-color: rgb(255, 255, 255);
+        color: rgb(255, 255, 255);
+        column-rule-color: rgb(255, 255, 255);
+        display: flex;
+        flex-direction: column;
+        height: 32px;
+        inline-size: 144.922px;
+        list-style-type: none;
+        min-block-size: auto;
+        min-height: auto;
+        min-inline-size: auto;
+        min-width: auto;
+        outline-color: rgb(255, 255, 255);
+        perspective-origin: 72.4531px 16px;
+        text-decoration: none solid rgb(255, 255, 255);
+        text-emphasis-color: rgb(255, 255, 255);
+        transform-origin: 72.4609px 16px;
+        width: 144.922px;
+        -webkit-text-fill-color: rgb(255, 255, 255);
+        -webkit-text-stroke-color: rgb(255, 255, 255);
+      "
+    >
+      <a
+        href="https://www.ersteprivatebanking.com/de/home"
+        role="menuitem"
+        target="_self"
+        tabindex="-1"
+        data-gem-id="header-nav-6"
+        class="wb css-1s3xdw2 evdsvoy4"
+        style="
+          block-size: 32px;
+          border-block-color: rgb(255, 255, 255);
+          border-color: rgb(255, 255, 255);
+          border-inline-color: rgb(255, 255, 255);
+          caret-color: rgb(255, 255, 255);
+          color: rgb(255, 255, 255);
+          column-rule-color: rgb(255, 255, 255);
+          cursor: pointer;
+          display: block;
+          font-weight: 600;
+          height: 32px;
+          inline-size: 144.922px;
+          list-style-type: none;
+          min-block-size: auto;
+          min-height: auto;
+          min-inline-size: auto;
+          min-width: auto;
+          outline-color: rgb(255, 255, 255);
+          padding-block: 4px;
+          padding: 4px 12px;
+          padding-inline: 12px;
+          perspective-origin: 72.4531px 16px;
+          text-align: left;
+          text-decoration: none solid rgb(255, 255, 255);
+          text-emphasis-color: rgb(255, 255, 255);
+          text-wrap-mode: nowrap;
+          transform-origin: 72.4609px 16px;
+          transition-duration: 0.25s;
+          transition-property: background-color;
+          width: 144.922px;
+          word-break: break-word;
+          -webkit-text-fill-color: rgb(255, 255, 255);
+          -webkit-text-stroke-color: rgb(255, 255, 255);
+        "
+        >Private Banking</a
+      >
+    </li>
+  </ul>
+</nav>` },
+  { filename: "button hidden", content: `<a href="#anchor" hidden></a>` },
+  { filename: "button like link href hash role button", content: `<a href="#" role="button"></a>` },
+  { filename: "button like link href javascript role button", content: `<a href="javascript: console.log()" role="button"></a>` },
+  { filename: "button role button", content: `<button role="button">Click me!</button>` },
+  { filename: "button role presentation", content: `<button role="presentation">Click me!</button>` },
+  { filename: "button role switch", content: `<button role="switch" aria-checked="false">Sound - Off</button>` },
+  { filename: "button", content: `<button>Click me!</button>` },
+  { filename: "heading clickable no role button", content: `<style>
+  .heading {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 20px;
+  }
+</style>
+
+<span class="heading" role="heading" aria-level=" " tabindex="0">Atomic test</span>` },
+  { filename: "link href hash", content: `<a href="#anchor"></a>` }
+  ];
+
+  return (
+    <EngineIssueSuccess
+      ruleId={ruleId}
+      title={title}
+      description={description}
+      helpText={helpText}
+      bestPractices={bestPractices}
+      htmlExamples={htmlExamples}
+    />
+  );
+};
+
+export default ButtonMismatchSuccess;

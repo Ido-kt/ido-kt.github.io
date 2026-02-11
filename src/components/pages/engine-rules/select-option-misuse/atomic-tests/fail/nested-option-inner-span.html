@@ -1,0 +1,21 @@
+<!--testconfig
+    "testedClass": "Rules.SelectOptionMisuse",
+    "expect": {
+        "failedNodes": ["#test-subject"]
+    }
+-->
+<div class="list-container">
+  <div>
+    Item 1
+    <div>
+      Subitem 1
+      <option id="test-subject">this is <small>(first)</small></option>
+    </div>
+    <div>Subitem 2</div>
+    <div>Subitem 3</div>
+  </div>
+  <div>
+    Item 2
+    <div>Subitem 4</div>
+  </div>
+</div>

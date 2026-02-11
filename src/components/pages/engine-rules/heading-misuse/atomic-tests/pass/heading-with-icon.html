@@ -1,0 +1,33 @@
+<!--testconfig
+    "testedClass": "Rules.HeadingMisuse",
+    "expect": {
+        "passedNodes": ["div"]
+    }
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <style>
+      body {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      .heading-with-svg {
+        font-size: 20px;
+        font-weight: 500;
+      }
+      .icon {
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+      }
+    </style>
+
+    <div class="heading-with-svg" role="heading" aria-level="3">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" fill="gray" />
+      </svg>
+      Heading with SVG Icon
+    </div>
+  </body>
+</html>

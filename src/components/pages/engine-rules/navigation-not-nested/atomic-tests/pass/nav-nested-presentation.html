@@ -1,0 +1,25 @@
+<!--testconfig
+    "testedClass": "Rules.NavigationNotNested",
+    "expect": {
+        "failedNodes": [],
+        "passedNodes": ["nav"]
+    }
+-->
+<nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li>
+      <a href="/about/">About Us</a>
+      <!-- Submenu for "About Us" -->
+      <nav role="presentation" aria-label="submenu">
+        <ul>
+          <li><a href="/about/history">Our History</a></li>
+          <li><a href="/about/team">Our Team</a></li>
+          <li><a href="/about/mission">Our Mission</a></li>
+        </ul>
+      </nav>
+    </li>
+    <li><a href="/services/">Services</a></li>
+    <li><a href="/contact/">Contact</a></li>
+  </ul>
+</nav>

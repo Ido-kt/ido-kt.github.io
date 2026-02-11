@@ -1,0 +1,18 @@
+<!--testconfig
+    "testedClass": "Rules.MenuTriggerMismatch",
+    "expect": {
+        "failedNodes": [],
+        "passedNodes": ["#sub-menu-button"]
+    }
+-->
+<nav>
+  <ul>
+    <li>
+      <button id="sub-menu-button" aria-expanded="false" aria-controls="sub-menu" aria-haspopup="menu">Menu</button>
+      <ul id="sub-menu">
+        <li><a href="link://#">Home</a></li>
+        <li><a href="link://#">About</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>

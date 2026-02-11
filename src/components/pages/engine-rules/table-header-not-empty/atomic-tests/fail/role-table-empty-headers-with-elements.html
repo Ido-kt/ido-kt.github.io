@@ -1,0 +1,27 @@
+<!--testconfig
+    "testedClass": "Rules.TableHeaderNotEmpty",
+    "expect": {
+        "failedNodes": ["div", "div", "div"]
+    }
+-->
+<div role="table">
+    <div role="rowgroup">
+        <div role="row">
+            <div role="columnheader"><div></div></div>
+            <div role="columnheader"><div></div></div>
+            <div role="columnheader"><div></div></div>
+        </div>
+    </div>
+    <div role="rowgroup">
+        <div role="row">
+            <div role="cell">Row 1, Column 1</div>
+            <div role="cell">Row 1, Column 2</div>
+            <div role="cell">Row 1, Column 3</div>
+        </div>
+        <div role="row">
+            <div role="cell">Row 2, Column 1</div>
+            <div role="cell">Row 2, Column 2</div>
+            <div role="cell">Row 2, Column 3</div>
+        </div>
+    </div>
+</div>

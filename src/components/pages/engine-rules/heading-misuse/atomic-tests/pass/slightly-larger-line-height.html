@@ -1,0 +1,25 @@
+<!--testconfig
+    "testedClass": "Rules.HeadingMisuse",
+    "expect": {
+        "passedNodes": ["div"]
+    }
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <style>
+      body {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.2;
+      }
+      .larger-line-height {
+        font-size: 18px; /* Larger than base */
+        font-weight: 400;
+        line-height: 1.5; /* Larger line height */
+      }
+    </style>
+
+    <div role="heading" aria-level="2" class="larger-line-height">Heading with Larger Line Height</div>
+  </body>
+</html>

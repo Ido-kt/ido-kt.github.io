@@ -1,0 +1,12 @@
+<!--testconfig
+    "testedClass": "Rules.FocusNoticeable",
+    "expect": {
+        "failedNodes": ["#test-subject"]
+    }
+-->
+<style>
+  #test-subject:focus {
+    outline: none;
+  }
+</style>
+<button id="test-subject">Click this</button>

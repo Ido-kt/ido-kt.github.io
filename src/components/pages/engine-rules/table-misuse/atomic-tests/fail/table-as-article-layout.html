@@ -1,0 +1,18 @@
+<!--testconfig
+    "testedClass": "Rules.TableMisuse",
+    "expect": {
+        "failedNodes": ["table"]
+    }
+-->
+<table style="padding: 1rem;">
+    <tr>
+      <td rowspan="3"><img src="image.jpg" style="height:100px;width:100px;border:1px solid black; margin-right: 0.5rem;" alt="Article Image"></td>
+      <td><h2>Article Title</h2></td>
+    </tr>
+    <tr>
+      <td>Description of the article goes here. It can span multiple lines and include further details about the article's content.</td>
+    </tr>
+    <tr>
+      <td><button onclick="location.href='article-link.html'">Read More</button></td>
+    </tr>
+</table>

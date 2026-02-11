@@ -1,0 +1,22 @@
+<!--testconfig
+    "testedClass": "Rules.LinkImageWarning",
+    "expect": {
+        "passedNodes": ["a"]
+    }
+-->
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+</style>
+<p>
+  <a href="https://example.com/image.png" id="image-link" aria-labelledby="image-desc">View Image</a>
+  <span id="image-desc" class="sr-only">This link opens an image in a new page</span>
+</p>

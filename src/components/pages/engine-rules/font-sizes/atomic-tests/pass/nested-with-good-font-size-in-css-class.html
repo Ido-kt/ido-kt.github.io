@@ -1,0 +1,28 @@
+<!--testconfig
+    "testedClass": "Rules.FontSizes",
+    "expect": {
+        "passedNodes": ["#div1", "#p1", "#span1", "#p2"]
+    }
+-->
+<style>
+  .good-font-size {
+    font-size: 12px;
+  }
+</style>
+<div>
+  <div id="div1" style="font-size: 12px">
+    This is a div with font-size 12px.
+    <p id="p1">
+      This is a paragraph with class good-font-size.
+      <span id="span1" class="good-font-size"> This is a span with no style or class. </span>
+    </p>
+  </div>
+  <div id="div2" style="font-size: 10px">
+    <p id="p2" style="font-size: 14px">
+      This is a paragraph with font-size 14px.
+      <span id="span2" class="good-font-size">
+        <!-- This is a span with no text -->
+      </span>
+    </p>
+  </div>
+</div>

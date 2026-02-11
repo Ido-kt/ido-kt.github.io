@@ -1,0 +1,19 @@
+<!--testconfig
+    "testedClass": "Rules.SelectOptionMisuse",
+    "expect": {
+        "failedNodes": ["#test-subject"]
+    }
+-->
+<div class="custom-select">
+  <button class="select-box">Select an option</button>
+  <div class="options">
+    <div id="test-subject" class="option" role="option">
+      Option 1
+      <div class="nested-option">Suboption 1</div>
+      <div class="nested-option">Suboption 2</div>
+      <div class="nested-option">Suboption 3</div>
+    </div>
+    <div class="option">Option 2</div>
+    <div class="option">Option 3</div>
+  </div>
+</div>

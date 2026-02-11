@@ -1,0 +1,35 @@
+<!--testconfig
+    "testedClass": "Rules.BreadcrumbsNav",
+    "expect": {
+        "passedNodes": ["div"]
+    }
+-->
+
+<style>
+    .breadcrumb {
+        background-color: #f5f5f5;
+        padding: 8px 15px;
+        margin-bottom: 20px;
+        list-style: none;
+        border-radius: 4px;
+        display: flex;
+        flex-flow: row wrap;
+    }
+
+    .breadcrumb-item {
+        margin-inline: 1rem;
+    }
+
+    .breadcrumb-item:not(:last-child)::after {
+        content: ">";
+        margin-inline: 1rem;
+    }
+</style>
+
+
+<div class="breadcrumb" role="navigation" aria-label="Breadcrumb">
+    <span class="breadcrumb-item"><a href="/">Home</a></span>
+    <span class="breadcrumb-item"><a href="/lib">Library</a></span>
+    <span class="breadcrumb-item active" aria-current="page">Data</span>
+</div>
+

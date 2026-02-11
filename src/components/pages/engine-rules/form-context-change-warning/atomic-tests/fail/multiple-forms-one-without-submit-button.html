@@ -1,0 +1,16 @@
+<!--testconfig
+    "testedClass": "Rules.FormContextChangeWarning",
+    "expect": {
+        "passedNodes": ["#submit-1"],
+        "failedNodes": ["#missing-submit-2"]
+    }
+-->
+<form id="submit-1">
+  <input type="text" />
+  <input type="password" />
+  <input type="submit">
+</form>
+<form id="missing-submit-2">
+  <input type="text" />
+  <input type="password" />
+</form>

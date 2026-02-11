@@ -1,0 +1,13 @@
+<!--testconfig
+    "testedClass": "Rules.FocusNoticeable",
+    "expect": {
+        "failedNodes": ["#test-subject"]
+    }
+-->
+<style>
+  #test-subject:focus {
+    outline: none;
+  }
+</style>
+<input id="test-subject" placeholder="test input" />
+<label for="test-subject">test label</label>

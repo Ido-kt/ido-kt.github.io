@@ -1,0 +1,13 @@
+<!--testconfig
+    "testedClass": "Rules.NavigationItemLink",
+    "expect": {
+        "failedNodes": ["#test-subject-1", "#test-subject-2", "#test-subject-3"]
+    }
+-->
+<div role="navigation">
+  <ul>
+    <div id="test-subject-1" role="listitem" onclick="navigateToPage('home.html');">Home</div>
+    <div id="test-subject-2" role="listitem" onclick="navigateToPage('about.html');">About</div>
+    <div id="test-subject-3" role="listitem" onclick="navigateToPage('contact.html');">Contact</div>
+  </ul>
+</div>

@@ -1,0 +1,19 @@
+<!--testconfig
+    "testedClass": "Rules.NavigationSubmenuRegion",
+    "expect": {
+        "failedNodes": [],
+        "passedNodes": ["#sub-menu"]
+    }
+-->
+<nav>
+    <div>
+      <button id="sub-menu-button" aria-expanded="false">About</button>
+      <div id="sub-menu" role="region">
+        <div><a href="#">Home</a></div>
+        <div><a href="#">About</a></div>
+      </div>
+    </div>
+    <div>
+      <a href="#">Contact</a>
+    </div>
+</nav>

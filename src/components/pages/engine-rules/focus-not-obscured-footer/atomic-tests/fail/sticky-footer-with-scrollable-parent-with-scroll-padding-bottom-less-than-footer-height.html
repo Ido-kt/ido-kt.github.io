@@ -1,0 +1,140 @@
+<!--testconfig
+    "testedClass": "Rules.FocusNotObscuredFooter",
+    "expect": {
+        "failedNodes": [".sticky-footer"]
+    }
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Scrollable Parent Example</title>
+    <style>
+      .scrollable {
+        height: 200px;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        position: relative;
+        scroll-padding-bottom: 20px;
+      }
+      .content {
+        height: 500px;
+        background: linear-gradient(to bottom, #f06, #4a90e2);
+      }
+      .sticky-footer {
+        background: #eee;
+        border-top: 1px solid #ccc;
+        bottom: 0;
+        box-shadow: 0px 0px 8px #ccc;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        left: 0;
+        padding: 0.5em 4em;
+        position: sticky;
+        width: 100%;
+        min-height: 5em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="scrollable">
+      <div class="content">
+        <ul>
+          <li>
+            <a href="#">Example 1</a>
+          </li>
+          <li>
+            <a href="#">Example 2</a>
+          </li>
+          <li>
+            <a href="#">Example 3</a>
+          </li>
+          <li>
+            <a href="#">Example 4</a>
+          </li>
+          <li>
+            <a href="#">Example 5</a>
+          </li>
+          <li>
+            <a href="#">Example 6</a>
+          </li>
+          <li>
+            <a href="#">Example 7</a>
+          </li>
+          <li>
+            <a href="#">Example 8</a>
+          </li>
+          <li>
+            <a href="#">Example 9</a>
+          </li>
+          <li>
+            <a href="#">Example 10</a>
+          </li>
+          <li>
+            <a href="#">Example 11</a>
+          </li>
+          <li>
+            <a href="#">Example 12</a>
+          </li>
+          <li>
+            <a href="#">Example 13</a>
+          </li>
+          <li>
+            <a href="#">Example 14</a>
+          </li>
+          <li>
+            <a href="#">Example 15</a>
+          </li>
+          <li>
+            <a href="#">Example 16</a>
+          </li>
+          <li>
+            <a href="#">Example 17</a>
+          </li>
+          <li>
+            <a href="#">Example 18</a>
+          </li>
+          <li>
+            <a href="#">Example 19</a>
+          </li>
+          <li>
+            <a href="#">Example 20</a>
+          </li>
+          <li>
+            <a href="#">Example 21</a>
+          </li>
+          <li>
+            <a href="#">Example 22</a>
+          </li>
+          <li>
+            <a href="#">Example 23</a>
+          </li>
+          <li>
+            <a href="#">Example 24</a>
+          </li>
+          <li>
+            <a href="#">Example 25</a>
+          </li>
+          <li>
+            <a href="#">Example 26</a>
+          </li>
+          <li>
+            <a href="#">Example 27</a>
+          </li>
+          <li>
+            <a href="#">Example 28</a>
+          </li>
+          <li>
+            <a href="#">Example 29</a>
+          </li>
+          <li>
+            <a href="#">Example 30</a>
+          </li>
+        </ul>
+      </div>
+      <footer class="sticky-footer"></footer>
+    </div>
+  </body>
+</html>

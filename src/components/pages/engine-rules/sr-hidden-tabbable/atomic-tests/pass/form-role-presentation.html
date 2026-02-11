@@ -1,0 +1,18 @@
+<!--testconfig
+    "testedClass": "Rules.SRHiddenTabbable",
+    "expect": {
+        "passedNodes": ["#fname", "#lname", "#address", "input[type=submit]"]
+    }
+-->
+<form role="presentation">
+  <label for="fname">First Name:</label><br />
+  <input type="text" id="fname" name="fname" required /><br /><br />
+
+  <label for="lname">Last Name:</label><br />
+  <input type="text" id="lname" name="lname" required /><br /><br />
+
+  <label for="address">Address:</label><br />
+  <input type="text" id="address" name="address" required /><br /><br />
+
+  <input type="submit" value="Submit" />
+</form>

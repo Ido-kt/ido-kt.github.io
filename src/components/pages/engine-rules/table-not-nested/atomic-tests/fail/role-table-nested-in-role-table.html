@@ -1,0 +1,36 @@
+<!--testconfig
+    "testedClass": "Rules.TableNotNested",
+    "expect": {
+        "failedNodes": ["#nested-table"],
+        "passedNodes": ["#not-nested-table"]
+    }
+-->
+<div role="table" id="not-nested-table">
+  <div role="row">
+    <div role="columnheader">Nested Column 1</div>
+    <div role="columnheader">Nested Column 2</div>
+  </div>
+  <div role="row">
+    <div role="cell">Nested Row 1, Cell 1</div>
+    <div role="cell">Nested Row 1, Cell 2</div>
+  </div>
+  <div role="row">
+    <div role="cell">Nested Row 2, Cell 1</div>
+    <div role="cell">
+      <div id="nested-table" role="table">
+        <div role="row">
+          <div role="columnheader">Nested Column 1</div>
+          <div role="columnheader">Nested Column 2</div>
+        </div>
+        <div role="row">
+          <div role="cell">Nested Row 1, Cell 1</div>
+          <div role="cell">Nested Row 1, Cell 2</div>
+        </div>
+        <div role="row">
+          <div role="cell">Nested Row 2, Cell 1</div>
+          <div role="cell">Nested Row 2, Cell 2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

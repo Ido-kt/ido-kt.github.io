@@ -1,0 +1,25 @@
+<!--testconfig
+    "testedClass": "Rules.SearchFormMismatch",
+    "expect": {
+        "failedNodes": [],
+        "passedNodes": ["form"]
+    }
+-->
+<html lang="he">
+  <style>
+    form {
+      width: 400px;
+    }
+
+    textarea {
+      width: 100%;
+    }
+  </style>
+
+  <div role="search">
+    <form>
+      <textarea placeholder="חיפוש"></textarea>
+      <button type="submit"></button>
+    </form>
+  </div>
+</html>

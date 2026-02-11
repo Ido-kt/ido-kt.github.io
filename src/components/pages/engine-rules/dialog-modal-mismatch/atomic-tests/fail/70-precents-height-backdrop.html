@@ -1,0 +1,94 @@
+<!--testconfig
+    "testedClass": "Rules.DialogModalMismatch",
+    "expect": {
+        "failedNodes": ["div.modal"]
+    }
+-->
+<html lang="en">
+<head>
+    <meta name="aceWebsite" content="accessibe.com">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+      /* Backdrop styles */
+      .backdrop {
+        display: block; /* Visible by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 70%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+      }
+    
+      /* Modal styles */
+      .modal {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 40%; /* Width */
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+        position: relative; /* For positioning the close button */
+      }
+    
+      /* The Close Button */
+      .close {
+        color: #aaa;
+        position: absolute;
+        top: 10px;
+        right: 25px;
+        font-size: 30px;
+        font-weight: bold;
+      }
+    
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    
+      /* Button styles inside the modal */
+      .modal-button {
+        padding: 10px 20px;
+        margin: 10px;
+        background-color: #008CBA; /* Blue */
+        color: white;
+        border: none;
+        cursor: pointer;
+        outline: none;
+      }
+    
+      .modal-button:hover {
+        background-color: #005f73;
+      }
+    
+    </style>
+    </head>
+    <body>
+    
+      <div>
+        <!-- Trigger/Open The Modal Button -->
+        <button id="myBtn">Open Modal</button>
+        
+        <!-- The Modal -->
+        <div id="myModal" class="backdrop">
+        
+          <!-- Modal content -->
+          <div class="modal">
+            <span class="close">&times;</span>
+            <p>Some text in the Modal...</p>
+            <button class="modal-button">Button 1</button>
+            <button class="modal-button">Button 2</button>
+            <button class="modal-button">Button 3</button>
+          </div>
+        
+        </div>
+      </div>
+
+</body>
+</html>

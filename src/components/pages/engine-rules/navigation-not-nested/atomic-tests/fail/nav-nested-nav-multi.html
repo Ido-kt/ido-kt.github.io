@@ -1,0 +1,33 @@
+<!--testconfig
+    "testedClass": "Rules.NavigationNotNested",
+    "expect": {
+        "failedNodes": ["#nested-nav1", "#nested-nav2"],
+        "passedNodes": ["#not-nested-nav"]
+    }
+-->
+<nav id="not-nested-nav">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li>
+      <a href="/about/">About Us</a>
+      <!-- Submenu for "About Us" -->
+      <nav id="nested-nav1">
+        <ul>
+          <li><a href="/about/history">Our History</a></li>
+          <li><a href="/about/team">Our Team</a></li>
+          <li>
+            <a href="/about/mission">Our Mission</a>
+            <nav id="nested-nav2">
+              <ul>
+                <li><a href="/about/mission/start">Our Beginning</a></li>
+                <li><a href="/about/mission/end">Our Goal</a></li>
+              </ul>
+            </nav>
+          </li>
+        </ul>
+      </nav>
+    </li>
+    <li><a href="/services/">Services</a></li>
+    <li><a href="/contact/">Contact</a></li>
+  </ul>
+</nav>

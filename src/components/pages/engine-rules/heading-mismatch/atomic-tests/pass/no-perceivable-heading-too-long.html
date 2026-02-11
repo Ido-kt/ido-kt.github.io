@@ -1,0 +1,27 @@
+<!--testconfig
+    "testedClass": "Rules.HeadingMismatch",
+    "expect": {
+        "passedNodes": []
+    }
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Example Page</title>
+  </head>
+  <body>
+    <style>
+      body {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      .too-long {
+        font-size: 22px;
+        font-weight: 500;
+      }
+    </style>
+
+    <div class="too-long">This heading text is intentionally longer than sixty characters to test the limit.</div>
+  </body>
+</html>

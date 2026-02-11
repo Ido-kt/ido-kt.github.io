@@ -1,0 +1,38 @@
+<!--testconfig
+    "testedClass": "Rules.TableRowHeader",
+    "expect": {
+        "failedNodes": [".test-subject", ".test-subject", ".test-subject"]
+    }
+-->
+<style>
+  .test-subject {
+    background-color: aqua;
+  }
+  [role=table] {
+    display: table;
+  }
+
+  [role=row] {
+    display: table-row;
+  }
+
+  [role=row] > * {
+    display: table-cell;
+    border: 1px solid black;
+    width: 100px;
+  }
+</style>
+<div role="table">
+  <div role="row">
+    <div role="cell" class="test-subject">Row 1</div>
+    <div role="cell">Row 1, Cell 1</div>
+  </div>
+  <div role="row">
+    <div role="cell" class="test-subject">Row 2</div>
+    <div role="cell">Row 2, Cell 1</div>
+  </div>
+  <div role="row">
+    <div role="cell" class="test-subject">Row 3</div>
+    <div role="cell">Row 3, Cell 1</div>
+  </div>
+</div>

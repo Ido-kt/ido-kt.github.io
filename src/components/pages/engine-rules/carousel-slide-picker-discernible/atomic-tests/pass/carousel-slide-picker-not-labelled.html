@@ -1,0 +1,20 @@
+<!--testconfig
+    "testedClass": "Rules.CarouselSlidePickerDiscernible",
+    "expect": {
+        "passedNodes": [".pagination-control", ".pagination-control", ".pagination-control"]
+    }
+-->
+<div id="test-subject" class="carousel" role="region" aria-roledescription="carousel" aria-label="News feed">
+    <button class="control" aria-label="previous slide">&lt;</button>
+    <ul class="carousel__slides-container">
+        <li class="slide">slide 1</li>
+        <li class="slide">slide 2</li>
+        <li class="slide">slide 3</li>
+    </ul>
+    <button class="control" aria-label="next slide">&gt;</button>
+    <div class="container">
+        <button class="pagination-control" aria-label="Go to Slide 1">1</button>
+        <button class="pagination-control" aria-label="Go to Slide 2">2</button>
+        <button class="pagination-control" aria-label="Go to Slide 3">3</button>
+    </div>
+</div>

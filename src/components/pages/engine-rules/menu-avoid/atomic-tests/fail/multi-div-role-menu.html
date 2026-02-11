@@ -1,0 +1,16 @@
+<!--testconfig
+    "testedClass": "Rules.MenuAvoid",
+    "expect": {
+        "failedNodes": ["#test-subject1", "#test-subject2"]
+    }
+-->
+<div id="test-subject1" role="menu" aria-label="File Operations" tabindex="0">
+  <div role="menuitem" tabindex="-1" id="newFile" onclick="newFile()">New</div>
+  <div role="menuitem" tabindex="-1" id="saveFile" onclick="saveFile()">Save</div>
+  <div role="menuitem" tabindex="-1" id="deleteFile" onclick="deleteFile()">Delete</div>
+</div>
+<div id="test-subject2" role="menu" aria-label="File Operations" tabindex="0">
+  <div role="menuitem" tabindex="-1" id="editFile" onclick="editFile()">New</div>
+  <div role="menuitem" tabindex="-1" id="copyFile" onclick="copyFile()">Save</div>
+  <div role="menuitem" tabindex="-1" id="cutFile" onclick="cutFile()">Delete</div>
+</div>

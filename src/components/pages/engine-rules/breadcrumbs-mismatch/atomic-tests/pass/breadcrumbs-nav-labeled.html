@@ -1,0 +1,20 @@
+<!--testconfig
+    "testedClass": "Rules.BreadcrumbsMismatch",
+    "expect": {
+        "passedNodes": ["nav"]
+    }
+-->
+
+<style>
+    .breadcrumbs {
+        display: flex;
+        gap: 1rem;
+    }
+</style>
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <div><a href="/">Home</a></div>
+  <div><a href="/perceivable/components/breadcrumb/">Home</a></div>
+  <div><a href="/perceivable/components/breadcrumb/atomic-tests/">Home</a></div>
+  <div><a href="/perceivable/components/breadcrumb/atomic-tests/pass/enclosing-element-is-nav--list-items-are-divs.html">Home</a></div>
+</nav>

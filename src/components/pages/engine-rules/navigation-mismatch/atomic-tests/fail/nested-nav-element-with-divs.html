@@ -1,0 +1,74 @@
+<!--testconfig
+    "testedClass": "Rules.NavigationMismatch",
+    "expect": {
+        "failedNodes": ["#test-subject"]
+    }
+-->
+<style>
+  .navigation {
+    display: flex;
+    width: 80%;
+    border: 1px red solid;
+  }
+
+  a {
+    padding: 12px;
+  }
+
+  a::before {
+    content: "a ";
+  }
+
+  div {
+    border: 1px black solid;
+    padding: 8px;
+  }
+
+  div::before {
+    content: "div";
+  }
+
+  *::before {
+    font-weight: bold;
+  }
+</style>
+
+<div id="test-subject">
+  <h2>My site</h2>
+  <div class="navigation">
+    <div>
+      <a href="#home">Home</a>
+    </div>
+    <div>
+      <a href="#about">About</a>
+      <div>
+        <div>
+          <a href="#team">Our Team</a>
+          <div>
+            <a href="#leadership">Leadership</a>
+            <a href="#staff">Staff</a>
+          </div>
+        </div>
+        <a href="#history">History</a>
+        <a href="#mission">Mission</a>
+      </div>
+    </div>
+    <div>
+      <a href="#services">Services</a>
+      <div>
+        <a href="#consulting">Consulting</a>
+        <div>
+          <a href="#development">Development</a>
+          <div>
+            <a href="#webdev">Web Development</a>
+            <a href="#appdev">App Development</a>
+          </div>
+        </div>
+        <a href="#support">Support</a>
+      </div>
+    </div>
+    <div>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</div>

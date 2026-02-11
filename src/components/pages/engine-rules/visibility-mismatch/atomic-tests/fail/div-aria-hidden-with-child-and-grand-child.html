@@ -1,0 +1,14 @@
+<!--testconfig
+    "testedClass": "Rules.VisibilityMismatch",
+    "expect": {
+        "failedNodes": ["#test"],
+        "inapplicableNodes": ["#child", "#grand-child"]
+    }
+-->
+<div id="test" aria-hidden="true">
+  This is hidden from sr
+  <div id="child">
+    child
+    <div id="grand-child">grand child</div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<!--testconfig
+    "testedClass": "Rules.FormContextChangeWarning",
+    "expect": {
+        "passedNodes": ["#submit-1"],
+        "failedNodes": ["#missing-submit-2"]
+    },
+    "skip": true
+-->
+<!-- test is skipped due to classifier wrongfully detecting this submit button -->
+<form id="submit-1" role="form">
+  <input type="text" />
+  <input type="password" />
+</form>
+
+<form id="missing-submit-2">
+  <input type="submit" form="submit-1" />
+  <input type="text" />
+  <input type="password" />
+</form>

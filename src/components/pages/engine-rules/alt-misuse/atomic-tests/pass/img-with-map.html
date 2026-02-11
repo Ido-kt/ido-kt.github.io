@@ -1,0 +1,11 @@
+<!--testconfig
+    "testedClass": "Rules.AltMisuse",
+    "expect": {
+        "passedNodes": ["img", "area", "area"]
+    }
+-->
+<img src="world-map.png" usemap="#worldmap" alt="World map with clickable countries">
+<map name="worldmap">
+  <area shape="rect" coords="0,0,100,100" href="usa.html" alt="United States" />
+  <area shape="rect" coords="101,0,200,100" href="canada.html" alt="Canada" />
+</map>

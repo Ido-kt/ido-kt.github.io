@@ -1,0 +1,17 @@
+<!--testconfig
+    "testedClass": "Rules.AriaControlsHasReference",
+    "expect": {
+        "failedNodes": ["span"]
+    }
+-->
+<span
+    role="tab"
+    aria-selected="true"
+    aria-controls="panel-1 panel-2"
+    id="tab-1"
+    tabindex="0">
+First Tab
+</span>
+<div id="panel-1" role="tabpanel" tabindex="0" aria-labelledby="tab-1">
+    <p>Content for the first panel</p>
+</div>

@@ -1,0 +1,18 @@
+<!--testconfig
+    "testedClass": "Rules.IconDiscernible",
+    "expect": {
+        "failedNodes": ["img"]
+    }
+-->
+<style>
+    img {
+        width: calc(var(--base-size) * 1px);
+        height: calc(var(--base-size) * 1px);
+        display: block;
+    }
+</style>
+<script>
+    var dpr = window.devicePixelRatio || 1;
+    document.documentElement.style.setProperty('--base-size', 48 * dpr);
+</script>
+<img src="https://banner2.cleanpng.com/20180411/oqq/kisspng-computer-icons-star-5-star-5acdd9ec67db40.8458493715234401084254.jpg" />

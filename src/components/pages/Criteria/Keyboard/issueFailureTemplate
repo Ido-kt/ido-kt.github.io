@@ -1,0 +1,11 @@
+import React from "react";
+import IssueFailure from "../../../../../layout/issueFailure";
+
+const itemDescription = " Failures";
+
+export default () => (
+  <IssueFailure
+    itemContent={<></>}
+    itemDescription={itemDescription}
+  />
+);

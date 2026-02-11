@@ -1,0 +1,221 @@
+<!--testconfig
+    "testedClass": "Rules.TableMisuse",
+    "expect": {
+        "passedNodes": ["table"]
+    }
+-->
+
+<style>
+    table {
+        display: table;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        display: table-cell;
+        padding: 10px;
+        border: 1px solid black;
+    }
+</style>
+
+<table>
+    <thead>
+        <tr>
+            <th>Experiment ID</th>
+            <th>Gene</th>
+            <th>Mutation Type</th>
+            <th>Location</th>
+            <th>Effect</th>
+            <th>Severity</th>
+            <th>Expression Level</th>
+            <th>Sample Size</th>
+            <th>Control Group</th>
+            <th>Treatment Group</th>
+            <th>p-value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>BRCA1</td>
+            <td>Missense</td>
+            <td>Exon 5</td>
+            <td>Protein Dysfunction</td>
+            <td>High</td>
+            <td>Increased</td>
+            <td>100</td>
+            <td>50</td>
+            <td>50</td>
+            <td>0.05</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>TP53</td>
+            <td>Nonsense</td>
+            <td>Exon 3</td>
+            <td>Protein Truncation</td>
+            <td>Medium</td>
+            <td>Decreased</td>
+            <td>80</td>
+            <td>40</td>
+            <td>40</td>
+            <td>0.01</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>EGFR</td>
+            <td>Frameshift</td>
+            <td>Exon 19</td>
+            <td>Protein Deletion</td>
+            <td>Low</td>
+            <td>Increased</td>
+            <td>120</td>
+            <td>60</td>
+            <td>60</td>
+            <td>0.02</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>KRAS</td>
+            <td>Missense</td>
+            <td>Exon 2</td>
+            <td>Protein Dysfunction</td>
+            <td>High</td>
+            <td>Increased</td>
+            <td>90</td>
+            <td>45</td>
+            <td>45</td>
+            <td>0.03</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>ALK</td>
+            <td>Translocation</td>
+            <td>Exon 20</td>
+            <td>Gene Fusion</td>
+            <td>Medium</td>
+            <td>Increased</td>
+            <td>150</td>
+            <td>75</td>
+            <td>75</td>
+            <td>0.01</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>PTEN</td>
+            <td>Frameshift</td>
+            <td>Exon 8</td>
+            <td>Protein Deletion</td>
+            <td>Low</td>
+            <td>Decreased</td>
+            <td>110</td>
+            <td>55</td>
+            <td>55</td>
+            <td>0.04</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>RET</td>
+            <td>Missense</td>
+            <td>Exon 11</td>
+            <td>Protein Dysfunction</td>
+            <td>High</td>
+            <td>Increased</td>
+            <td>130</td>
+            <td>65</td>
+            <td>65</td>
+            <td>0.02</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>BRAF</td>
+            <td>Nonsense</td>
+            <td>Exon 15</td>
+            <td>Protein Truncation</td>
+            <td>Medium</td>
+            <td>Decreased</td>
+            <td>95</td>
+            <td>47</td>
+            <td>47</td>
+            <td>0.03</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>MET</td>
+            <td>Translocation</td>
+            <td>Exon 14</td>
+            <td>Gene Fusion</td>
+            <td>Low</td>
+            <td>Increased</td>
+            <td>140</td>
+            <td>70</td>
+            <td>70</td>
+            <td>0.01</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>PIK3CA</td>
+            <td>Missense</td>
+            <td>Exon 10</td>
+            <td>Protein Dysfunction</td>
+            <td>High</td>
+            <td>Increased</td>
+            <td>100</td>
+            <td>50</td>
+            <td>50</td>
+            <td>0.02</td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>NRAS</td>
+            <td>Missense</td>
+            <td>Exon 3</td>
+            <td>Protein Dysfunction</td>
+            <td>Medium</td>
+            <td>Increased</td>
+            <td>120</td>
+            <td>60</td>
+            <td>60</td>
+            <td>0.03</td>
+        </tr>
+        <tr>
+            <td>12</td>
+            <td>SMAD4</td>
+            <td>Nonsense</td>
+            <td>Exon 8</td>
+            <td>Protein Truncation</td>
+            <td>Low</td>
+            <td>Decreased</td>
+            <td>80</td>
+            <td>40</td>
+            <td>40</td>
+            <td>0.04</td>
+        </tr>
+        <tr>
+            <td>13</td>
+            <td>NOTCH1</td>
+            <td>Frameshift</td>
+            <td>Exon 34</td>
+            <td>Protein Deletion</td>
+            <td>High</td>
+            <td>Increased</td>
+            <td>130</td>
+            <td>65</td>
+            <td>65</td>
+            <td>0.02</td>
+        </tr>
+        <tr>
+            <td>14</td>
+            <td>PTPN11</td>
+            <td>Missense</td>
+            <td>Exon 3</td>
+            <td>Protein Dysfunction</td>
+            <td>Medium</td>
+            <td>Increased</td>
+            <td>110</td>
+            <td>55</td>
+            <td>55</td>
+            <td>0.03</td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,23 @@
+<!--testconfig
+    "testedClass": "Rules.HeadingMisuse",
+    "expect": {
+        "failedNodes": ["div"]
+    }
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <style>
+      body {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      .too-small {
+        font-size: 14px; /* Smaller than the base size */
+        font-weight: 500;
+      }
+    </style>
+
+    <div role="heading" aria-level="1" class="too-small">Text with too small font</div>
+  </body>
+</html>
