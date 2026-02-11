@@ -27,7 +27,6 @@ yarn-error.log*
 /sdk-tests/node/test-results/
 /sdk-tests/node/playwright-report/
 /sdk-tests/node/.npmrc
-/sdk-tests/node/package-lock.json
 
 /sdk-tests/python/test-results/
 /sdk-tests/python/reports/
