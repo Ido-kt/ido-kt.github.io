@@ -240,7 +240,9 @@ jobs:
             -DgroupId=com.acsbe \
             -DartifactId=accessflow-sdk \
             -Dversion=1.0.1 \
-            -Dpackaging=jar
+            -Dpackaging=jar \
+            -DgeneratePom=true
+          echo "✅ SDK installed to local Maven repository"
 
       - name: Install Playwright browsers
         run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install chromium"
@@ -291,6 +293,11 @@ jobs:
         run: |
           echo "📝 Configuring Maven settings.xml for GCP Artifact Registry..."
           mkdir -p ~/.m2
+          # Add https:// if not present in the URL
+          MAVEN_URL="${GCP_SDK_MAVEN_REGISTRY_URL}"
+          if [[ ! "$MAVEN_URL" =~ ^https?:// ]]; then
+            MAVEN_URL="https://${MAVEN_URL}"
+          fi
           cat > ~/.m2/settings.xml << EOF
           <settings>
             <servers>
@@ -306,7 +313,7 @@ jobs:
                 <repositories>
                   <repository>
                     <id>accessflow-registry</id>
-                    <url>${GCP_SDK_MAVEN_REGISTRY_URL}</url>
+                    <url>${MAVEN_URL}</url>
                   </repository>
                 </repositories>
               </profile>
@@ -316,7 +323,7 @@ jobs:
             </activeProfiles>
           </settings>
           EOF
-          echo "✅ Maven settings configured"
+          echo "✅ Maven settings configured with URL: ${MAVEN_URL}"
 
       - name: Install Playwright browsers
         run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install chromium"
