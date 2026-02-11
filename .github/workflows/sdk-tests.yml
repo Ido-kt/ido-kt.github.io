@@ -13,7 +13,7 @@ jobs:
   # ============================================================================
   node-local:
     name: Node.js (Local Package)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     
     steps:
       - name: Checkout repository
@@ -60,7 +60,7 @@ jobs:
   # ============================================================================
   node-registry:
     name: Node.js (GCP Registry)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     
     steps:
       - name: Checkout repository
@@ -122,7 +122,7 @@ jobs:
   # ============================================================================
   python-local:
     name: Python (Local Package)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     
     steps:
       - name: Checkout repository
@@ -166,7 +166,7 @@ jobs:
   # ============================================================================
   python-registry:
     name: Python (GCP Registry)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     
     steps:
       - name: Checkout repository
@@ -213,7 +213,7 @@ jobs:
   # ============================================================================
   java-local:
     name: Java (Local Package)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     
     steps:
       - name: Checkout repository
@@ -267,7 +267,7 @@ jobs:
   # ============================================================================
   java-registry:
     name: Java (GCP Registry)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     
     steps:
       - name: Checkout repository
