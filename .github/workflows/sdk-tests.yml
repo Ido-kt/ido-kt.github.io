@@ -244,9 +244,13 @@ jobs:
             -DgeneratePom=true
           echo "✅ SDK installed to local Maven repository"
 
-      - name: Install Playwright browsers
-        run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install chromium"
+      - name: Resolve Maven dependencies
         working-directory: ./sdk-tests/java
+        run: mvn dependency:resolve
+      
+      - name: Install Playwright browsers
+        working-directory: ./sdk-tests/java
+        run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install chromium"
 
       - name: Create test-results directory
         run: mkdir -p test-results
@@ -325,9 +329,16 @@ jobs:
           EOF
           echo "✅ Maven settings configured with URL: ${MAVEN_URL}"
 
-      - name: Install Playwright browsers
-        run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install chromium"
+      - name: Resolve Maven dependencies
         working-directory: ./sdk-tests/java
+        env:
+          ACCESSFLOW_REGISTRY_TOKEN: ${{ secrets.ACCESSFLOW_REGISTRY_TOKEN }}
+          GCP_SDK_MAVEN_REGISTRY_URL: ${{ vars.GCP_SDK_MAVEN_REGISTRY_URL }}
+        run: mvn dependency:resolve
+      
+      - name: Install Playwright browsers
+        working-directory: ./sdk-tests/java
+        run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install chromium"
 
       - name: Create test-results directory
         run: mkdir -p test-results
