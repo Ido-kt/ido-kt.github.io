@@ -26,4 +26,6 @@ export default defineConfig({
     },
   ],
   outputDir: 'test-results',
+  // Auto-finalize and upload AccessFlow SDK reports after all tests complete
+  globalTeardown: require.resolve('@acsbe/accessflow-sdk/dist/src/playwright/global-teardown'),
 });

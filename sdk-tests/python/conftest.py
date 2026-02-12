@@ -13,7 +13,7 @@ load_dotenv()
 
 # Try to import AccessFlow SDK (will be installed in CI)
 try:
-    from accessflow_sdk import AccessFlowSDK, record_audit, finalize_reports
+    from accessflow_sdk import AccessFlowSDK, finalize_reports
     ACCESSFLOW_SDK_AVAILABLE = True
 except ImportError:
     ACCESSFLOW_SDK_AVAILABLE = False
@@ -73,9 +73,8 @@ def run_accessibility_audit(page, sdk_config):
                 print(f"⚠️  Audit returned None (failed to run)")
                 return None
 
-            # Record raw audits for reporting
-            if raw_audits:
-                record_audit(page.url, raw_audits)
+            # Note: audit() now automatically records results for CI/CD reporting
+            # No need to manually call record_audit()
 
             # Generate formatted report for display
             report = sdk.generate_report(raw_audits)
