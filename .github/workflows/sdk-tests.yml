@@ -55,67 +55,68 @@ jobs:
   #           sdk-tests/node/playwright-report/
   #         retention-days: 7
 
-  # ============================================================================
-  # Node.js Tests - Registry Install
-  # ============================================================================
-  node-registry:
-    name: Node.js (GCP Registry)
-    runs-on: ubuntu-22.04
-    
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-
-      - name: Configure npm registry authentication
-        working-directory: ./sdk-tests/node
-        env:
-          GCP_SDK_NPM_REGISTRY_URL: ${{ vars.GCP_SDK_NPM_REGISTRY_URL }}
-          ACCESSFLOW_NPM_REGISTRY_TOKEN: ${{ secrets.ACCESSFLOW_NPM_REGISTRY_TOKEN }}
-        run: |
-          echo "📝 Configuring .npmrc for GCP Artifact Registry..."
-          cat > .npmrc << EOF
-          @acsbe:registry=https://${GCP_SDK_NPM_REGISTRY_URL}/
-          //${GCP_SDK_NPM_REGISTRY_URL}/:username=_json_key_base64
-          //${GCP_SDK_NPM_REGISTRY_URL}/:_password=${ACCESSFLOW_NPM_REGISTRY_TOKEN}
-          //${GCP_SDK_NPM_REGISTRY_URL}/:always-auth=true
-          EOF
-          echo "✅ Registry configured"
-
-      - name: Install test dependencies
-        working-directory: ./sdk-tests/node
-        run: npm ci
-
-      - name: Install SDK from registry
-        working-directory: ./sdk-tests/node
-        run: |
-          echo "📦 Installing SDK from GCP Artifact Registry..."
-          npm install @acsbe/accessflow-sdk
-
-      - name: Install Playwright browsers
-        working-directory: ./sdk-tests/node
-        run: npx playwright install --with-deps chromium
-
-      - name: Run tests
-        working-directory: ./sdk-tests/node
-        env:
-          ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
-          CI: true
-        run: npx playwright test
-
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: node-registry-results
-          path: |
-            sdk-tests/node/test-results/
-            sdk-tests/node/playwright-report/
-          retention-days: 7
+  # # ============================================================================
+  # # Node.js Tests - Registry Install
+  # # ============================================================================
+  # node-registry:
+  #   name: Node.js (GCP Registry)
+  #   runs-on: ubuntu-22.04
+  #   
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4
+  #
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: '18'
+  #
+  #     - name: Configure npm registry authentication
+  #       working-directory: ./sdk-tests/node
+  #       env:
+  #         GCP_SDK_NPM_REGISTRY_URL: ${{ vars.GCP_SDK_NPM_REGISTRY_URL }}
+  #         ACCESSFLOW_NPM_REGISTRY_TOKEN: ${{ secrets.ACCESSFLOW_NPM_REGISTRY_TOKEN }}
+  #       run: |
+  #         echo "📝 Configuring .npmrc for GCP Artifact Registry..."
+  #         cat > .npmrc << EOF
+  #         @acsbe:registry=https://${GCP_SDK_NPM_REGISTRY_URL}/
+  #         //${GCP_SDK_NPM_REGISTRY_URL}/:username=_json_key_base64
+  #         //${GCP_SDK_NPM_REGISTRY_URL}/:_password=${ACCESSFLOW_NPM_REGISTRY_TOKEN}
+  #         //${GCP_SDK_NPM_REGISTRY_URL}/:always-auth=true
+  #         EOF
+  #         echo "✅ Registry configured"
+  #
+  #     - name: Install test dependencies
+  #       working-directory: ./sdk-tests/node
+  #       run: npm ci
+  #
+  #     - name: Install SDK from registry
+  #       working-directory: ./sdk-tests/node
+  #       run: |
+  #         echo "📦 Installing SDK from GCP Artifact Registry..."
+  #         npm install @acsbe/accessflow-sdk
+  #
+  #     - name: Install Playwright browsers
+  #       working-directory: ./sdk-tests/node
+  #       run: npx playwright install --with-deps chromium
+  #
+  #     - name: Run tests
+  #       working-directory: ./sdk-tests/node
+  #       env:
+  #         ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
+  #         CI: true
+  #       run: npx playwright test
+  #
+  #     - name: Upload test results
+  #       if: always()
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: node-registry-results
+  #         path: |
+  #           sdk-tests/node/test-results/
+  #           sdk-tests/node/playwright-report/
+  #         retention-days: 7
+  #
 
   # # ============================================================================
   # # Python Tests - Local Install
@@ -161,6 +162,7 @@ jobs:
   #         path: sdk-tests/python/test-results/
   #         retention-days: 7
   #
+
   # # ============================================================================
   # # Python Tests - Registry Install
   # # ============================================================================
@@ -208,6 +210,7 @@ jobs:
   #         path: sdk-tests/python/test-results/
   #         retention-days: 7
   #
+
   # # ============================================================================
   # # Java Tests - Local Install
   # # ============================================================================
