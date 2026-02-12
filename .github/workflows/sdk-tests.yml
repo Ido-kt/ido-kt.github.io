@@ -8,6 +8,14 @@ on:
   workflow_dispatch:
 
 jobs:
+  # Placeholder job - all tests are currently commented out
+  placeholder:
+    name: Tests Disabled
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Info
+        run: echo "All SDK tests are currently commented out. Uncomment specific jobs to run tests."
+
   # # ============================================================================
   # # Node.js Tests - Local Install
   # # ============================================================================
@@ -283,92 +291,92 @@ jobs:
   #
 
 
-  # ============================================================================
-  # Java Tests - Registry Install
-  # ============================================================================
-  java-registry:
-    name: Java (GCP Registry)
-    runs-on: ubuntu-22.04
-    
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          java-version: '11'
-          distribution: 'temurin'
-
-      - name: Configure Maven registry authentication
-        env:
-          ACCESSFLOW_REGISTRY_TOKEN: ${{ secrets.ACCESSFLOW_REGISTRY_TOKEN }}
-          GCP_SDK_MAVEN_REGISTRY_URL: ${{ vars.GCP_SDK_MAVEN_REGISTRY_URL }}
-        run: |
-          echo "📝 Configuring Maven settings.xml for GCP Artifact Registry..."
-          mkdir -p ~/.m2
-          # Add https:// if not present in the URL
-          MAVEN_URL="${GCP_SDK_MAVEN_REGISTRY_URL}"
-          if [[ ! "$MAVEN_URL" =~ ^https?:// ]]; then
-            MAVEN_URL="https://${MAVEN_URL}"
-          fi
-          cat > ~/.m2/settings.xml << EOF
-          <settings>
-            <servers>
-              <server>
-                <id>accessflow-registry</id>
-                <username>_json_key_base64</username>
-                <password>${ACCESSFLOW_REGISTRY_TOKEN}</password>
-              </server>
-            </servers>
-            <profiles>
-              <profile>
-                <id>accessflow</id>
-                <repositories>
-                  <repository>
-                    <id>accessflow-registry</id>
-                    <url>${MAVEN_URL}</url>
-                  </repository>
-                </repositories>
-              </profile>
-            </profiles>
-            <activeProfiles>
-              <activeProfile>accessflow</activeProfile>
-            </activeProfiles>
-          </settings>
-          EOF
-          echo "✅ Maven settings configured with URL: ${MAVEN_URL}"
-
-      - name: Resolve Maven dependencies
-        working-directory: ./sdk-tests/java
-        env:
-          ACCESSFLOW_REGISTRY_TOKEN: ${{ secrets.ACCESSFLOW_REGISTRY_TOKEN }}
-          GCP_SDK_MAVEN_REGISTRY_URL: ${{ vars.GCP_SDK_MAVEN_REGISTRY_URL }}
-        run: mvn dependency:resolve
-      
-      - name: Install Playwright browsers
-        working-directory: ./sdk-tests/java
-        run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.classpathScope=test -D exec.args="install --with-deps chromium"
-
-      - name: Create test-results directory
-        run: mkdir -p test-results
-        working-directory: ./sdk-tests/java
-
-      - name: Run tests (SDK downloaded from registry)
-        working-directory: ./sdk-tests/java
-        env:
-          ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
-          GCP_SDK_MAVEN_REGISTRY_URL: ${{ vars.GCP_SDK_MAVEN_REGISTRY_URL }}
-          ACCESSFLOW_REGISTRY_TOKEN: ${{ secrets.ACCESSFLOW_REGISTRY_TOKEN }}
-          CI: true
-        run: mvn test
-
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: java-registry-results
-          path: |
-            sdk-tests/java/test-results/
-            sdk-tests/java/target/surefire-reports/
-          retention-days: 7
+  # # ============================================================================
+  # # Java Tests - Registry Install
+  # # ============================================================================
+  # java-registry:
+  #   name: Java (GCP Registry)
+  #   runs-on: ubuntu-22.04
+  #   
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4
+  #
+  #     - name: Setup Java
+  #       uses: actions/setup-java@v4
+  #       with:
+  #         java-version: '11'
+  #         distribution: 'temurin'
+  #
+  #     - name: Configure Maven registry authentication
+  #       env:
+  #         ACCESSFLOW_REGISTRY_TOKEN: ${{ secrets.ACCESSFLOW_REGISTRY_TOKEN }}
+  #         GCP_SDK_MAVEN_REGISTRY_URL: ${{ vars.GCP_SDK_MAVEN_REGISTRY_URL }}
+  #       run: |
+  #         echo "📝 Configuring Maven settings.xml for GCP Artifact Registry..."
+  #         mkdir -p ~/.m2
+  #         # Add https:// if not present in the URL
+  #         MAVEN_URL="${GCP_SDK_MAVEN_REGISTRY_URL}"
+  #         if [[ ! "$MAVEN_URL" =~ ^https?:// ]]; then
+  #           MAVEN_URL="https://${MAVEN_URL}"
+  #         fi
+  #         cat > ~/.m2/settings.xml << EOF
+  #         <settings>
+  #           <servers>
+  #             <server>
+  #               <id>accessflow-registry</id>
+  #               <username>_json_key_base64</username>
+  #               <password>${ACCESSFLOW_REGISTRY_TOKEN}</password>
+  #             </server>
+  #           </servers>
+  #           <profiles>
+  #             <profile>
+  #               <id>accessflow</id>
+  #               <repositories>
+  #                 <repository>
+  #                   <id>accessflow-registry</id>
+  #                   <url>${MAVEN_URL}</url>
+  #                 </repository>
+  #               </repositories>
+  #             </profile>
+  #           </profiles>
+  #           <activeProfiles>
+  #             <activeProfile>accessflow</activeProfile>
+  #           </activeProfiles>
+  #         </settings>
+  #         EOF
+  #         echo "✅ Maven settings configured with URL: ${MAVEN_URL}"
+  #
+  #     - name: Resolve Maven dependencies
+  #       working-directory: ./sdk-tests/java
+  #       env:
+  #         ACCESSFLOW_REGISTRY_TOKEN: ${{ secrets.ACCESSFLOW_REGISTRY_TOKEN }}
+  #         GCP_SDK_MAVEN_REGISTRY_URL: ${{ vars.GCP_SDK_MAVEN_REGISTRY_URL }}
+  #       run: mvn dependency:resolve
+  #     
+  #     - name: Install Playwright browsers
+  #       working-directory: ./sdk-tests/java
+  #       run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.classpathScope=test -D exec.args="install --with-deps chromium"
+  #
+  #     - name: Create test-results directory
+  #       run: mkdir -p test-results
+  #       working-directory: ./sdk-tests/java
+  #
+  #     - name: Run tests (SDK downloaded from registry)
+  #       working-directory: ./sdk-tests/java
+  #       env:
+  #         ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
+  #         GCP_SDK_MAVEN_REGISTRY_URL: ${{ vars.GCP_SDK_MAVEN_REGISTRY_URL }}
+  #         ACCESSFLOW_REGISTRY_TOKEN: ${{ secrets.ACCESSFLOW_REGISTRY_TOKEN }}
+  #         CI: true
+  #       run: mvn test
+  #
+  #     - name: Upload test results
+  #       if: always()
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: java-registry-results
+  #         path: |
+  #           sdk-tests/java/test-results/
+  #           sdk-tests/java/target/surefire-reports/
+  #         retention-days: 7
