@@ -149,7 +149,16 @@ def pytest_sessionfinish(session, exitstatus):
 
         # Save individual audit reports
         for i, record in enumerate(_audit_records):
-            url_safe = record['url'].replace('https://', '').replace('http://', '').replace('/', '_').replace(':', '_')
+            # Sanitize URL for filename (remove/replace invalid chars)
+            import re
+            url_safe = record['url']
+            url_safe = url_safe.replace('https://', '').replace('http://', '')
+            # Remove or replace invalid filename chars: " : < > | * ? \r \n and /
+            url_safe = re.sub(r'[<>:"|?*\r\n]', '', url_safe)  # Remove these chars
+            url_safe = url_safe.replace('/', '_').replace('\\', '_')  # Replace slashes
+            # Truncate if too long (Windows has 255 char limit)
+            if len(url_safe) > 100:
+                url_safe = url_safe[:100]
             filename = reports_dir / f"audit_{i+1}_{url_safe}.json"
             with open(filename, 'w') as f:
                 json.dump(record, f, indent=2)
