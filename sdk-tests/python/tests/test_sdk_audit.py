@@ -165,3 +165,148 @@ def test_sdk_initialization(page, sdk_config):
     assert raw_audits is not None, "SDK should return audit results after initialization"
     
     print("\n✅ SDK initialization test passed")
+
+
+def test_audit_returns_empty_dict_not_none(page, sdk_config):
+    """
+    Test that audit() always returns a dict, never None.
+    This tests the fix for null-safety - even if the page has no auditor,
+    audit() should return an empty dict {} instead of None.
+    """
+    from accessflow_sdk import AccessFlowSDK
+    
+    # Navigate to a minimal page
+    page.goto("data:text/html,<html><body><h1>Test</h1></body></html>")
+    page.wait_for_load_state('domcontentloaded')
+    
+    sdk = AccessFlowSDK(page, config=sdk_config)
+    raw_audits = sdk.audit()
+    
+    # Should return a dict, never None
+    assert raw_audits is not None, "audit() should never return None"
+    assert isinstance(raw_audits, dict), f"audit() should return dict, got {type(raw_audits)}"
+    
+    print(f"\n✅ Null-safety test passed - audit() returned {type(raw_audits).__name__}")
+
+
+def test_local_json_reports_written():
+    """
+    Test that finalize_reports() writes JSON reports locally even without CI env.
+    This tests the fix where reports are now saved locally for inspection.
+    """
+    from accessflow_sdk.teardown import _audit_records, finalize_reports
+    from pathlib import Path
+    import json
+    import shutil
+    
+    # Clear any existing test results
+    test_output_dir = Path("test-results-local")
+    if test_output_dir.exists():
+        shutil.rmtree(test_output_dir)
+    
+    # Manually add a mock audit record (simulating what audit() does)
+    _audit_records.clear()
+    _audit_records.append({
+        'url': 'https://example.com/test',
+        'audits': {
+            'test': 'data',
+            'issues': []
+        }
+    })
+    
+    # Unset CI env vars to ensure we're in "local mode"
+    original_ci = os.environ.pop('CI', None)
+    original_github = os.environ.pop('GITHUB_ACTIONS', None)
+    
+    try:
+        # Finalize reports in local mode
+        print("\n🧪 Testing local report generation (no CI env)...")
+        finalize_reports(output_dir=str(test_output_dir))
+        
+        # Verify output directory was created
+        assert test_output_dir.exists(), f"Output directory should be created: {test_output_dir}"
+        
+        # Verify JSON files were written
+        json_files = list(test_output_dir.glob("*.json"))
+        assert len(json_files) > 0, f"Should have created JSON report files in {test_output_dir}"
+        
+        print(f"✅ Local reports written successfully:")
+        for json_file in json_files:
+            print(f"   📄 {json_file.name} ({json_file.stat().st_size} bytes)")
+            
+            # Verify it's valid JSON
+            with open(json_file) as f:
+                data = json.load(f)
+                assert data is not None, f"JSON file should be valid: {json_file}"
+        
+        print(f"\n✅ Local JSON reports test passed - {len(json_files)} file(s) created")
+        
+    finally:
+        # Restore CI env vars
+        if original_ci:
+            os.environ['CI'] = original_ci
+        if original_github:
+            os.environ['GITHUB_ACTIONS'] = original_github
+        
+        # Cleanup
+        if test_output_dir.exists():
+            shutil.rmtree(test_output_dir)
+
+
+def test_finalize_reports_idempotent():
+    """
+    Test that finalize_reports() is idempotent - calling it multiple times
+    doesn't cause duplicate processing or errors.
+    """
+    from accessflow_sdk.teardown import _audit_records, finalize_reports
+    from pathlib import Path
+    import shutil
+    
+    # Clear and setup test data
+    test_output_dir = Path("test-results-idempotent")
+    if test_output_dir.exists():
+        shutil.rmtree(test_output_dir)
+    
+    _audit_records.clear()
+    _audit_records.append({
+        'url': 'https://example.com/idempotent-test',
+        'audits': {'test': 'idempotent'}
+    })
+    
+    # Unset CI env vars
+    original_ci = os.environ.pop('CI', None)
+    
+    try:
+        print("\n🧪 Testing idempotent behavior...")
+        
+        # First call - should process
+        print("   📝 First finalize_reports() call...")
+        finalize_reports(output_dir=str(test_output_dir))
+        
+        # Get file count after first call
+        first_call_files = list(test_output_dir.glob("*.json"))
+        first_call_count = len(first_call_files)
+        assert first_call_count > 0, "First call should create files"
+        
+        # Second call - should be idempotent (no duplicate files)
+        print("   📝 Second finalize_reports() call (should skip)...")
+        finalize_reports(output_dir=str(test_output_dir))
+        
+        # Get file count after second call
+        second_call_files = list(test_output_dir.glob("*.json"))
+        second_call_count = len(second_call_files)
+        
+        # Should have same number of files (no duplicates)
+        assert second_call_count == first_call_count, \
+            f"Second call should not create duplicates. Expected {first_call_count} files, got {second_call_count}"
+        
+        print(f"✅ Idempotent test passed - both calls resulted in {first_call_count} file(s)")
+        
+    finally:
+        # Restore CI env
+        if original_ci:
+            os.environ['CI'] = original_ci
+        
+        # Cleanup
+        if test_output_dir.exists():
+            shutil.rmtree(test_output_dir)
