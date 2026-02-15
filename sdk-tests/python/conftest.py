@@ -180,7 +180,14 @@ def pytest_sessionfinish(session, exitstatus):
         print("   ℹ️  No accessibility audits were recorded")
 
     # In CI environment, upload reports to AccessFlow platform
-    if os.getenv('CI'):
+    # Check CI explicitly: "true" (case-insensitive) or platform-specific CI vars
+    is_ci = (
+        os.getenv('CI', '').lower() == 'true' or
+        os.getenv('GITHUB_ACTIONS') or
+        os.getenv('CIRCLECI') or
+        os.getenv('GITLAB_CI')
+    )
+    if is_ci:
         print("\n📤 CI detected - finalizing reports for upload...")
         finalize_reports()
 
