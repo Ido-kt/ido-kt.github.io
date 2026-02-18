@@ -158,7 +158,7 @@ def test_sdk_initialization(page, sdk_config):
     page.goto("https://ido-kt.github.io/")
     
     # SDK should initialize without errors using ACCESSFLOW_SDK_API_KEY from env
-    sdk = AccessFlowSDK(page, config=sdk_config)
+    sdk = AccessFlowSDK(page, api_key=sdk_config.get('apiToken'))
     
     # If initialization worked, audit should execute
     raw_audits = sdk.audit()
@@ -179,7 +179,7 @@ def test_audit_returns_empty_dict_not_none(page, sdk_config):
     page.goto("data:text/html,<html><body><h1>Test</h1></body></html>")
     page.wait_for_load_state('domcontentloaded')
     
-    sdk = AccessFlowSDK(page, config=sdk_config)
+    sdk = AccessFlowSDK(page, api_key=sdk_config.get('apiToken'))
     raw_audits = sdk.audit()
     
     # Should return a dict, never None

@@ -60,7 +60,7 @@ def run_accessibility_audit(page, sdk_config):
 
         try:
             print("📦 Initializing AccessFlowSDK...")
-            sdk = AccessFlowSDK(page, config=sdk_config)
+            sdk = AccessFlowSDK(page, api_key=sdk_config.get('apiToken'))
             print("✅ SDK initialized successfully")
 
             # Get raw audits from browser
