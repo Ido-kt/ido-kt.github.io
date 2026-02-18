@@ -14,7 +14,7 @@ jobs:
   node-local:
     name: Node.js (Local Package)
     runs-on: ubuntu-22.04
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -61,7 +61,7 @@ jobs:
   node-registry:
     name: Node.js (GCP Registry)
     runs-on: ubuntu-22.04
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -123,7 +123,7 @@ jobs:
   python-local:
     name: Python (Local Package)
     runs-on: ubuntu-22.04
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -167,7 +167,7 @@ jobs:
   python-registry:
     name: Python (GCP Registry)
     runs-on: ubuntu-22.04
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -214,7 +214,7 @@ jobs:
   java-local:
     name: Java (Local Package)
     runs-on: ubuntu-22.04
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -239,7 +239,7 @@ jobs:
             -Dfile="$JAR_FILE" \
             -DgroupId=com.acsbe \
             -DartifactId=accessflow-sdk \
-            -Dversion=1.0.1-dev-78718 \
+            -Dversion=1.0.1-dev-80604 \
             -Dpackaging=jar \
             -DgeneratePom=true
           echo "✅ SDK installed to local Maven repository"
@@ -247,7 +247,7 @@ jobs:
       - name: Resolve Maven dependencies
         working-directory: ./sdk-tests/java
         run: mvn dependency:resolve
-      
+
       - name: Install Playwright browsers
         working-directory: ./sdk-tests/java
         run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.classpathScope=test -D exec.args="install --with-deps chromium"
@@ -279,7 +279,7 @@ jobs:
   java-registry:
     name: Java (GCP Registry)
     runs-on: ubuntu-22.04
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -335,7 +335,7 @@ jobs:
           ACCESSFLOW_REGISTRY_TOKEN: ${{ secrets.ACCESSFLOW_REGISTRY_TOKEN }}
           GCP_SDK_MAVEN_REGISTRY_URL: ${{ vars.GCP_SDK_MAVEN_REGISTRY_URL }}
         run: mvn dependency:resolve
-      
+
       - name: Install Playwright browsers
         working-directory: ./sdk-tests/java
         run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.classpathScope=test -D exec.args="install --with-deps chromium"
