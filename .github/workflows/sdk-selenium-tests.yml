@@ -46,17 +46,7 @@ jobs:
         env:
           ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
           CI: true
-        run: npx playwright test tests/sdk-selenium.spec.ts
-
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: node-selenium-local-results
-          path: |
-            sdk-tests/node/test-results/
-            sdk-tests/node/playwright-report/
-          retention-days: 7
+        run: npm run test:selenium
 
   # ============================================================================
   # Node.js Selenium Tests - Registry Install (commented out: local packages only for now)
@@ -111,7 +101,7 @@ jobs:
   #       env:
   #         ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
   #         CI: true
-  #       run: npx playwright test tests/sdk-selenium.spec.ts
+  #       run: npm run test:selenium
   #
   #     - name: Upload test results
   #       if: always()
