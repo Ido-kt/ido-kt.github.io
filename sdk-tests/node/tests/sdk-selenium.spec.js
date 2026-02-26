@@ -1,15 +1,23 @@
 /**
  * Selenium integration spec. No Playwright. Run: npm run test:selenium
  * Prerequisites: Chrome, ACCESSFLOW_SDK_API_KEY.
+ * Finalize and upload (same as a customer would): run SDK global teardown after all tests.
  */
-const { describe, it } = require('node:test');
+const { after, before, describe, it } = require('node:test');
 const assert = require('node:assert');
+const fs = require('fs');
 const path = require('path');
 const { pathToFileURL } = require('url');
 
 const { Builder } = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 const { AccessFlowSDK, SeleniumDriver } = require('@acsbe/accessflow-sdk');
+
+// Ensure output dir exists so SDK writes and teardown find the same path
+before(() => {
+  const outDir = path.join(__dirname, '..', 'test-results');
+  fs.mkdirSync(outDir, { recursive: true });
+});
 
 function buildChromeDriver() {
   const options = new chrome.Options();
@@ -55,4 +63,9 @@ describe('AccessFlow SDK - Selenium', () => {
       if (driver) await driver.quit();
     }
   });
+});
+
+// Finalize and upload report after all tests (same pattern a customer would use). Return Promise so runner awaits.
+after(() => {
+  return require('@acsbe/accessflow-sdk/dist/src/playwright/global-teardown').default();
 });

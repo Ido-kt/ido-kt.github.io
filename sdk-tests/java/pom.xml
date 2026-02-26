@@ -18,6 +18,7 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <playwright.version>1.42.0</playwright.version>
+        <selenium.version>4.27.0</selenium.version>
         <junit.version>5.10.0</junit.version>
     </properties>
 
@@ -41,6 +42,14 @@
             <groupId>com.microsoft.playwright</groupId>
             <artifactId>playwright</artifactId>
             <version>${playwright.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Selenium (for SDKSeleniumTest) -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
             <scope>test</scope>
         </dependency>
 
