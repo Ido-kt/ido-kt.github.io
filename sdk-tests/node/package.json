@@ -6,11 +6,13 @@
   "scripts": {
     "test": "playwright test",
     "test:debug": "playwright test --debug",
-    "test:headed": "playwright test --headed"
+    "test:headed": "playwright test --headed",
+    "test:selenium": "playwright test tests/sdk-selenium.spec.ts"
   },
   "devDependencies": {
     "@playwright/test": "^1.42.0",
     "@types/node": "^20.11.0",
+    "selenium-webdriver": "^4.27.0",
     "typescript": "^5.3.0"
   }
 }

@@ -25,6 +25,9 @@ def pytest_configure(config):
     config.addinivalue_line(
         "markers", "accessibility: Tests that include accessibility audits"
     )
+    config.addinivalue_line(
+        "markers", "selenium: Selenium WebDriver-based tests (when SDK supports Selenium)"
+    )
 
 
 @pytest.fixture
