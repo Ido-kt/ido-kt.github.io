@@ -42,10 +42,14 @@ public class SDKSeleniumTest {
     }
 
     private String getFixtureUrl() {
-        Path base = Paths.get(System.getProperty("user.dir", "."));
+        // Resolve from sdk-tests/java (user.dir in Maven) or from repo root (CI)
+        Path base = Paths.get(System.getProperty("user.dir", ".")).toAbsolutePath().normalize();
         Path htmlPath = base.resolve("../fixtures/sample_page_with_issues.html").normalize();
         if (!htmlPath.toFile().exists()) {
-            throw new IllegalStateException("Test fixture not found: " + htmlPath);
+            htmlPath = base.resolve("sdk-tests/fixtures/sample_page_with_issues.html").normalize();
+        }
+        if (!htmlPath.toFile().exists()) {
+            throw new IllegalStateException("Test fixture not found. Tried: " + htmlPath + " (user.dir=" + base + ")");
         }
         return htmlPath.toUri().toString();
     }
@@ -72,9 +76,11 @@ public class SDKSeleniumTest {
 
     @Test
     @DisplayName("Audit fixture page with Selenium WebDriver")
-    void testAuditFixturePageSelenium() {
+    void testAuditFixturePageSelenium() throws InterruptedException {
         driver.get(getFixtureUrl());
         waitForFixtureContent(driver);
+        // Brief pause so DOM and any async scripts are settled before audit
+        Thread.sleep(500);
 
         AccessFlowSDK sdk = new AccessFlowSDK(new SeleniumDriver(driver));
         Map<String, Object> rawAudits = sdk.audit();

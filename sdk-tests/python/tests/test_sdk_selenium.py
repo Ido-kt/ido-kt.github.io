@@ -29,9 +29,9 @@ def _chrome_driver():
 
 
 def _fixture_url():
-    # sdk-tests/python/tests/ -> sdk-tests/fixtures/ (go up to sdk-tests root)
+    # sdk-tests/python/tests/ -> sdk-tests/fixtures/ (go up 2 levels to sdk-tests)
     base = Path(__file__).resolve().parent
-    html = base.parent.parent.parent / "fixtures" / "sample_page_with_issues.html"
+    html = base.parent.parent / "fixtures" / "sample_page_with_issues.html"
     if not html.exists():
         pytest.fail(f"Fixture not found: {html}")
     return html.as_uri()
