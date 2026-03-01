@@ -9,51 +9,51 @@ on:
 
 jobs:
   # ============================================================================
-  # Node.js Tests - Local Install
+  # Node.js Tests - Local Install (commented out: run python only)
   # ============================================================================
-  node-local:
-    name: Node.js (Local Package)
-    runs-on: ubuntu-22.04
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-
-      - name: Install test dependencies
-        working-directory: ./sdk-tests/node
-        run: npm ci
-
-      - name: Install SDK from local package
-        working-directory: ./sdk-tests/node
-        run: |
-          echo "📦 Installing SDK from local package..."
-          npm install ../../sdk-tests/packages/acsbe-accessflow-sdk.tgz
-
-      - name: Install Playwright browsers
-        working-directory: ./sdk-tests/node
-        run: npx playwright install --with-deps chromium
-
-      - name: Run tests
-        working-directory: ./sdk-tests/node
-        env:
-          ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
-          CI: true
-        run: npx playwright test
-
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: node-local-results
-          path: |
-            sdk-tests/node/test-results/
-            sdk-tests/node/playwright-report/
-          retention-days: 7
+  # node-local:
+  #   name: Node.js (Local Package)
+  #   runs-on: ubuntu-22.04
+  #
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4
+  #
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: '18'
+  #
+  #     - name: Install test dependencies
+  #       working-directory: ./sdk-tests/node
+  #       run: npm ci
+  #
+  #     - name: Install SDK from local package
+  #       working-directory: ./sdk-tests/node
+  #       run: |
+  #         echo "📦 Installing SDK from local package..."
+  #         npm install ../../sdk-tests/packages/acsbe-accessflow-sdk.tgz
+  #
+  #     - name: Install Playwright browsers
+  #       working-directory: ./sdk-tests/node
+  #       run: npx playwright install --with-deps chromium
+  #
+  #     - name: Run tests
+  #       working-directory: ./sdk-tests/node
+  #       env:
+  #         ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
+  #         CI: true
+  #       run: npx playwright test
+  #
+  #     - name: Upload test results
+  #       if: always()
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: node-local-results
+  #         path: |
+  #           sdk-tests/node/test-results/
+  #           sdk-tests/node/playwright-report/
+  #         retention-days: 7
 
   # ============================================================================
   # Node.js Tests - Registry Install (commented out: local packages only for now)
@@ -118,48 +118,48 @@ jobs:
   #         retention-days: 7
 
   # ============================================================================
-  # Python Tests - Local Install (commented out: run java only)
+  # Python Tests - Local Install
   # ============================================================================
-  # python-local:
-  #   name: Python (Local Package)
-  #   runs-on: ubuntu-22.04
-  #
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v4
-  #
-  #     - name: Setup Python
-  #       uses: actions/setup-python@v5
-  #       with:
-  #         python-version: '3.10'
-  #
-  #     - name: Install test dependencies
-  #       working-directory: ./sdk-tests/python
-  #       run: pip install -r requirements.txt
-  #
-  #     - name: Install SDK from local package
-  #       working-directory: ./sdk-tests/python
-  #       run: |
-  #         echo "📦 Installing SDK from local package..."
-  #         pip install ../packages/accessflow_sdk-*.whl
-  #
-  #     - name: Install Playwright browsers
-  #       run: playwright install --with-deps chromium
-  #
-  #     - name: Run tests
-  #       working-directory: ./sdk-tests/python
-  #       env:
-  #         ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
-  #         CI: true
-  #       run: pytest -v -m "not selenium"
-  #
-  #     - name: Upload test results
-  #       if: always()
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: python-local-results
-  #         path: sdk-tests/python/test-results/
-  #         retention-days: 7
+  python-local:
+    name: Python (Local Package)
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install test dependencies
+        working-directory: ./sdk-tests/python
+        run: pip install -r requirements.txt
+
+      - name: Install SDK from local package
+        working-directory: ./sdk-tests/python
+        run: |
+          echo "📦 Installing SDK from local package..."
+          pip install ../packages/accessflow_sdk-*.whl
+
+      - name: Install Playwright browsers
+        run: playwright install --with-deps chromium
+
+      - name: Run tests
+        working-directory: ./sdk-tests/python
+        env:
+          ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
+          CI: true
+        run: pytest -v -m "not selenium"
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-local-results
+          path: sdk-tests/python/test-results/
+          retention-days: 7
 
   # ============================================================================
   # Python Tests - Registry Install (commented out: local packages only for now)
