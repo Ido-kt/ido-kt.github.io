@@ -12,6 +12,9 @@ from accessflow_sdk import AccessFlowSDK, SeleniumDriver
 try:
     from selenium import webdriver
     from selenium.webdriver.chrome.options import Options
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
     SELENIUM_AVAILABLE = True
 except ImportError:
     SELENIUM_AVAILABLE = False
@@ -26,9 +29,9 @@ def _chrome_driver():
 
 
 def _fixture_url():
-    # sdk-tests/python/tests/ -> sdk-tests/fixtures/
+    # sdk-tests/python/tests/ -> sdk-tests/fixtures/ (go up to sdk-tests root)
     base = Path(__file__).resolve().parent
-    html = base.parent.parent / "fixtures" / "sample_page_with_issues.html"
+    html = base.parent.parent.parent / "fixtures" / "sample_page_with_issues.html"
     if not html.exists():
         pytest.fail(f"Fixture not found: {html}")
     return html.as_uri()
@@ -64,6 +67,10 @@ def test_audit_fixture_page_selenium():
     try:
         driver = _chrome_driver()
         driver.get(_fixture_url())
+        # Wait for fixture content so we audit the correct page
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//h1[text()='Main Heading']"))
+        )
         sdk = AccessFlowSDK(SeleniumDriver(driver))
         raw_audits = sdk.audit()
         assert raw_audits is not None

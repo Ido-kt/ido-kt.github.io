@@ -4,12 +4,16 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Duration;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -43,7 +47,12 @@ public class SDKSeleniumTest {
         if (!htmlPath.toFile().exists()) {
             throw new IllegalStateException("Test fixture not found: " + htmlPath);
         }
-        return "file://" + htmlPath.toAbsolutePath().toString();
+        return htmlPath.toUri().toString();
+    }
+
+    private void waitForFixtureContent(WebDriver d) {
+        new WebDriverWait(d, Duration.ofSeconds(10))
+            .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1[text()='Main Heading']")));
     }
 
     @Test
@@ -65,6 +74,7 @@ public class SDKSeleniumTest {
     @DisplayName("Audit fixture page with Selenium WebDriver")
     void testAuditFixturePageSelenium() {
         driver.get(getFixtureUrl());
+        waitForFixtureContent(driver);
 
         AccessFlowSDK sdk = new AccessFlowSDK(new SeleniumDriver(driver));
         Map<String, Object> rawAudits = sdk.audit();

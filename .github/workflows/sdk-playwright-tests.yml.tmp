@@ -151,7 +151,7 @@ jobs:
   #       env:
   #         ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
   #         CI: true
-  #       run: pytest -v
+  #       run: pytest -v -m "not selenium"
   #
   #     - name: Upload test results
   #       if: always()
@@ -198,7 +198,7 @@ jobs:
   #       env:
   #         ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
   #         CI: true
-  #       run: pytest -v
+  #       run: pytest -v -m "not selenium"
   #
   #     - name: Upload test results
   #       if: always()
@@ -261,7 +261,8 @@ jobs:
         env:
           ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
           CI: true
-        run: mvn test
+        # Playwright only: do not run SDKSeleniumTest
+        run: mvn test -Dtest=SDKAuditTest
 
       - name: Upload test results
         if: always()
