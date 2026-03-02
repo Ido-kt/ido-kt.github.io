@@ -8,12 +8,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  # Placeholder so this workflow always has ≥1 job.
-  noop:
-    name: "(no Selenium job this run)"
-    runs-on: ubuntu-22.04
-    steps:
-      - run: echo "No Selenium job enabled for this run"
+  # Placeholder (commented: cycle 4 runs python Selenium only)
+  # noop:
+  #   name: "(no Selenium job this run)"
+  #   runs-on: ubuntu-22.04
+  #   steps:
+  #     - run: echo "No Selenium job enabled for this run"
 
   # ============================================================================
   # Node Selenium (commented)
@@ -130,10 +130,10 @@ jobs:
   #         retention-days: 7
 
   # ============================================================================
-  # Python Selenium Tests - Local Install (cycle: 4/6 Python Selenium only)
+  # Python Selenium (cycle 4/6)
   # ============================================================================
   python-local:
-    name: Python Selenium (Local Package)
+    name: Python Selenium
     runs-on: ubuntu-22.04
 
     steps:

@@ -8,12 +8,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  # Placeholder (commented: cycle 3 runs python Playwright only)
-  # noop:
-  #   name: "(no Playwright job this run)"
-  #   runs-on: ubuntu-22.04
-  #   steps:
-  #     - run: echo "No Playwright job enabled for this run"
+  # Placeholder so this workflow always has ≥1 job.
+  noop:
+    name: "(no Playwright job this run)"
+    runs-on: ubuntu-22.04
+    steps:
+      - run: echo "No Playwright job enabled for this run"
 
   # ============================================================================
   # Node Playwright (commented)
@@ -125,48 +125,48 @@ jobs:
   #         retention-days: 7
 
   # ============================================================================
-  # Python Playwright (cycle 3/6)
+  # Python Playwright (commented)
   # ============================================================================
-  python-local:
-    name: Python Playwright
-    runs-on: ubuntu-22.04
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-
-      - name: Install test dependencies
-        working-directory: ./sdk-tests/python
-        run: pip install -r requirements.txt
-
-      - name: Install SDK from local package
-        working-directory: ./sdk-tests/python
-        run: |
-          echo "📦 Installing SDK from local package..."
-          pip install ../packages/accessflow_sdk-*.whl
-
-      - name: Install Playwright browsers
-        run: playwright install --with-deps chromium
-
-      - name: Run tests
-        working-directory: ./sdk-tests/python
-        env:
-          ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
-          CI: true
-        run: pytest -v -m "not selenium"
-
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: python-playwright-results
-          path: sdk-tests/python/test-results/
-          retention-days: 7
+  # python-local:
+  #   name: Python Playwright
+  #   runs-on: ubuntu-22.04
+  #
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4
+  #
+  #     - name: Setup Python
+  #       uses: actions/setup-python@v5
+  #       with:
+  #         python-version: '3.10'
+  #
+  #     - name: Install test dependencies
+  #       working-directory: ./sdk-tests/python
+  #       run: pip install -r requirements.txt
+  #
+  #     - name: Install SDK from local package
+  #       working-directory: ./sdk-tests/python
+  #       run: |
+  #         echo "📦 Installing SDK from local package..."
+  #         pip install ../packages/accessflow_sdk-*.whl
+  #
+  #     - name: Install Playwright browsers
+  #       run: playwright install --with-deps chromium
+  #
+  #     - name: Run tests
+  #       working-directory: ./sdk-tests/python
+  #       env:
+  #         ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
+  #         CI: true
+  #       run: pytest -v -m "not selenium"
+  #
+  #     - name: Upload test results
+  #       if: always()
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: python-playwright-results
+  #         path: sdk-tests/python/test-results/
+  #         retention-days: 7
 
   # ============================================================================
   # Python Tests - Registry Install (commented out: local packages only for now)
