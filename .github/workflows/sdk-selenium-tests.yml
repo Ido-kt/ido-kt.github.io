@@ -8,8 +8,16 @@ on:
   workflow_dispatch:
 
 jobs:
+  # Placeholder so this workflow always has ≥1 job (required by GitHub Actions).
+  # Comment this out when uncommenting one of the real jobs below.
+  noop:
+    name: "(no Selenium job this run)"
+    runs-on: ubuntu-22.04
+    steps:
+      - run: echo "No Selenium job enabled for this run"
+
   # ============================================================================
-  # Node.js Selenium Tests - Local Install (commented: cycle 3 runs Playwright only)
+  # Node.js Selenium Tests - Local Install
   # ============================================================================
   # node-local:
   #   name: Node.js Selenium (Local Package)
