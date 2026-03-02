@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  # noop (cycle 7 runs java Selenium JUnit)
+  # noop (cycle 8 runs java Selenium TestNG)
   # noop:
   #   name: "(no Selenium job this run)"
   #   runs-on: ubuntu-22.04
@@ -191,10 +191,15 @@ jobs:
   #         retention-days: 7
 
   # ============================================================================
-  # Java Selenium — JUnit 5 only (SDKSeleniumTest) — cycle 7/8
+  # Java Selenium — JUnit 5 only (commented — cycle 7/8)
   # ============================================================================
-  java-selenium-junit:
-    name: Java Selenium (JUnit 5)
+  # java-selenium-junit: ... (omitted — re-enable for cycle 7)
+
+  # ============================================================================
+  # Java Selenium — TestNG only (SDKSeleniumTestNGTest) — cycle 8/8
+  # ============================================================================
+  java-selenium-testng:
+    name: Java Selenium (TestNG)
     runs-on: ubuntu-22.04
 
     steps:
@@ -246,96 +251,23 @@ jobs:
         run: mkdir -p test-results
         working-directory: ./sdk-tests/java
 
-      - name: Run Selenium JUnit 5 tests (SDKSeleniumTest)
+      - name: Run Selenium TestNG tests (SDKSeleniumTestNGTest)
         working-directory: ./sdk-tests/java
         env:
           ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
           CI: true
-        run: mvn test -Dtest=SDKSeleniumTest -DskipTestNG=true
+        run: mvn test -DskipJunit=true -DtestngSuiteFile=testng-selenium.xml
 
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: java-selenium-junit-results
+          name: java-selenium-testng-results
           path: |
             sdk-tests/java/test-results/
             sdk-tests/java/target/surefire-reports/
+            sdk-tests/java/target/testng-reports/
           retention-days: 7
-
-  # ============================================================================
-  # Java Selenium — TestNG only (SDKSeleniumTestNGTest) — enable for cycle 8/8
-  # ============================================================================
-  # java-selenium-testng:
-  #   name: Java Selenium (TestNG)
-  #   runs-on: ubuntu-22.04
-  #
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v4
-  #
-  #     - name: Setup Java
-  #       uses: actions/setup-java@v4
-  #       with:
-  #         java-version: '11'
-  #         distribution: 'temurin'
-  #
-  #     - name: Install SDK to local Maven repository
-  #       working-directory: ./sdk-tests/java
-  #       run: |
-  #         echo "📦 Installing SDK JAR to local Maven repository..."
-  #         JAR_FILE="../packages/accessflow-sdk.jar"
-  #         if [ ! -f "$JAR_FILE" ]; then
-  #           echo "❌ Error: JAR file not found at $JAR_FILE"
-  #           ls -la ../packages/
-  #           exit 1
-  #         fi
-  #         mvn install:install-file \
-  #           -Dfile="$JAR_FILE" \
-  #           -DgroupId=com.acsbe \
-  #           -DartifactId=accessflow-sdk \
-  #           -Dversion=1.0.1-dev-80604 \
-  #           -Dpackaging=jar \
-  #           -DgeneratePom=true
-  #         echo "✅ SDK installed to local Maven repository"
-  #
-  #     - name: Resolve Maven dependencies
-  #       working-directory: ./sdk-tests/java
-  #       run: mvn dependency:resolve
-  #
-  #     - name: Install Chrome for Selenium
-  #       run: |
-  #         sudo apt-get update
-  #         sudo apt-get install -y wget unzip
-  #         wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  #         sudo apt install -y ./google-chrome-stable_current_amd64.deb
-  #         CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+\.\d+')
-  #         wget -q "https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSION}/linux64/chromedriver-linux64.zip" -O /tmp/chromedriver.zip
-  #         unzip -o /tmp/chromedriver.zip -d /tmp/
-  #         sudo mv /tmp/chromedriver-linux64/chromedriver /usr/local/bin/
-  #         sudo chmod +x /usr/local/bin/chromedriver
-  #
-  #     - name: Create test-results directory
-  #       run: mkdir -p test-results
-  #       working-directory: ./sdk-tests/java
-  #
-  #     - name: Run Selenium TestNG tests (SDKSeleniumTestNGTest)
-  #       working-directory: ./sdk-tests/java
-  #       env:
-  #         ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
-  #         CI: true
-  #       run: mvn test -DskipJunit=true -DtestngSuiteFile=testng-selenium.xml
-  #
-  #     - name: Upload test results
-  #       if: always()
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: java-selenium-testng-results
-  #         path: |
-  #           sdk-tests/java/test-results/
-  #           sdk-tests/java/target/surefire-reports/
-  #           sdk-tests/java/target/testng-reports/
-  #         retention-days: 7
 
   # ============================================================================
   # Java Selenium Tests - Registry Install (commented out: local packages only for now)
