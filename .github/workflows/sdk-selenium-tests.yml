@@ -8,12 +8,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  # Placeholder so this workflow always has ≥1 job.
-  noop:
-    name: "(no Selenium job this run)"
-    runs-on: ubuntu-22.04
-    steps:
-      - run: echo "No Selenium job enabled for this run"
+  # Placeholder (commented: cycle 6 runs java Selenium only)
+  # noop:
+  #   name: "(no Selenium job this run)"
+  #   runs-on: ubuntu-22.04
+  #   steps:
+  #     - run: echo "No Selenium job enabled for this run"
 
   # ============================================================================
   # Node Selenium (commented)
@@ -229,72 +229,72 @@ jobs:
   #         retention-days: 7
 
   # ============================================================================
-  # Java Selenium Tests - Local Install (commented out: run Node only)
+  # Java Selenium (cycle 6/6)
   # ============================================================================
-  # java-local:
-  #   name: Java Selenium (Local Package)
-  #   runs-on: ubuntu-22.04
-  #
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v4
-  #
-  #     - name: Setup Java
-  #       uses: actions/setup-java@v4
-  #       with:
-  #         java-version: '11'
-  #         distribution: 'temurin'
-  #
-  #     - name: Install SDK to local Maven repository
-  #       working-directory: ./sdk-tests/java
-  #       run: |
-  #         echo "📦 Installing SDK JAR to local Maven repository..."
-  #         JAR_FILE="../packages/accessflow-sdk.jar"
-  #         if [ ! -f "$JAR_FILE" ]; then
-  #           echo "❌ Error: JAR file not found at $JAR_FILE"
-  #           ls -la ../packages/
-  #           exit 1
-  #         fi
-  #         mvn install:install-file \
-  #           -Dfile="$JAR_FILE" \
-  #           -DgroupId=com.acsbe \
-  #           -DartifactId=accessflow-sdk \
-  #           -Dversion=1.0.1-dev-80604 \
-  #           -Dpackaging=jar \
-  #           -DgeneratePom=true
-  #         echo "✅ SDK installed to local Maven repository"
-  #
-  #     - name: Resolve Maven dependencies
-  #       working-directory: ./sdk-tests/java
-  #       run: mvn dependency:resolve
-  #
-  #     - name: Install Chrome for Selenium
-  #       run: |
-  #         sudo apt-get update
-  #         sudo apt-get install -y wget
-  #         wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  #         sudo apt install -y ./google-chrome-stable_current_amd64.deb
-  #
-  #     - name: Create test-results directory
-  #       run: mkdir -p test-results
-  #       working-directory: ./sdk-tests/java
-  #
-  #     - name: Run Selenium tests
-  #       working-directory: ./sdk-tests/java
-  #       env:
-  #         ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
-  #         CI: true
-  #       run: mvn test -Dtest=SDKSeleniumTest
-  #
-  #     - name: Upload test results
-  #       if: always()
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: java-selenium-local-results
-  #         path: |
-  #           sdk-tests/java/test-results/
-  #           sdk-tests/java/target/surefire-reports/
-  #         retention-days: 7
+  java-local:
+    name: Java Selenium
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Install SDK to local Maven repository
+        working-directory: ./sdk-tests/java
+        run: |
+          echo "📦 Installing SDK JAR to local Maven repository..."
+          JAR_FILE="../packages/accessflow-sdk.jar"
+          if [ ! -f "$JAR_FILE" ]; then
+            echo "❌ Error: JAR file not found at $JAR_FILE"
+            ls -la ../packages/
+            exit 1
+          fi
+          mvn install:install-file \
+            -Dfile="$JAR_FILE" \
+            -DgroupId=com.acsbe \
+            -DartifactId=accessflow-sdk \
+            -Dversion=1.0.1-dev-80604 \
+            -Dpackaging=jar \
+            -DgeneratePom=true
+          echo "✅ SDK installed to local Maven repository"
+
+      - name: Resolve Maven dependencies
+        working-directory: ./sdk-tests/java
+        run: mvn dependency:resolve
+
+      - name: Install Chrome for Selenium
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget
+          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt install -y ./google-chrome-stable_current_amd64.deb
+
+      - name: Create test-results directory
+        run: mkdir -p test-results
+        working-directory: ./sdk-tests/java
+
+      - name: Run Selenium tests
+        working-directory: ./sdk-tests/java
+        env:
+          ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
+          CI: true
+        run: mvn test -Dtest=SDKSeleniumTest
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: java-selenium-results
+          path: |
+            sdk-tests/java/test-results/
+            sdk-tests/java/target/surefire-reports/
+          retention-days: 7
 
   # ============================================================================
   # Java Selenium Tests - Registry Install (commented out: local packages only for now)
