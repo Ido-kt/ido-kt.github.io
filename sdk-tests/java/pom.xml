@@ -21,9 +21,13 @@
         <selenium.version>4.27.0</selenium.version>
         <junit.version>5.10.0</junit.version>
         <testng.version>7.9.0</testng.version>
-        <!-- Set to true via -DskipTestNG=true on the CLI to skip the TestNG execution
-             (used in Selenium-only workflow where Playwright browsers are not installed). -->
+        <!-- Control which test framework/runner executes:
+             -DskipJunit=true     → skip the JUnit 5 execution (run TestNG only)
+             -DskipTestNG=true    → skip the TestNG execution  (run JUnit only)
+             -DtestngSuiteFile=testng-selenium.xml → select a different TestNG suite -->
+        <skipJunit>false</skipJunit>
         <skipTestNG>false</skipTestNG>
+        <testngSuiteFile>testng.xml</testngSuiteFile>
     </properties>
 
     <!-- GCP Artifact Registry repository (configured in settings.xml for registry install job) -->
@@ -101,28 +105,32 @@
                     <skip>true</skip>
                 </configuration>
                 <executions>
-                    <!-- JUnit 5 tests (SDKAuditTest, SDKSeleniumTest) -->
+                    <!-- JUnit 5 tests.
+                         Filter with -Dtest=SDKAuditTest or -Dtest=SDKSeleniumTest to run
+                         only one class. Skip entirely with -DskipJunit=true. -->
                     <execution>
                         <id>junit5</id>
                         <goals><goal>test</goal></goals>
                         <configuration>
-                            <skip>false</skip>
+                            <skip>${skipJunit}</skip>
                             <excludes>
                                 <exclude>**/SDKTestNGTest.java</exclude>
+                                <exclude>**/SDKSeleniumTestNGTest.java</exclude>
                             </excludes>
                         </configuration>
                     </execution>
 
-                    <!-- TestNG tests (SDKTestNGTest via testng.xml).
-                         Pass -DskipTestNG=true on the command line to skip this execution
-                         (e.g. in the Selenium-only workflow where Playwright is not installed). -->
+                    <!-- TestNG tests via a configurable suite XML.
+                         Default suite: testng.xml (Playwright — SDKTestNGTest).
+                         Override with -DtestngSuiteFile=testng-selenium.xml for Selenium.
+                         Skip entirely with -DskipTestNG=true. -->
                     <execution>
                         <id>testng</id>
                         <goals><goal>test</goal></goals>
                         <configuration>
                             <skip>${skipTestNG}</skip>
                             <suiteXmlFiles>
-                                <suiteXmlFile>testng.xml</suiteXmlFile>
+                                <suiteXmlFile>${testngSuiteFile}</suiteXmlFile>
                             </suiteXmlFiles>
                         </configuration>
                     </execution>
