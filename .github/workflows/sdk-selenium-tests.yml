@@ -286,7 +286,9 @@ jobs:
         env:
           ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
           CI: true
-        run: mvn test -Dtest=SDKSeleniumTest
+        # -DskipTestNG=true: SDKTestNGTest uses Playwright; skip it here since
+        # Playwright browsers are not installed in the Selenium workflow.
+        run: mvn test -Dtest=SDKSeleniumTest -DskipTestNG=true
 
       - name: Upload test results
         if: always()
