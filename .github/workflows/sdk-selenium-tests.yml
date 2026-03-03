@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  # noop (cycle 2 runs node Selenium)
+  # noop (cycle 4 runs python Selenium)
   # noop:
   #   name: "(no Selenium job this run)"
   #   runs-on: ubuntu-22.04
@@ -18,53 +18,53 @@ jobs:
   #     - run: echo "No Selenium job enabled for this run"
 
   # ============================================================================
-  # Node Selenium (cycle 2/8)
+  # Node Selenium (commented — cycle 2/8)
   # ============================================================================
-  node-local:
-    name: Node Selenium
-    runs-on: ubuntu-22.04
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-
-      - name: Install Chrome for Selenium
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y wget
-          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          sudo apt install -y ./google-chrome-stable_current_amd64.deb
-
-      - name: Install test dependencies
-        working-directory: ./sdk-tests/node
-        run: npm ci
-
-      - name: Install SDK from local package
-        working-directory: ./sdk-tests/node
-        run: |
-          echo "📦 Installing SDK from local package..."
-          npm install ../../sdk-tests/packages/acsbe-accessflow-sdk.tgz
-
-      - name: Run Selenium tests
-        working-directory: ./sdk-tests/node
-        env:
-          ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
-          CI: true
-        run: npm run test:selenium
-
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: node-selenium-results
-          path: |
-            sdk-tests/node/test-results/
-          retention-days: 7
+  # node-local:
+  #   name: Node Selenium
+  #   runs-on: ubuntu-22.04
+  #
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4
+  #
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: '18'
+  #
+  #     - name: Install Chrome for Selenium
+  #       run: |
+  #         sudo apt-get update
+  #         sudo apt-get install -y wget
+  #         wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  #         sudo apt install -y ./google-chrome-stable_current_amd64.deb
+  #
+  #     - name: Install test dependencies
+  #       working-directory: ./sdk-tests/node
+  #       run: npm ci
+  #
+  #     - name: Install SDK from local package
+  #       working-directory: ./sdk-tests/node
+  #       run: |
+  #         echo "📦 Installing SDK from local package..."
+  #         npm install ../../sdk-tests/packages/acsbe-accessflow-sdk.tgz
+  #
+  #     - name: Run Selenium tests
+  #       working-directory: ./sdk-tests/node
+  #       env:
+  #         ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
+  #         CI: true
+  #       run: npm run test:selenium
+  #
+  #     - name: Upload test results
+  #       if: always()
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: node-selenium-results
+  #         path: |
+  #           sdk-tests/node/test-results/
+  #         retention-days: 7
 
   # ============================================================================
   # Node.js Selenium Tests - Registry Install (commented out: local packages only for now)
@@ -132,12 +132,52 @@ jobs:
   #         retention-days: 7
 
   # ============================================================================
-  # Python Selenium (commented — cycle 4/8)
+  # Python Selenium (cycle 4/8)
   # ============================================================================
-  # python-local:
-  #   name: Python Selenium
-  #   runs-on: ubuntu-22.04
-  #   ... (omitted — re-enable for cycle 4)
+  python-local:
+    name: Python Selenium
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install test dependencies
+        working-directory: ./sdk-tests/python
+        run: pip install -r requirements.txt
+
+      - name: Install SDK from local package
+        working-directory: ./sdk-tests/python
+        run: |
+          echo "📦 Installing SDK from local package..."
+          pip install ../packages/accessflow_sdk-*.whl
+
+      - name: Install Chrome for Selenium
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget
+          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt install -y ./google-chrome-stable_current_amd64.deb
+
+      - name: Run Selenium tests
+        working-directory: ./sdk-tests/python
+        env:
+          ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
+          CI: true
+        run: pytest -v -m selenium
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-selenium-results
+          path: sdk-tests/python/test-results/
+          retention-days: 7
 
   # ============================================================================
   # Python Selenium Tests - Registry Install (commented out: local packages only for now)
