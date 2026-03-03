@@ -9,135 +9,72 @@ on:
     paths: ['.github/workflows/sdk-selenium-tests.yml']
   workflow_dispatch:
 
+# -----------------------------------------------------------------------------
+# Test cycle: change only this line to choose which job runs (one job per push).
+# Options: none | node-local | python-local | java-selenium-junit | java-selenium-testng
+# Cycle: 2=node-local, 4=python-local, 7=java-selenium-junit, 8=java-selenium-testng
+# -----------------------------------------------------------------------------
+env:
+  SDK_SELENIUM_JOB: none
+
 jobs:
-  # noop (cycle 4 runs python Selenium)
-  # noop:
-  #   name: "(no Selenium job this run)"
-  #   runs-on: ubuntu-22.04
-  #   steps:
-  #     - run: echo "No Selenium job enabled for this run"
+  noop:
+    if: env.SDK_SELENIUM_JOB == 'none'
+    name: "(no Selenium job this run)"
+    runs-on: ubuntu-22.04
+    steps:
+      - run: echo "No Selenium job enabled for this run"
 
-  # ============================================================================
-  # Node Selenium (commented — cycle 2/8)
-  # ============================================================================
-  # node-local:
-  #   name: Node Selenium
-  #   runs-on: ubuntu-22.04
-  #
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v4
-  #
-  #     - name: Setup Node.js
-  #       uses: actions/setup-node@v4
-  #       with:
-  #         node-version: '18'
-  #
-  #     - name: Install Chrome for Selenium
-  #       run: |
-  #         sudo apt-get update
-  #         sudo apt-get install -y wget
-  #         wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  #         sudo apt install -y ./google-chrome-stable_current_amd64.deb
-  #
-  #     - name: Install test dependencies
-  #       working-directory: ./sdk-tests/node
-  #       run: npm ci
-  #
-  #     - name: Install SDK from local package
-  #       working-directory: ./sdk-tests/node
-  #       run: |
-  #         echo "📦 Installing SDK from local package..."
-  #         npm install ../../sdk-tests/packages/acsbe-accessflow-sdk.tgz
-  #
-  #     - name: Run Selenium tests
-  #       working-directory: ./sdk-tests/node
-  #       env:
-  #         ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
-  #         CI: true
-  #       run: npm run test:selenium
-  #
-  #     - name: Upload test results
-  #       if: always()
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: node-selenium-results
-  #         path: |
-  #           sdk-tests/node/test-results/
-  #         retention-days: 7
+  node-local:
+    if: env.SDK_SELENIUM_JOB == 'node-local'
+    name: Node Selenium
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-  # ============================================================================
-  # Node.js Selenium Tests - Registry Install (commented out: local packages only for now)
-  # ============================================================================
-  # node-registry:
-  #   name: Node.js Selenium (GCP Registry)
-  #   runs-on: ubuntu-22.04
-  #
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v4
-  #
-  #     - name: Setup Node.js
-  #       uses: actions/setup-node@v4
-  #       with:
-  #         node-version: '18'
-  #
-  #     - name: Install Chrome for Selenium
-  #       run: |
-  #         sudo apt-get update
-  #         sudo apt-get install -y wget
-  #         wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  #         sudo apt install -y ./google-chrome-stable_current_amd64.deb
-  #
-  #     - name: Configure npm registry authentication
-  #       working-directory: ./sdk-tests/node
-  #       env:
-  #         GCP_SDK_NPM_REGISTRY_URL: ${{ vars.GCP_SDK_NPM_REGISTRY_URL }}
-  #         ACCESSFLOW_NPM_REGISTRY_TOKEN: ${{ secrets.ACCESSFLOW_NPM_REGISTRY_TOKEN }}
-  #       run: |
-  #         echo "📝 Configuring .npmrc for GCP Artifact Registry..."
-  #         cat > .npmrc << EOF
-  #         @acsbe:registry=https://${GCP_SDK_NPM_REGISTRY_URL}/
-  #         //${GCP_SDK_NPM_REGISTRY_URL}/:username=_json_key_base64
-  #         //${GCP_SDK_NPM_REGISTRY_URL}/:_password=${ACCESSFLOW_NPM_REGISTRY_TOKEN}
-  #         //${GCP_SDK_NPM_REGISTRY_URL}/:always-auth=true
-  #         EOF
-  #         echo "✅ Registry configured"
-  #
-  #     - name: Install test dependencies
-  #       working-directory: ./sdk-tests/node
-  #       run: npm ci
-  #
-  #     - name: Install SDK from registry
-  #       working-directory: ./sdk-tests/node
-  #       run: |
-  #         echo "📦 Installing SDK from GCP Artifact Registry..."
-  #         npm install @acsbe/accessflow-sdk
-  #
-  #     - name: Run Selenium tests
-  #       working-directory: ./sdk-tests/node
-  #       env:
-  #         ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
-  #         CI: true
-  #       run: npm run test:selenium
-  #
-  #     - name: Upload test results
-  #       if: always()
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: node-selenium-registry-results
-  #         path: |
-  #           sdk-tests/node/test-results/
-  #           sdk-tests/node/playwright-report/
-  #         retention-days: 7
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
 
-  # ============================================================================
-  # Python Selenium (cycle 4/8)
-  # ============================================================================
+      - name: Install Chrome for Selenium
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget
+          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt install -y ./google-chrome-stable_current_amd64.deb
+
+      - name: Install test dependencies
+        working-directory: ./sdk-tests/node
+        run: npm ci
+
+      - name: Install SDK from local package
+        working-directory: ./sdk-tests/node
+        run: |
+          echo "📦 Installing SDK from local package..."
+          npm install ../../sdk-tests/packages/acsbe-accessflow-sdk.tgz
+
+      - name: Run Selenium tests
+        working-directory: ./sdk-tests/node
+        env:
+          ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
+          CI: true
+        run: npm run test:selenium
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: node-selenium-results
+          path: |
+            sdk-tests/node/test-results/
+          retention-days: 7
+
   python-local:
+    if: env.SDK_SELENIUM_JOB == 'python-local'
     name: Python Selenium
     runs-on: ubuntu-22.04
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -179,224 +116,143 @@ jobs:
           path: sdk-tests/python/test-results/
           retention-days: 7
 
-  # ============================================================================
-  # Python Selenium Tests - Registry Install (commented out: local packages only for now)
-  # ============================================================================
-  # python-registry:
-  #   name: Python Selenium (GCP Registry)
-  #   runs-on: ubuntu-22.04
-  #
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v4
-  #
-  #     - name: Setup Python
-  #       uses: actions/setup-python@v5
-  #       with:
-  #         python-version: '3.10'
-  #
-  #     - name: Install test dependencies
-  #       working-directory: ./sdk-tests/python
-  #       run: pip install -r requirements.txt
-  #
-  #     - name: Install SDK from registry
-  #       env:
-  #         GCP_SDK_PYTHON_REGISTRY_URL: ${{ vars.GCP_SDK_PYTHON_REGISTRY_URL }}
-  #         ACCESSFLOW_REGISTRY_TOKEN: ${{ secrets.ACCESSFLOW_REGISTRY_TOKEN }}
-  #       run: |
-  #         echo "📦 Installing SDK from GCP Artifact Registry..."
-  #         pip install accessflow-sdk \
-  #           --index-url "https://_json_key_base64:${ACCESSFLOW_REGISTRY_TOKEN}@${GCP_SDK_PYTHON_REGISTRY_URL}/simple/"
-  #
-  #     - name: Install Chrome for Selenium
-  #       run: |
-  #         sudo apt-get update
-  #         sudo apt-get install -y wget
-  #         wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  #         sudo apt install -y ./google-chrome-stable_current_amd64.deb
-  #
-  #     - name: Run Selenium tests
-  #       working-directory: ./sdk-tests/python
-  #       env:
-  #         ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
-  #         CI: true
-  #       run: pytest -v -m selenium
-  #
-  #     - name: Upload test results
-  #       if: always()
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: python-selenium-registry-results
-  #         path: sdk-tests/python/test-results/
-  #         retention-days: 7
+  java-selenium-junit:
+    if: env.SDK_SELENIUM_JOB == 'java-selenium-junit'
+    name: Java Selenium (JUnit 5)
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-  # ============================================================================
-  # Java Selenium — JUnit 5 only (commented — cycle 7/8)
-  # ============================================================================
-  # java-selenium-junit: ... (omitted — re-enable for cycle 7)
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
 
-  # ============================================================================
-  # Java Selenium — TestNG only (SDKSeleniumTestNGTest) — cycle 8/8 (commented for cycle 2)
-  # ============================================================================
-  # java-selenium-testng:
-  #   name: Java Selenium (TestNG)
-  #   runs-on: ubuntu-22.04
-  #
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v4
-  #
-  #     - name: Setup Java
-  #       uses: actions/setup-java@v4
-  #       with:
-  #         java-version: '11'
-  #         distribution: 'temurin'
-  #
-  #     - name: Install SDK to local Maven repository
-  #       working-directory: ./sdk-tests/java
-  #       run: |
-  #         echo "📦 Installing SDK JAR to local Maven repository..."
-  #         JAR_FILE="../packages/accessflow-sdk.jar"
-  #         if [ ! -f "$JAR_FILE" ]; then
-  #           echo "❌ Error: JAR file not found at $JAR_FILE"
-  #           ls -la ../packages/
-  #           exit 1
-  #         fi
-  #         mvn install:install-file \
-  #           -Dfile="$JAR_FILE" \
-  #           -DgroupId=com.acsbe \
-  #           -DartifactId=accessflow-sdk \
-  #           -Dversion=1.0.1-dev-80604 \
-  #           -Dpackaging=jar \
-  #           -DgeneratePom=true
-  #         echo "✅ SDK installed to local Maven repository"
-  #
-  #     - name: Resolve Maven dependencies
-  #       working-directory: ./sdk-tests/java
-  #       run: mvn dependency:resolve
-  #
-  #     - name: Install Chrome for Selenium
-  #       run: |
-  #         sudo apt-get update
-  #         sudo apt-get install -y wget unzip
-  #         wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  #         sudo apt install -y ./google-chrome-stable_current_amd64.deb
-  #         CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+\.\d+')
-  #         wget -q "https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSION}/linux64/chromedriver-linux64.zip" -O /tmp/chromedriver.zip
-  #         unzip -o /tmp/chromedriver.zip -d /tmp/
-  #         sudo mv /tmp/chromedriver-linux64/chromedriver /usr/local/bin/
-  #         sudo chmod +x /usr/local/bin/chromedriver
-  #
-  #     - name: Create test-results directory
-  #       run: mkdir -p test-results
-  #       working-directory: ./sdk-tests/java
-  #
-  #     - name: Run Selenium TestNG tests (SDKSeleniumTestNGTest)
-  #       working-directory: ./sdk-tests/java
-  #       env:
-  #         ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
-  #         CI: true
-  #       run: mvn test -DskipJunit=true -DtestngSuiteFile=testng-selenium.xml
-  #
-  #     - name: Upload test results
-  #       if: always()
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: java-selenium-testng-results
-  #         path: |
-  #           sdk-tests/java/test-results/
-  #           sdk-tests/java/target/surefire-reports/
-  #           sdk-tests/java/target/testng-reports/
-  #         retention-days: 7
+      - name: Install SDK to local Maven repository
+        working-directory: ./sdk-tests/java
+        run: |
+          echo "📦 Installing SDK JAR to local Maven repository..."
+          JAR_FILE="../packages/accessflow-sdk.jar"
+          if [ ! -f "$JAR_FILE" ]; then
+            echo "❌ Error: JAR file not found at $JAR_FILE"
+            ls -la ../packages/
+            exit 1
+          fi
+          mvn install:install-file \
+            -Dfile="$JAR_FILE" \
+            -DgroupId=com.acsbe \
+            -DartifactId=accessflow-sdk \
+            -Dversion=1.0.1-dev-80604 \
+            -Dpackaging=jar \
+            -DgeneratePom=true
+          echo "✅ SDK installed to local Maven repository"
 
-  # ============================================================================
-  # Java Selenium Tests - Registry Install (commented out: local packages only for now)
-  # ============================================================================
-  # java-registry:
-  #   name: Java Selenium (GCP Registry)
-  #   runs-on: ubuntu-22.04
-  #
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v4
-  #
-  #     - name: Setup Java
-  #       uses: actions/setup-java@v4
-  #       with:
-  #         java-version: '11'
-  #         distribution: 'temurin'
-  #
-  #     - name: Configure Maven registry authentication
-  #       env:
-  #         ACCESSFLOW_REGISTRY_TOKEN: ${{ secrets.ACCESSFLOW_REGISTRY_TOKEN }}
-  #         GCP_SDK_MAVEN_REGISTRY_URL: ${{ vars.GCP_SDK_MAVEN_REGISTRY_URL }}
-  #       run: |
-  #         echo "📝 Configuring Maven settings.xml for GCP Artifact Registry..."
-  #         mkdir -p ~/.m2
-  #         MAVEN_URL="${GCP_SDK_MAVEN_REGISTRY_URL}"
-  #         if [[ ! "$MAVEN_URL" =~ ^https?:// ]]; then
-  #           MAVEN_URL="https://${MAVEN_URL}"
-  #         fi
-  #         cat > ~/.m2/settings.xml << EOF
-  #         <settings>
-  #           <servers>
-  #             <server>
-  #               <id>accessflow-registry</id>
-  #               <username>_json_key_base64</username>
-  #               <password>${ACCESSFLOW_REGISTRY_TOKEN}</password>
-  #             </server>
-  #           </servers>
-  #           <profiles>
-  #             <profile>
-  #               <id>accessflow</id>
-  #               <repositories>
-  #                 <repository>
-  #                   <id>accessflow-registry</id>
-  #                   <url>${MAVEN_URL}</url>
-  #                 </repository>
-  #               </repositories>
-  #             </profile>
-  #           </profiles>
-  #           <activeProfiles>
-  #             <activeProfile>accessflow</activeProfile>
-  #           </activeProfiles>
-  #         </settings>
-  #         EOF
-  #         echo "✅ Maven settings configured with URL: ${MAVEN_URL}"
-  #
-  #     - name: Resolve Maven dependencies
-  #       working-directory: ./sdk-tests/java
-  #       env:
-  #         ACCESSFLOW_REGISTRY_TOKEN: ${{ secrets.ACCESSFLOW_REGISTRY_TOKEN }}
-  #         GCP_SDK_MAVEN_REGISTRY_URL: ${{ vars.GCP_SDK_MAVEN_REGISTRY_URL }}
-  #       run: mvn dependency:resolve
-  #
-  #     - name: Install Chrome for Selenium
-  #       run: |
-  #         sudo apt-get update
-  #         sudo apt-get install -y wget
-  #         wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  #         sudo apt install -y ./google-chrome-stable_current_amd64.deb
-  #
-  #     - name: Create test-results directory
-  #       run: mkdir -p test-results
-  #       working-directory: ./sdk-tests/java
-  #
-  #     - name: Run tests (SDK from registry)
-  #       working-directory: ./sdk-tests/java
-  #       env:
-  #         ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
-  #         GCP_SDK_MAVEN_REGISTRY_URL: ${{ vars.GCP_SDK_MAVEN_REGISTRY_URL }}
-  #         ACCESSFLOW_REGISTRY_TOKEN: ${{ secrets.ACCESSFLOW_REGISTRY_TOKEN }}
-  #         CI: true
-  #       run: mvn test
-  #
-  #     - name: Upload test results
-  #       if: always()
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: java-selenium-registry-results
-  #         path: |
-  #           sdk-tests/java/test-results/
-  #           sdk-tests/java/target/surefire-reports/
-  #         retention-days: 7
+      - name: Resolve Maven dependencies
+        working-directory: ./sdk-tests/java
+        run: mvn dependency:resolve
+
+      - name: Install Chrome for Selenium
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget unzip
+          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt install -y ./google-chrome-stable_current_amd64.deb
+          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+\.\d+')
+          wget -q "https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSION}/linux64/chromedriver-linux64.zip" -O /tmp/chromedriver.zip
+          unzip -o /tmp/chromedriver.zip -d /tmp/
+          sudo mv /tmp/chromedriver-linux64/chromedriver /usr/local/bin/
+          sudo chmod +x /usr/local/bin/chromedriver
+
+      - name: Create test-results directory
+        run: mkdir -p test-results
+        working-directory: ./sdk-tests/java
+
+      - name: Run Selenium JUnit tests (SDKSeleniumTest)
+        working-directory: ./sdk-tests/java
+        env:
+          ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
+          CI: true
+        run: mvn test -Dtest=SDKSeleniumTest -DskipTestNG=true
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: java-selenium-junit-results
+          path: |
+            sdk-tests/java/test-results/
+            sdk-tests/java/target/surefire-reports/
+          retention-days: 7
+
+  java-selenium-testng:
+    if: env.SDK_SELENIUM_JOB == 'java-selenium-testng'
+    name: Java Selenium (TestNG)
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Install SDK to local Maven repository
+        working-directory: ./sdk-tests/java
+        run: |
+          echo "📦 Installing SDK JAR to local Maven repository..."
+          JAR_FILE="../packages/accessflow-sdk.jar"
+          if [ ! -f "$JAR_FILE" ]; then
+            echo "❌ Error: JAR file not found at $JAR_FILE"
+            ls -la ../packages/
+            exit 1
+          fi
+          mvn install:install-file \
+            -Dfile="$JAR_FILE" \
+            -DgroupId=com.acsbe \
+            -DartifactId=accessflow-sdk \
+            -Dversion=1.0.1-dev-80604 \
+            -Dpackaging=jar \
+            -DgeneratePom=true
+          echo "✅ SDK installed to local Maven repository"
+
+      - name: Resolve Maven dependencies
+        working-directory: ./sdk-tests/java
+        run: mvn dependency:resolve
+
+      - name: Install Chrome for Selenium
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget unzip
+          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt install -y ./google-chrome-stable_current_amd64.deb
+          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+\.\d+')
+          wget -q "https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSION}/linux64/chromedriver-linux64.zip" -O /tmp/chromedriver.zip
+          unzip -o /tmp/chromedriver.zip -d /tmp/
+          sudo mv /tmp/chromedriver-linux64/chromedriver /usr/local/bin/
+          sudo chmod +x /usr/local/bin/chromedriver
+
+      - name: Create test-results directory
+        run: mkdir -p test-results
+        working-directory: ./sdk-tests/java
+
+      - name: Run Selenium TestNG tests (SDKSeleniumTestNGTest)
+        working-directory: ./sdk-tests/java
+        env:
+          ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
+          CI: true
+        run: mvn test -DskipJunit=true -DtestngSuiteFile=testng-selenium.xml
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: java-selenium-testng-results
+          path: |
+            sdk-tests/java/test-results/
+            sdk-tests/java/target/surefire-reports/
+            sdk-tests/java/target/testng-reports/
+          retention-days: 7
