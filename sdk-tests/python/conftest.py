@@ -182,17 +182,10 @@ def pytest_sessionfinish(session, exitstatus):
     else:
         print("   ℹ️  No accessibility audits were recorded")
 
-    # In CI environment, upload reports to AccessFlow platform
-    # Check CI explicitly: "true" (case-insensitive) or platform-specific CI vars
-    is_ci = (
-        os.getenv('CI', '').lower() == 'true' or
-        os.getenv('GITHUB_ACTIONS') or
-        os.getenv('CIRCLECI') or
-        os.getenv('GITLAB_CI')
-    )
-    if is_ci:
-        print("\n📤 CI detected - finalizing reports for upload...")
-        finalize_reports()
+    # Always finalize reports: in CI it uploads; locally it checks thresholds
+    # (when localCheck=true in accessflow.config.json).
+    print("\n📤 Finalizing reports...")
+    finalize_reports()
 
     print("="*80)
     print(f"✅ Test suite finished with exit status: {exitstatus}")

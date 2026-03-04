@@ -1,0 +1,288 @@
+name: AccessFlow SDK localCheck Tests
+
+on:
+  push:
+    branches: ['**']
+    paths: ['.github/workflows/sdk-localcheck-tests.yml']
+  pull_request:
+    branches: ['**']
+    paths: ['.github/workflows/sdk-localcheck-tests.yml']
+  workflow_dispatch:
+
+# -----------------------------------------------------------------------------
+# Test cycle: change only this line to choose which job runs (one job per push).
+# Options: none | node-localcheck | python-localcheck | java-localcheck
+# Cycle: 9=node-localcheck, 10=python-localcheck, 11=java-localcheck
+# -----------------------------------------------------------------------------
+env:
+  SDK_LOCALCHECK_JOB: none
+
+jobs:
+  sdk-localcheck:
+    name: SDK localCheck
+    runs-on: ubuntu-22.04
+    steps:
+      # --- noop ---
+      - name: "(no localCheck job this run)"
+        if: env.SDK_LOCALCHECK_JOB == 'none'
+        run: echo "No localCheck job enabled for this run"
+
+      # =====================================================================
+      # node-localcheck
+      # =====================================================================
+      - name: Checkout repository (node)
+        if: env.SDK_LOCALCHECK_JOB == 'node-localcheck'
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        if: env.SDK_LOCALCHECK_JOB == 'node-localcheck'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install test dependencies (node)
+        if: env.SDK_LOCALCHECK_JOB == 'node-localcheck'
+        working-directory: ./sdk-tests/node
+        run: npm ci
+
+      - name: Install SDK from local package (node)
+        if: env.SDK_LOCALCHECK_JOB == 'node-localcheck'
+        working-directory: ./sdk-tests/node
+        run: |
+          echo "📦 Installing SDK from local package..."
+          npm install ../../sdk-tests/packages/acsbe-accessflow-sdk.tgz
+
+      - name: Install Playwright browsers (node)
+        if: env.SDK_LOCALCHECK_JOB == 'node-localcheck'
+        working-directory: ./sdk-tests/node
+        run: npx playwright install --with-deps chromium
+
+      - name: "localCheck PASS test (node)"
+        if: env.SDK_LOCALCHECK_JOB == 'node-localcheck'
+        working-directory: ./sdk-tests/node
+        env:
+          ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
+          CI: true
+        run: |
+          echo '{"issuesFoundThreshold":{"extreme":0,"high":100,"medium":100,"low":100},"localCheck":true}' > accessflow.config.json
+          echo "📋 Config for PASS test:"
+          cat accessflow.config.json
+          echo ""
+          echo "🧪 Running Playwright tests — expecting PASS (generous thresholds)..."
+          npx playwright test
+          echo "✅ localCheck PASS test succeeded"
+
+      - name: Clean test-results between runs (node)
+        if: env.SDK_LOCALCHECK_JOB == 'node-localcheck'
+        working-directory: ./sdk-tests/node
+        run: rm -rf test-results/ playwright-report/
+
+      - name: "localCheck FAIL test (node)"
+        if: env.SDK_LOCALCHECK_JOB == 'node-localcheck'
+        working-directory: ./sdk-tests/node
+        env:
+          ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
+          CI: true
+        run: |
+          echo '{"issuesFoundThreshold":{"extreme":0,"high":0,"medium":0,"low":0},"localCheck":true}' > accessflow.config.json
+          echo "📋 Config for FAIL test:"
+          cat accessflow.config.json
+          echo ""
+          echo "🧪 Running Playwright tests — expecting FAIL (all thresholds at 0)..."
+          set +e
+          npx playwright test
+          EXIT_CODE=$?
+          set -e
+          if [ $EXIT_CODE -eq 0 ]; then
+            echo "❌ ERROR: Expected threshold failure but test passed!"
+            exit 1
+          fi
+          echo "✅ localCheck FAIL test succeeded — test correctly failed with exit code $EXIT_CODE"
+
+      - name: Upload test results (node)
+        if: env.SDK_LOCALCHECK_JOB == 'node-localcheck' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: node-localcheck-results
+          path: sdk-tests/node/test-results/
+          retention-days: 7
+
+      # =====================================================================
+      # python-localcheck
+      # =====================================================================
+      - name: Checkout repository (python)
+        if: env.SDK_LOCALCHECK_JOB == 'python-localcheck'
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        if: env.SDK_LOCALCHECK_JOB == 'python-localcheck'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install test dependencies (python)
+        if: env.SDK_LOCALCHECK_JOB == 'python-localcheck'
+        working-directory: ./sdk-tests/python
+        run: pip install -r requirements.txt
+
+      - name: Install SDK from local package (python)
+        if: env.SDK_LOCALCHECK_JOB == 'python-localcheck'
+        working-directory: ./sdk-tests/python
+        run: |
+          echo "📦 Installing SDK from local package..."
+          pip install ../packages/accessflow_sdk-*.whl
+
+      - name: Install Playwright browsers (python)
+        if: env.SDK_LOCALCHECK_JOB == 'python-localcheck'
+        run: playwright install --with-deps chromium
+
+      - name: "localCheck PASS test (python)"
+        if: env.SDK_LOCALCHECK_JOB == 'python-localcheck'
+        working-directory: ./sdk-tests/python
+        env:
+          ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
+          CI: true
+        run: |
+          echo '{"issuesFoundThreshold":{"extreme":0,"high":100,"medium":100,"low":100},"localCheck":true}' > accessflow.config.json
+          echo "📋 Config for PASS test:"
+          cat accessflow.config.json
+          echo ""
+          echo "🧪 Running pytest — expecting PASS (generous thresholds)..."
+          pytest -v -k "test_audit_fixture_page"
+          echo "✅ localCheck PASS test succeeded"
+
+      - name: Clean test-results between runs (python)
+        if: env.SDK_LOCALCHECK_JOB == 'python-localcheck'
+        working-directory: ./sdk-tests/python
+        run: rm -rf test-results/
+
+      - name: "localCheck FAIL test (python)"
+        if: env.SDK_LOCALCHECK_JOB == 'python-localcheck'
+        working-directory: ./sdk-tests/python
+        env:
+          ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
+          CI: true
+        run: |
+          echo '{"issuesFoundThreshold":{"extreme":0,"high":0,"medium":0,"low":0},"localCheck":true}' > accessflow.config.json
+          echo "📋 Config for FAIL test:"
+          cat accessflow.config.json
+          echo ""
+          echo "🧪 Running pytest — expecting FAIL (all thresholds at 0)..."
+          set +e
+          pytest -v -k "test_audit_fixture_page"
+          EXIT_CODE=$?
+          set -e
+          if [ $EXIT_CODE -eq 0 ]; then
+            echo "❌ ERROR: Expected threshold failure but test passed!"
+            exit 1
+          fi
+          echo "✅ localCheck FAIL test succeeded — test correctly failed with exit code $EXIT_CODE"
+
+      - name: Upload test results (python)
+        if: env.SDK_LOCALCHECK_JOB == 'python-localcheck' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-localcheck-results
+          path: sdk-tests/python/test-results/
+          retention-days: 7
+
+      # =====================================================================
+      # java-localcheck
+      # =====================================================================
+      - name: Checkout repository (java)
+        if: env.SDK_LOCALCHECK_JOB == 'java-localcheck'
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        if: env.SDK_LOCALCHECK_JOB == 'java-localcheck'
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Install SDK to local Maven repository (java)
+        if: env.SDK_LOCALCHECK_JOB == 'java-localcheck'
+        working-directory: ./sdk-tests/java
+        run: |
+          echo "📦 Installing SDK JAR to local Maven repository..."
+          JAR_FILE="../packages/accessflow-sdk.jar"
+          if [ ! -f "$JAR_FILE" ]; then
+            echo "❌ Error: JAR file not found at $JAR_FILE"
+            ls -la ../packages/
+            exit 1
+          fi
+          mvn install:install-file \
+            -Dfile="$JAR_FILE" \
+            -DgroupId=com.acsbe \
+            -DartifactId=accessflow-sdk \
+            -Dversion=1.0.1-dev-80604 \
+            -Dpackaging=jar \
+            -DgeneratePom=true
+          echo "✅ SDK installed to local Maven repository"
+
+      - name: Resolve Maven dependencies (java)
+        if: env.SDK_LOCALCHECK_JOB == 'java-localcheck'
+        working-directory: ./sdk-tests/java
+        run: mvn dependency:resolve
+
+      - name: Install Playwright browsers (java)
+        if: env.SDK_LOCALCHECK_JOB == 'java-localcheck'
+        working-directory: ./sdk-tests/java
+        run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.classpathScope=test -D exec.args="install --with-deps chromium"
+
+      - name: Create test-results directory (java)
+        if: env.SDK_LOCALCHECK_JOB == 'java-localcheck'
+        working-directory: ./sdk-tests/java
+        run: mkdir -p test-results
+
+      - name: "localCheck PASS test (java)"
+        if: env.SDK_LOCALCHECK_JOB == 'java-localcheck'
+        working-directory: ./sdk-tests/java
+        env:
+          ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
+          CI: true
+        run: |
+          echo '{"issuesFoundThreshold":{"extreme":0,"high":100,"medium":100,"low":100},"localCheck":true}' > accessflow.config.json
+          echo "📋 Config for PASS test:"
+          cat accessflow.config.json
+          echo ""
+          echo "🧪 Running JUnit tests — expecting PASS (generous thresholds)..."
+          mvn test -Dtest=SDKAuditTest -DskipTestNG=true
+          echo "✅ localCheck PASS test succeeded"
+
+      - name: Clean test-results between runs (java)
+        if: env.SDK_LOCALCHECK_JOB == 'java-localcheck'
+        working-directory: ./sdk-tests/java
+        run: rm -rf test-results/ target/surefire-reports/
+
+      - name: "localCheck FAIL test (java)"
+        if: env.SDK_LOCALCHECK_JOB == 'java-localcheck'
+        working-directory: ./sdk-tests/java
+        env:
+          ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
+          CI: true
+        run: |
+          echo '{"issuesFoundThreshold":{"extreme":0,"high":0,"medium":0,"low":0},"localCheck":true}' > accessflow.config.json
+          echo "📋 Config for FAIL test:"
+          cat accessflow.config.json
+          echo ""
+          echo "🧪 Running JUnit tests — expecting FAIL (all thresholds at 0)..."
+          set +e
+          mvn test -Dtest=SDKAuditTest -DskipTestNG=true
+          EXIT_CODE=$?
+          set -e
+          if [ $EXIT_CODE -eq 0 ]; then
+            echo "❌ ERROR: Expected threshold failure but test passed!"
+            exit 1
+          fi
+          echo "✅ localCheck FAIL test succeeded — test correctly failed with exit code $EXIT_CODE"
+
+      - name: Upload test results (java)
+        if: env.SDK_LOCALCHECK_JOB == 'java-localcheck' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: java-localcheck-results
+          path: |
+            sdk-tests/java/test-results/
+            sdk-tests/java/target/surefire-reports/
+          retention-days: 7
