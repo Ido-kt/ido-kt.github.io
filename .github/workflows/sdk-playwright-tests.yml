@@ -19,7 +19,7 @@ env:
 
 jobs:
   sdk-playwright:
-    name: Playwright (${{ env.SDK_PLAYWRIGHT_JOB }})
+    name: SDK Playwright
     runs-on: ubuntu-22.04
     steps:
       # --- noop (when SDK_PLAYWRIGHT_JOB == 'none') ---

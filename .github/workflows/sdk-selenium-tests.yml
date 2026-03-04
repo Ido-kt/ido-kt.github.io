@@ -19,7 +19,7 @@ env:
 
 jobs:
   sdk-selenium:
-    name: Selenium (${{ env.SDK_SELENIUM_JOB }})
+    name: SDK Selenium
     runs-on: ubuntu-22.04
     steps:
       # --- noop (when SDK_SELENIUM_JOB == 'none') ---

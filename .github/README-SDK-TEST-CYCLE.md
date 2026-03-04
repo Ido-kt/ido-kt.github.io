@@ -31,21 +31,21 @@ env:
   SDK_SELENIUM_JOB: none     # ← Change to: node-local | python-local | java-selenium-junit | java-selenium-testng
 ```
 
-- Use `none` when you don’t want any real test (the noop job runs so the workflow still has one job).
-- Each job has an `if: env.SDK_*_JOB == 'job-id'` condition; only the selected job runs.
+- Use `none` when you don’t want any real test (a noop step runs).
+- Each workflow has one job; steps use `if: env.SDK_*_JOB == 'job-id'` so only the selected variant runs (job-level `if` cannot use `env` in GitHub Actions, so the selector is applied at step level).
 
 ## Rules
 
-- **One file per push:** Pushes 1, 3, 5, 6 edit only `sdk-playwright-tests.yml`. Pushes 2, 4, 7, 8 edit only `sdk-selenium-tests.yml`, so only one workflow runs per push (each workflow has `paths:`).
-- **One line per push:** You only change the `SDK_PLAYWRIGHT_JOB` or `SDK_SELENIUM_JOB` value; no need to comment or uncomment large blocks.
+- **One file per push — critical:** Each push must change **only one** workflow file. If you edit both files in the same commit, **both** workflows will run (duplicate runs). So: for pushes 1, 3, 5, 6 edit **only** `sdk-playwright-tests.yml`; for pushes 2, 4, 7, 8 edit **only** `sdk-selenium-tests.yml`. Do not set the other file back to `none` in the same push.
+- **One line per push:** Change only the `SDK_PLAYWRIGHT_JOB` or `SDK_SELENIUM_JOB` value in that file.
 - JUnit and TestNG run in separate pushes so report uploads can be verified per framework.
 
 ## How to run the cycle
 
 For each push 1–8:
 
-1. Open the workflow file in the table (Playwright or Selenium).
+1. Open **only** the workflow file for that push (see table — never edit both files in one commit).
 2. Find the `env:` block at the top and set the variable to the value for that push (e.g. `SDK_PLAYWRIGHT_JOB: node-local` for push 1).
-3. Commit and push, e.g. `git add .github/workflows/sdk-playwright-tests.yml && git commit -m "test cycle 1/8: node Playwright" && git push`.
+3. Commit and push **only that file**, e.g. push 1: `git add .github/workflows/sdk-playwright-tests.yml && git commit -m "test cycle 1/8: node Playwright" && git push`. Push 2: `git add .github/workflows/sdk-selenium-tests.yml && ...` (do not add the Playwright file).
 
-Repeat for the next push with the next value. The repo default is `none` so that each run is explicit.
+Repeat for the next push with the next value. Leave the other workflow file unchanged so only one workflow triggers per push.
