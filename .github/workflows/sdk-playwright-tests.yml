@@ -15,7 +15,7 @@ on:
 # Cycle: 1=node-local, 3=python-local, 5=java-playwright-junit, 6=java-playwright-testng
 # -----------------------------------------------------------------------------
 env:
-  SDK_PLAYWRIGHT_JOB: node-local
+  SDK_PLAYWRIGHT_JOB: none
 
 jobs:
   noop:
