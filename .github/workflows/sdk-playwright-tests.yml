@@ -163,13 +163,13 @@ jobs:
         run: mkdir -p test-results
         working-directory: ./sdk-tests/java
 
-      - name: Run Playwright JUnit tests (SDKPlaywrightTest)
+      - name: Run Playwright JUnit tests (SDKAuditTest)
         if: env.SDK_PLAYWRIGHT_JOB == 'java-playwright-junit'
         working-directory: ./sdk-tests/java
         env:
           ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
           CI: true
-        run: mvn test -Dtest=SDKPlaywrightTest -DskipTestNG=true
+        run: mvn test -Dtest=SDKAuditTest -DskipTestNG=true
 
       - name: Upload test results (java-junit)
         if: env.SDK_PLAYWRIGHT_JOB == 'java-playwright-junit' && always()
