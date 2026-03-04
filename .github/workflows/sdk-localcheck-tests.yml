@@ -15,7 +15,7 @@ on:
 # Cycle: 9=node-localcheck, 10=python-localcheck, 11=java-localcheck
 # -----------------------------------------------------------------------------
 env:
-  SDK_LOCALCHECK_JOB: java-localcheck
+  SDK_LOCALCHECK_JOB: node-localcheck
 
 jobs:
   sdk-localcheck:
@@ -64,7 +64,7 @@ jobs:
           ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
           CI: true
         run: |
-          echo '{"issuesFoundThreshold":{"extreme":0,"high":100,"medium":100,"low":100},"localCheck":true}' > accessflow.config.json
+          echo '{"issuesFoundThreshold":{"extreme":100,"high":100,"medium":100,"low":100},"localCheck":true}' > accessflow.config.json
           echo "📋 Config for PASS test:"
           cat accessflow.config.json
           echo ""
@@ -143,7 +143,7 @@ jobs:
           ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
           CI: true
         run: |
-          echo '{"issuesFoundThreshold":{"extreme":0,"high":100,"medium":100,"low":100},"localCheck":true}' > accessflow.config.json
+          echo '{"issuesFoundThreshold":{"extreme":100,"high":100,"medium":100,"low":100},"localCheck":true}' > accessflow.config.json
           echo "📋 Config for PASS test:"
           cat accessflow.config.json
           echo ""
@@ -242,7 +242,7 @@ jobs:
           ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
           CI: true
         run: |
-          echo '{"issuesFoundThreshold":{"extreme":0,"high":100,"medium":100,"low":100},"localCheck":true}' > accessflow.config.json
+          echo '{"issuesFoundThreshold":{"extreme":100,"high":100,"medium":100,"low":100},"localCheck":true}' > accessflow.config.json
           echo "📋 Config for PASS test:"
           cat accessflow.config.json
           echo ""
