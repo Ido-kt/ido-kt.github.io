@@ -15,52 +15,56 @@ on:
 # Cycle: 1=node-local, 3=python-local, 5=java-playwright-junit, 6=java-playwright-testng
 # -----------------------------------------------------------------------------
 env:
-  SDK_PLAYWRIGHT_JOB: java-playwright-testng
+  SDK_PLAYWRIGHT_JOB: node-local
 
 jobs:
-  noop:
-    if: env.SDK_PLAYWRIGHT_JOB == 'none'
-    name: "(no Playwright job this run)"
+  sdk-playwright:
+    name: Playwright (${{ env.SDK_PLAYWRIGHT_JOB }})
     runs-on: ubuntu-22.04
     steps:
-      - run: echo "No Playwright job enabled for this run"
+      # --- noop (when SDK_PLAYWRIGHT_JOB == 'none') ---
+      - name: "(no Playwright job this run)"
+        if: env.SDK_PLAYWRIGHT_JOB == 'none'
+        run: echo "No Playwright job enabled for this run"
 
-  node-local:
-    if: env.SDK_PLAYWRIGHT_JOB == 'node-local'
-    name: Node Playwright
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout repository
+      # --- node-local ---
+      - name: Checkout repository (node)
+        if: env.SDK_PLAYWRIGHT_JOB == 'node-local'
         uses: actions/checkout@v4
 
       - name: Setup Node.js
+        if: env.SDK_PLAYWRIGHT_JOB == 'node-local'
         uses: actions/setup-node@v4
         with:
           node-version: '18'
 
       - name: Install test dependencies
+        if: env.SDK_PLAYWRIGHT_JOB == 'node-local'
         working-directory: ./sdk-tests/node
         run: npm ci
 
       - name: Install SDK from local package
+        if: env.SDK_PLAYWRIGHT_JOB == 'node-local'
         working-directory: ./sdk-tests/node
         run: |
           echo "📦 Installing SDK from local package..."
           npm install ../../sdk-tests/packages/acsbe-accessflow-sdk.tgz
 
       - name: Install Playwright browsers
+        if: env.SDK_PLAYWRIGHT_JOB == 'node-local'
         working-directory: ./sdk-tests/node
         run: npx playwright install --with-deps chromium
 
       - name: Run tests
+        if: env.SDK_PLAYWRIGHT_JOB == 'node-local'
         working-directory: ./sdk-tests/node
         env:
           ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
           CI: true
         run: npx playwright test
 
-      - name: Upload test results
-        if: always()
+      - name: Upload test results (node)
+        if: env.SDK_PLAYWRIGHT_JOB == 'node-local' && always()
         uses: actions/upload-artifact@v4
         with:
           name: node-playwright-results
@@ -69,62 +73,63 @@ jobs:
             sdk-tests/node/playwright-report/
           retention-days: 7
 
-  python-local:
-    if: env.SDK_PLAYWRIGHT_JOB == 'python-local'
-    name: Python Playwright
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout repository
+      # --- python-local ---
+      - name: Checkout repository (python)
+        if: env.SDK_PLAYWRIGHT_JOB == 'python-local'
         uses: actions/checkout@v4
 
       - name: Setup Python
+        if: env.SDK_PLAYWRIGHT_JOB == 'python-local'
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      - name: Install test dependencies
+      - name: Install test dependencies (python)
+        if: env.SDK_PLAYWRIGHT_JOB == 'python-local'
         working-directory: ./sdk-tests/python
         run: pip install -r requirements.txt
 
-      - name: Install SDK from local package
+      - name: Install SDK from local package (python)
+        if: env.SDK_PLAYWRIGHT_JOB == 'python-local'
         working-directory: ./sdk-tests/python
         run: |
           echo "📦 Installing SDK from local package..."
           pip install ../packages/accessflow_sdk-*.whl
 
-      - name: Install Playwright browsers
+      - name: Install Playwright browsers (python)
+        if: env.SDK_PLAYWRIGHT_JOB == 'python-local'
         run: playwright install --with-deps chromium
 
-      - name: Run tests
+      - name: Run tests (python)
+        if: env.SDK_PLAYWRIGHT_JOB == 'python-local'
         working-directory: ./sdk-tests/python
         env:
           ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
           CI: true
         run: pytest -v -m "not selenium"
 
-      - name: Upload test results
-        if: always()
+      - name: Upload test results (python)
+        if: env.SDK_PLAYWRIGHT_JOB == 'python-local' && always()
         uses: actions/upload-artifact@v4
         with:
           name: python-playwright-results
           path: sdk-tests/python/test-results/
           retention-days: 7
 
-  java-playwright-junit:
-    if: env.SDK_PLAYWRIGHT_JOB == 'java-playwright-junit'
-    name: Java Playwright (JUnit 5)
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout repository
+      # --- java-playwright-junit ---
+      - name: Checkout repository (java-junit)
+        if: env.SDK_PLAYWRIGHT_JOB == 'java-playwright-junit'
         uses: actions/checkout@v4
 
       - name: Setup Java
+        if: env.SDK_PLAYWRIGHT_JOB == 'java-playwright-junit'
         uses: actions/setup-java@v4
         with:
           java-version: '11'
           distribution: 'temurin'
 
       - name: Install SDK to local Maven repository
+        if: env.SDK_PLAYWRIGHT_JOB == 'java-playwright-junit'
         working-directory: ./sdk-tests/java
         run: |
           echo "📦 Installing SDK JAR to local Maven repository..."
@@ -144,26 +149,30 @@ jobs:
           echo "✅ SDK installed to local Maven repository"
 
       - name: Resolve Maven dependencies
+        if: env.SDK_PLAYWRIGHT_JOB == 'java-playwright-junit'
         working-directory: ./sdk-tests/java
         run: mvn dependency:resolve
 
-      - name: Install Playwright browsers
+      - name: Install Playwright browsers (java)
+        if: env.SDK_PLAYWRIGHT_JOB == 'java-playwright-junit'
         working-directory: ./sdk-tests/java
         run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.classpathScope=test -D exec.args="install --with-deps chromium"
 
       - name: Create test-results directory
+        if: env.SDK_PLAYWRIGHT_JOB == 'java-playwright-junit'
         run: mkdir -p test-results
         working-directory: ./sdk-tests/java
 
       - name: Run Playwright JUnit tests (SDKPlaywrightTest)
+        if: env.SDK_PLAYWRIGHT_JOB == 'java-playwright-junit'
         working-directory: ./sdk-tests/java
         env:
           ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
           CI: true
         run: mvn test -Dtest=SDKPlaywrightTest -DskipTestNG=true
 
-      - name: Upload test results
-        if: always()
+      - name: Upload test results (java-junit)
+        if: env.SDK_PLAYWRIGHT_JOB == 'java-playwright-junit' && always()
         uses: actions/upload-artifact@v4
         with:
           name: java-playwright-junit-results
@@ -172,21 +181,20 @@ jobs:
             sdk-tests/java/target/surefire-reports/
           retention-days: 7
 
-  java-playwright-testng:
-    if: env.SDK_PLAYWRIGHT_JOB == 'java-playwright-testng'
-    name: Java Playwright (TestNG)
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout repository
+      # --- java-playwright-testng ---
+      - name: Checkout repository (java-testng)
+        if: env.SDK_PLAYWRIGHT_JOB == 'java-playwright-testng'
         uses: actions/checkout@v4
 
-      - name: Setup Java
+      - name: Setup Java (testng)
+        if: env.SDK_PLAYWRIGHT_JOB == 'java-playwright-testng'
         uses: actions/setup-java@v4
         with:
           java-version: '11'
           distribution: 'temurin'
 
-      - name: Install SDK to local Maven repository
+      - name: Install SDK to local Maven repository (testng)
+        if: env.SDK_PLAYWRIGHT_JOB == 'java-playwright-testng'
         working-directory: ./sdk-tests/java
         run: |
           echo "📦 Installing SDK JAR to local Maven repository..."
@@ -205,27 +213,31 @@ jobs:
             -DgeneratePom=true
           echo "✅ SDK installed to local Maven repository"
 
-      - name: Resolve Maven dependencies
+      - name: Resolve Maven dependencies (testng)
+        if: env.SDK_PLAYWRIGHT_JOB == 'java-playwright-testng'
         working-directory: ./sdk-tests/java
         run: mvn dependency:resolve
 
-      - name: Install Playwright browsers
+      - name: Install Playwright browsers (java-testng)
+        if: env.SDK_PLAYWRIGHT_JOB == 'java-playwright-testng'
         working-directory: ./sdk-tests/java
         run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.classpathScope=test -D exec.args="install --with-deps chromium"
 
-      - name: Create test-results directory
+      - name: Create test-results directory (testng)
+        if: env.SDK_PLAYWRIGHT_JOB == 'java-playwright-testng'
         run: mkdir -p test-results
         working-directory: ./sdk-tests/java
 
       - name: Run Playwright TestNG tests (SDKTestNGTest)
+        if: env.SDK_PLAYWRIGHT_JOB == 'java-playwright-testng'
         working-directory: ./sdk-tests/java
         env:
           ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
           CI: true
         run: mvn test -DskipJunit=true -DtestngSuiteFile=testng.xml
 
-      - name: Upload test results
-        if: always()
+      - name: Upload test results (java-testng)
+        if: env.SDK_PLAYWRIGHT_JOB == 'java-playwright-testng' && always()
         uses: actions/upload-artifact@v4
         with:
           name: java-playwright-testng-results
