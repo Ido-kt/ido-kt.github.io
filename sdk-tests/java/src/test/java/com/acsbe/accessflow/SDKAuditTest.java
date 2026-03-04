@@ -69,7 +69,7 @@ public class SDKAuditTest {
 
         // Initialize SDK and run audit
         System.out.println("\n🔍 Running accessibility audit on deployed site...");
-        AccessFlowSDK sdk = new AccessFlowSDK(page);
+        AccessFlowSDK sdk = new AccessFlowSDK(new PlaywrightDriver(page));
         Map<String, Object> rawAudits = sdk.audit();
 
         // Verify audit completed
@@ -117,7 +117,7 @@ public class SDKAuditTest {
         page.navigate("https://ido-kt.github.io/");
         page.waitForLoadState(LoadState.DOMCONTENTLOADED);
 
-        AccessFlowSDK sdk = new AccessFlowSDK(page);
+        AccessFlowSDK sdk = new AccessFlowSDK(new PlaywrightDriver(page));
         Map<String, Object> rawAudits = sdk.audit();
         Map<String, Object> report = sdk.generateReport(rawAudits);
 
@@ -158,7 +158,7 @@ public class SDKAuditTest {
 
         // Initialize SDK and run audit
         System.out.println("\n🔍 Running accessibility audit on fixture...");
-        AccessFlowSDK sdk = new AccessFlowSDK(page);
+        AccessFlowSDK sdk = new AccessFlowSDK(new PlaywrightDriver(page));
         Map<String, Object> rawAudits = sdk.audit();
 
         // Verify audit completed
@@ -207,7 +207,7 @@ public class SDKAuditTest {
         page.navigate("https://ido-kt.github.io/");
 
         // SDK should initialize without errors using ACCESSFLOW_SDK_API_KEY from env
-        AccessFlowSDK sdk = new AccessFlowSDK(page);
+        AccessFlowSDK sdk = new AccessFlowSDK(new PlaywrightDriver(page));
         
         // If initialization worked, audit should execute
         Map<String, Object> rawAudits = sdk.audit();
@@ -225,7 +225,7 @@ public class SDKAuditTest {
         page.navigate("data:text/html,<html><body><h1>Test</h1></body></html>");
         page.waitForLoadState(LoadState.DOMCONTENTLOADED);
 
-        AccessFlowSDK sdk = new AccessFlowSDK(page);
+        AccessFlowSDK sdk = new AccessFlowSDK(new PlaywrightDriver(page));
         Map<String, Object> rawAudits = sdk.audit();
 
         // Should return a Map, never null
@@ -242,7 +242,7 @@ public class SDKAuditTest {
         
         // Navigate and audit
         page.navigate("https://ido-kt.github.io/");
-        AccessFlowSDK sdk = new AccessFlowSDK(page);
+        AccessFlowSDK sdk = new AccessFlowSDK(new PlaywrightDriver(page));
         Map<String, Object> rawAudits = sdk.audit();
         
         assertNotNull(rawAudits, "Audit should complete");

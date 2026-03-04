@@ -64,7 +64,7 @@ public class SDKTestNGTest {
         page.screenshot(new Page.ScreenshotOptions()
                 .setPath(Paths.get("test-results/testng_deployed_site.png")));
 
-        AccessFlowSDK sdk = new AccessFlowSDK(page);
+        AccessFlowSDK sdk = new AccessFlowSDK(new PlaywrightDriver(page));
         Map<String, Object> rawAudits = sdk.audit();
 
         assertNotNull(rawAudits, "Audit should return results");
@@ -95,7 +95,7 @@ public class SDKTestNGTest {
         page.screenshot(new Page.ScreenshotOptions()
                 .setPath(Paths.get("test-results/testng_fixture_page.png")));
 
-        AccessFlowSDK sdk = new AccessFlowSDK(page);
+        AccessFlowSDK sdk = new AccessFlowSDK(new PlaywrightDriver(page));
         Map<String, Object> rawAudits = sdk.audit();
 
         assertNotNull(rawAudits, "Audit should return results");
@@ -123,7 +123,7 @@ public class SDKTestNGTest {
         page.navigate("data:text/html,<html><body><h1>Test</h1></body></html>");
         page.waitForLoadState(LoadState.DOMCONTENTLOADED);
 
-        AccessFlowSDK sdk = new AccessFlowSDK(page);
+        AccessFlowSDK sdk = new AccessFlowSDK(new PlaywrightDriver(page));
         Map<String, Object> rawAudits = sdk.audit();
 
         assertNotNull(rawAudits, "audit() should never return null");
