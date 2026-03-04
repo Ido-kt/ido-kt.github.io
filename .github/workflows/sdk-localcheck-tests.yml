@@ -15,7 +15,7 @@ on:
 # Cycle: 9=node-localcheck, 10=python-localcheck, 11=java-localcheck
 # -----------------------------------------------------------------------------
 env:
-  SDK_LOCALCHECK_JOB: none
+  SDK_LOCALCHECK_JOB: node-localcheck
 
 jobs:
   sdk-localcheck:
