@@ -189,66 +189,55 @@ def test_audit_returns_empty_dict_not_none(page, sdk_config):
     print(f"\n✅ Null-safety test passed - audit() returned {type(raw_audits).__name__}")
 
 
-def test_local_json_reports_written(page):
+def test_local_finalize_completes_successfully(page):
     """
-    Test that finalize_reports() writes JSON reports locally even without CI env.
-    This tests the fix where reports are now saved locally for inspection.
+    Test that finalize_reports() completes without error in local mode.
+
+    In local mode (no CI env), the CLI finalize processes audits, checks thresholds
+    (if localCheck=true), and then cleans up temporary files (state file and summary
+    report are removed — they are only needed for dashboard uploads in CI).
     """
     from accessflow_sdk import AccessFlowSDK
     from accessflow_sdk.teardown import finalize_reports
     from pathlib import Path
-    import json
     import shutil
-    
-    # Clear any existing test results
+
     test_output_dir = Path("test-results-local-test")
     if test_output_dir.exists():
         shutil.rmtree(test_output_dir)
-    
+
     # Unset CI env vars to ensure we're in "local mode"
     original_ci = os.environ.pop('CI', None)
     original_github = os.environ.pop('GITHUB_ACTIONS', None)
-    
+
     try:
-        # Run a real audit through the SDK (this auto-records to _audit_records)
-        print("\n🧪 Testing local report generation (no CI env)...")
+        print("\n🧪 Testing local finalize (no CI env)...")
         page.goto("https://ido-kt.github.io/")
         page.wait_for_load_state('domcontentloaded')
-        
+
         sdk = AccessFlowSDK(page)
         raw_audits = sdk.audit()
-        
+
         assert raw_audits is not None, "Audit should complete"
-        print(f"   Audit completed, recorded 1 page")
-        
-        # Finalize reports in local mode (no CI env vars)
+        print("   Audit completed, recorded 1 page")
+
+        # In local mode, finalize_reports() processes audits and cleans up
+        # state files + summary report (they are not needed without a dashboard
+        # upload). Verify it completes without raising an exception.
         finalize_reports(output_dir=str(test_output_dir))
-        
-        # Verify output directory was created
-        assert test_output_dir.exists(), f"Output directory should be created: {test_output_dir}"
-        
-        # Verify state files and/or report files were written
-        # The CLI creates .jsonl state files and potentially summary JSON files
-        state_files = list(test_output_dir.glob("*.jsonl"))
-        json_files = list(test_output_dir.glob("*.json"))
-        all_files = state_files + json_files
-        
-        assert len(all_files) > 0, f"Should have created report/state files in {test_output_dir}"
-        
-        print(f"✅ Local reports written successfully:")
-        for file in all_files:
-            print(f"   📄 {file.name} ({file.stat().st_size} bytes)")
-        
-        print(f"\n✅ Local JSON reports test passed - {len(all_files)} file(s) created")
-        
+
+        # The output directory is created during processing even though
+        # temporary files inside it are cleaned up afterwards.
+        assert test_output_dir.exists(), f"Output directory should exist: {test_output_dir}"
+
+        print("\n✅ Local finalize completed successfully (temporary files cleaned up)")
+
     finally:
-        # Restore CI env vars
         if original_ci:
             os.environ['CI'] = original_ci
         if original_github:
             os.environ['GITHUB_ACTIONS'] = original_github
-        
-        # Cleanup
+
         if test_output_dir.exists():
             shutil.rmtree(test_output_dir)
 
