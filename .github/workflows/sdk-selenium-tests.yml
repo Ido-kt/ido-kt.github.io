@@ -6,7 +6,11 @@ name: AccessFlow SDK Selenium Integration Tests
 on:
   push:
     branches: ['**']
-    paths: ['.github/workflows/sdk-selenium-tests.yml']
+    paths:
+      - '.github/workflows/sdk-selenium-tests.yml'
+      - '.github/scripts/install-chrome-for-testing.sh'
+      - 'sdk-tests/node/tests/sdk-selenium.spec.js'
+      - 'sdk-tests/python/tests/test_sdk_selenium.py'
   workflow_dispatch:
 
 # -----------------------------------------------------------------------------

@@ -3,6 +3,7 @@ AccessFlow SDK Selenium Integration Tests - Python
 Run with: pytest -v -m selenium
 Requires: Chrome, ACCESSFLOW_SDK_API_KEY.
 """
+import os
 from pathlib import Path
 
 import pytest
@@ -25,6 +26,9 @@ def _chrome_driver():
     opts.add_argument("--headless=new")
     opts.add_argument("--no-sandbox")
     opts.add_argument("--disable-dev-shm-usage")
+    chrome_bin = os.environ.get("CHROME_BIN")
+    if chrome_bin:
+        opts.binary_location = chrome_bin
     return webdriver.Chrome(options=opts)
 
 
