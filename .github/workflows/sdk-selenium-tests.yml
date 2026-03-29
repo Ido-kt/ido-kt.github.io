@@ -19,7 +19,7 @@ on:
 # Cycle: 2=node-local, 4=python-local, 7=java-selenium-junit, 8=java-selenium-testng
 # -----------------------------------------------------------------------------
 env:
-  SDK_SELENIUM_JOB: node-local
+  SDK_SELENIUM_JOB: python-local
 
 jobs:
   sdk-selenium:
