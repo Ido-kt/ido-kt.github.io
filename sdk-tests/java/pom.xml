@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.acsbe.accessflow</groupId>
+    <artifactId>accessflow-sdk-integration-tests</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>AccessFlow SDK Integration Tests - Java</name>
+    <description>Integration tests for AccessFlow Java SDK</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <playwright.version>1.42.0</playwright.version>
+        <selenium.version>4.27.0</selenium.version>
+        <junit.version>5.10.0</junit.version>
+        <testng.version>7.9.0</testng.version>
+        <!-- Control which test framework/runner executes:
+             -DskipJunit=true     → skip the JUnit 5 execution (run TestNG only)
+             -DskipTestNG=true    → skip the TestNG execution  (run JUnit only)
+             -DtestngSuiteFile=testng-selenium.xml → select a different TestNG suite -->
+        <skipJunit>false</skipJunit>
+        <skipTestNG>false</skipTestNG>
+        <testngSuiteFile>testng.xml</testngSuiteFile>
+    </properties>
+
+    <!-- GCP Artifact Registry repository (configured in settings.xml for registry install job) -->
+
+    <dependencies>
+        <!-- AccessFlow SDK -->
+        <!-- This dependency is installed dynamically in CI via:
+             - Local install: mvn install:install-file (uses ../packages/*.jar)
+             - Registry install: Uses GCP Artifact Registry via repository above
+        -->
+        <dependency>
+            <groupId>com.acsbe</groupId>
+            <artifactId>accessflow-sdk</artifactId>
+            <version>1.0.1-dev-80604</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Playwright -->
+        <dependency>
+            <groupId>com.microsoft.playwright</groupId>
+            <artifactId>playwright</artifactId>
+            <version>${playwright.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Selenium (for SDKSeleniumTest) -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- JUnit 5 -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- TestNG -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0</version>
+                <!-- Default execution is disabled; explicit executions below handle each provider. -->
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+                <executions>
+                    <!-- JUnit 5 tests.
+                         Filter with -Dtest=SDKAuditTest or -Dtest=SDKSeleniumTest to run
+                         only one class. Skip entirely with -DskipJunit=true. -->
+                    <execution>
+                        <id>junit5</id>
+                        <goals><goal>test</goal></goals>
+                        <configuration>
+                            <skip>${skipJunit}</skip>
+                            <excludes>
+                                <exclude>**/SDKTestNGTest.java</exclude>
+                                <exclude>**/SDKSeleniumTestNGTest.java</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+
+                    <!-- TestNG tests via a configurable suite XML.
+                         Default suite: testng.xml (Playwright — SDKTestNGTest).
+                         Override with -DtestngSuiteFile=testng-selenium.xml for Selenium.
+                         Skip entirely with -DskipTestNG=true. -->
+                    <execution>
+                        <id>testng</id>
+                        <goals><goal>test</goal></goals>
+                        <configuration>
+                            <skip>${skipTestNG}</skip>
+                            <suiteXmlFiles>
+                                <suiteXmlFile>${testngSuiteFile}</suiteXmlFile>
+                            </suiteXmlFiles>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

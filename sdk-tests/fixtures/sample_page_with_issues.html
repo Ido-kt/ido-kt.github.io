@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Page with Accessibility Issues</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Issue 1: Missing page title would be good but title exists -->
+        
+        <!-- Issue 2: Image without alt text -->
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='100'%3E%3Crect fill='%23ddd' width='200' height='100'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999'%3EPlaceholder%3C/text%3E%3C/svg%3E" width="200" height="100">
+        
+        <!-- Issue 3: Low contrast text -->
+        <p style="color: #999; background: #fff;">
+            This text has insufficient color contrast and may be difficult to read for users with visual impairments.
+        </p>
+        
+        <!-- Issue 4: Button without accessible label -->
+        <button onclick="alert('clicked')">
+            <span style="display: inline-block; width: 20px; height: 20px; background: blue;"></span>
+        </button>
+        
+        <!-- Issue 5: Form input without label -->
+        <form>
+            <input type="text" name="username" placeholder="Enter username">
+            <input type="email" name="email" placeholder="Enter email">
+            <button type="submit">Submit</button>
+        </form>
+        
+        <!-- Issue 6: Link without descriptive text -->
+        <p>
+            To learn more, <a href="#" onclick="return false;">click here</a>.
+        </p>
+        
+        <!-- Issue 7: Heading structure skipped (h1 -> h3) -->
+        <h1>Main Heading</h1>
+        <h3>Subheading (skipped h2)</h3>
+        <p>This breaks the logical heading hierarchy.</p>
+        
+        <!-- Issue 8: Empty heading -->
+        <h2></h2>
+        
+        <!-- Issue 9: Decorative image in content (should have empty alt) -->
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50'%3E%3Ccircle fill='%23f00' cx='25' cy='25' r='20'/%3E%3C/svg%3E" width="50" height="50" alt="red circle decoration">
+        
+        <!-- Issue 10: Table without headers -->
+        <table border="1">
+            <tr>
+                <td>Name</td>
+                <td>Email</td>
+            </tr>
+            <tr>
+                <td>John Doe</td>
+                <td>john@example.com</td>
+            </tr>
+        </table>
+        
+        <!-- Some accessible content -->
+        <h2>Properly Structured Section</h2>
+        <p>This paragraph has good contrast and is properly marked up.</p>
+        
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='100'%3E%3Crect fill='%2366bb6a' width='200' height='100'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='white' font-size='20'%3EAccessible Image%3C/text%3E%3C/svg%3E" 
+             alt="An accessible image with proper alternative text describing a green rectangle with white text"
+             width="200" 
+             height="100">
+        
+        <form>
+            <label for="properInput">Properly labeled input:</label>
+            <input type="text" id="properInput" name="properInput">
+        </form>
+    </div>
+</body>
+</html>

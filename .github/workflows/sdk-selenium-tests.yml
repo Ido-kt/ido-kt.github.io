@@ -1,0 +1,270 @@
+name: AccessFlow SDK Selenium Integration Tests
+
+on:
+  push:
+    branches: ['**']
+    paths: ['.github/workflows/sdk-selenium-tests.yml']
+  pull_request:
+    branches: ['**']
+    paths: ['.github/workflows/sdk-selenium-tests.yml']
+  workflow_dispatch:
+
+# -----------------------------------------------------------------------------
+# Test cycle: change only this line to choose which job runs (one job per push).
+# Options: none | node-local | python-local | java-selenium-junit | java-selenium-testng
+# Cycle: 2=node-local, 4=python-local, 7=java-selenium-junit, 8=java-selenium-testng
+# -----------------------------------------------------------------------------
+env:
+  SDK_SELENIUM_JOB: java-selenium-testng
+
+jobs:
+  sdk-selenium:
+    name: SDK Selenium
+    runs-on: ubuntu-22.04
+    steps:
+      # --- noop (when SDK_SELENIUM_JOB == 'none') ---
+      - name: "(no Selenium job this run)"
+        if: env.SDK_SELENIUM_JOB == 'none'
+        run: echo "No Selenium job enabled for this run"
+
+      # --- node-local ---
+      - name: Checkout repository (node)
+        if: env.SDK_SELENIUM_JOB == 'node-local'
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        if: env.SDK_SELENIUM_JOB == 'node-local'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Chrome for Selenium
+        if: env.SDK_SELENIUM_JOB == 'node-local'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget
+          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt install -y ./google-chrome-stable_current_amd64.deb
+
+      - name: Install test dependencies
+        if: env.SDK_SELENIUM_JOB == 'node-local'
+        working-directory: ./sdk-tests/node
+        run: npm ci
+
+      - name: Install SDK from local package
+        if: env.SDK_SELENIUM_JOB == 'node-local'
+        working-directory: ./sdk-tests/node
+        run: |
+          echo "📦 Installing SDK from local package..."
+          npm install ../../sdk-tests/packages/acsbe-accessflow-sdk.tgz
+
+      - name: Run Selenium tests
+        if: env.SDK_SELENIUM_JOB == 'node-local'
+        working-directory: ./sdk-tests/node
+        env:
+          ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
+          CI: true
+        run: npm run test:selenium
+
+      - name: Upload test results (node)
+        if: env.SDK_SELENIUM_JOB == 'node-local' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: node-selenium-results
+          path: |
+            sdk-tests/node/test-results/
+          retention-days: 7
+
+      # --- python-local ---
+      - name: Checkout repository (python)
+        if: env.SDK_SELENIUM_JOB == 'python-local'
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        if: env.SDK_SELENIUM_JOB == 'python-local'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install test dependencies (python)
+        if: env.SDK_SELENIUM_JOB == 'python-local'
+        working-directory: ./sdk-tests/python
+        run: pip install -r requirements.txt
+
+      - name: Install SDK from local package (python)
+        if: env.SDK_SELENIUM_JOB == 'python-local'
+        working-directory: ./sdk-tests/python
+        run: |
+          echo "📦 Installing SDK from local package..."
+          pip install ../packages/accessflow_sdk-*.whl
+
+      - name: Install Chrome for Selenium (python)
+        if: env.SDK_SELENIUM_JOB == 'python-local'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget
+          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt install -y ./google-chrome-stable_current_amd64.deb
+
+      - name: Run Selenium tests (python)
+        if: env.SDK_SELENIUM_JOB == 'python-local'
+        working-directory: ./sdk-tests/python
+        env:
+          ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
+          CI: true
+        run: pytest -v -m selenium
+
+      - name: Upload test results (python)
+        if: env.SDK_SELENIUM_JOB == 'python-local' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-selenium-results
+          path: sdk-tests/python/test-results/
+          retention-days: 7
+
+      # --- java-selenium-junit ---
+      - name: Checkout repository (java-junit)
+        if: env.SDK_SELENIUM_JOB == 'java-selenium-junit'
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        if: env.SDK_SELENIUM_JOB == 'java-selenium-junit'
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Install SDK to local Maven repository
+        if: env.SDK_SELENIUM_JOB == 'java-selenium-junit'
+        working-directory: ./sdk-tests/java
+        run: |
+          echo "📦 Installing SDK JAR to local Maven repository..."
+          JAR_FILE="../packages/accessflow-sdk.jar"
+          if [ ! -f "$JAR_FILE" ]; then
+            echo "❌ Error: JAR file not found at $JAR_FILE"
+            ls -la ../packages/
+            exit 1
+          fi
+          mvn install:install-file \
+            -Dfile="$JAR_FILE" \
+            -DgroupId=com.acsbe \
+            -DartifactId=accessflow-sdk \
+            -Dversion=1.0.1-dev-80604 \
+            -Dpackaging=jar \
+            -DgeneratePom=true
+          echo "✅ SDK installed to local Maven repository"
+
+      - name: Resolve Maven dependencies
+        if: env.SDK_SELENIUM_JOB == 'java-selenium-junit'
+        working-directory: ./sdk-tests/java
+        run: mvn dependency:resolve
+
+      - name: Install Chrome for Selenium (java)
+        if: env.SDK_SELENIUM_JOB == 'java-selenium-junit'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget unzip
+          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt install -y ./google-chrome-stable_current_amd64.deb
+          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+\.\d+')
+          wget -q "https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSION}/linux64/chromedriver-linux64.zip" -O /tmp/chromedriver.zip
+          unzip -o /tmp/chromedriver.zip -d /tmp/
+          sudo mv /tmp/chromedriver-linux64/chromedriver /usr/local/bin/
+          sudo chmod +x /usr/local/bin/chromedriver
+
+      - name: Create test-results directory
+        if: env.SDK_SELENIUM_JOB == 'java-selenium-junit'
+        run: mkdir -p test-results
+        working-directory: ./sdk-tests/java
+
+      - name: Run Selenium JUnit tests (SDKSeleniumTest)
+        if: env.SDK_SELENIUM_JOB == 'java-selenium-junit'
+        working-directory: ./sdk-tests/java
+        env:
+          ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
+          CI: true
+        run: mvn test -Dtest=SDKSeleniumTest -DskipTestNG=true
+
+      - name: Upload test results (java-junit)
+        if: env.SDK_SELENIUM_JOB == 'java-selenium-junit' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: java-selenium-junit-results
+          path: |
+            sdk-tests/java/test-results/
+            sdk-tests/java/target/surefire-reports/
+          retention-days: 7
+
+      # --- java-selenium-testng ---
+      - name: Checkout repository (java-testng)
+        if: env.SDK_SELENIUM_JOB == 'java-selenium-testng'
+        uses: actions/checkout@v4
+
+      - name: Setup Java (testng)
+        if: env.SDK_SELENIUM_JOB == 'java-selenium-testng'
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Install SDK to local Maven repository (testng)
+        if: env.SDK_SELENIUM_JOB == 'java-selenium-testng'
+        working-directory: ./sdk-tests/java
+        run: |
+          echo "📦 Installing SDK JAR to local Maven repository..."
+          JAR_FILE="../packages/accessflow-sdk.jar"
+          if [ ! -f "$JAR_FILE" ]; then
+            echo "❌ Error: JAR file not found at $JAR_FILE"
+            ls -la ../packages/
+            exit 1
+          fi
+          mvn install:install-file \
+            -Dfile="$JAR_FILE" \
+            -DgroupId=com.acsbe \
+            -DartifactId=accessflow-sdk \
+            -Dversion=1.0.1-dev-80604 \
+            -Dpackaging=jar \
+            -DgeneratePom=true
+          echo "✅ SDK installed to local Maven repository"
+
+      - name: Resolve Maven dependencies (testng)
+        if: env.SDK_SELENIUM_JOB == 'java-selenium-testng'
+        working-directory: ./sdk-tests/java
+        run: mvn dependency:resolve
+
+      - name: Install Chrome for Selenium (java-testng)
+        if: env.SDK_SELENIUM_JOB == 'java-selenium-testng'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget unzip
+          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt install -y ./google-chrome-stable_current_amd64.deb
+          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+\.\d+')
+          wget -q "https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSION}/linux64/chromedriver-linux64.zip" -O /tmp/chromedriver.zip
+          unzip -o /tmp/chromedriver.zip -d /tmp/
+          sudo mv /tmp/chromedriver-linux64/chromedriver /usr/local/bin/
+          sudo chmod +x /usr/local/bin/chromedriver
+
+      - name: Create test-results directory (testng)
+        if: env.SDK_SELENIUM_JOB == 'java-selenium-testng'
+        run: mkdir -p test-results
+        working-directory: ./sdk-tests/java
+
+      - name: Run Selenium TestNG tests (SDKSeleniumTestNGTest)
+        if: env.SDK_SELENIUM_JOB == 'java-selenium-testng'
+        working-directory: ./sdk-tests/java
+        env:
+          ACCESSFLOW_SDK_API_KEY: ${{ secrets.ACCESSFLOW_SDK_API_KEY }}
+          CI: true
+        run: mvn test -DskipJunit=true -DtestngSuiteFile=testng-selenium.xml
+
+      - name: Upload test results (java-testng)
+        if: env.SDK_SELENIUM_JOB == 'java-selenium-testng' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: java-selenium-testng-results
+          path: |
+            sdk-tests/java/test-results/
+            sdk-tests/java/target/surefire-reports/
+            sdk-tests/java/target/testng-reports/
+          retention-days: 7
