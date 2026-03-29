@@ -42,7 +42,7 @@ jobs:
         if: env.SDK_SELENIUM_JOB == 'node-local'
         run: bash .github/scripts/install-chrome-for-testing.sh
 
-      - name: Install Node dependencies (npm ci — SDK via file: in package-lock)
+      - name: "Install Node dependencies (npm ci — SDK via file: in package-lock)"
         if: env.SDK_SELENIUM_JOB == 'node-local'
         working-directory: ./sdk-tests/node
         run: npm ci

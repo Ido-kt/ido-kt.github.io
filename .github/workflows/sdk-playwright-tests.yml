@@ -38,7 +38,7 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install Node dependencies (npm ci — SDK via file: in package-lock)
+      - name: "Install Node dependencies (npm ci — SDK via file: in package-lock)"
         if: env.SDK_PLAYWRIGHT_JOB == 'node-local'
         working-directory: ./sdk-tests/node
         run: npm ci
