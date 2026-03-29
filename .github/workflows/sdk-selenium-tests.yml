@@ -38,25 +38,14 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install Chrome for Selenium
+      - name: Install Chrome for Selenium (Chrome for Testing)
         if: env.SDK_SELENIUM_JOB == 'node-local'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y wget
-          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          sudo apt install -y ./google-chrome-stable_current_amd64.deb
+        run: bash .github/scripts/install-chrome-for-testing.sh
 
-      - name: Install test dependencies
+      - name: Install Node dependencies (npm ci — SDK via file: in package-lock)
         if: env.SDK_SELENIUM_JOB == 'node-local'
         working-directory: ./sdk-tests/node
         run: npm ci
-
-      - name: Install SDK from local package
-        if: env.SDK_SELENIUM_JOB == 'node-local'
-        working-directory: ./sdk-tests/node
-        run: |
-          echo "📦 Installing SDK from local package..."
-          npm install ../../sdk-tests/packages/acsbe-accessflow-sdk.tgz
 
       - name: Run Selenium tests
         if: env.SDK_SELENIUM_JOB == 'node-local'
@@ -98,13 +87,9 @@ jobs:
           echo "📦 Installing SDK from local package..."
           pip install ../packages/accessflow_sdk-*.whl
 
-      - name: Install Chrome for Selenium (python)
+      - name: Install Chrome for Selenium (python, Chrome for Testing)
         if: env.SDK_SELENIUM_JOB == 'python-local'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y wget
-          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          sudo apt install -y ./google-chrome-stable_current_amd64.deb
+        run: bash .github/scripts/install-chrome-for-testing.sh
 
       - name: Run Selenium tests (python)
         if: env.SDK_SELENIUM_JOB == 'python-local'
@@ -159,18 +144,9 @@ jobs:
         working-directory: ./sdk-tests/java
         run: mvn dependency:resolve
 
-      - name: Install Chrome for Selenium (java)
+      - name: Install Chrome for Selenium (java, Chrome for Testing)
         if: env.SDK_SELENIUM_JOB == 'java-selenium-junit'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y wget unzip
-          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          sudo apt install -y ./google-chrome-stable_current_amd64.deb
-          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+\.\d+')
-          wget -q "https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSION}/linux64/chromedriver-linux64.zip" -O /tmp/chromedriver.zip
-          unzip -o /tmp/chromedriver.zip -d /tmp/
-          sudo mv /tmp/chromedriver-linux64/chromedriver /usr/local/bin/
-          sudo chmod +x /usr/local/bin/chromedriver
+        run: bash .github/scripts/install-chrome-for-testing.sh
 
       - name: Create test-results directory
         if: env.SDK_SELENIUM_JOB == 'java-selenium-junit'
@@ -232,18 +208,9 @@ jobs:
         working-directory: ./sdk-tests/java
         run: mvn dependency:resolve
 
-      - name: Install Chrome for Selenium (java-testng)
+      - name: Install Chrome for Selenium (java-testng, Chrome for Testing)
         if: env.SDK_SELENIUM_JOB == 'java-selenium-testng'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y wget unzip
-          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          sudo apt install -y ./google-chrome-stable_current_amd64.deb
-          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+\.\d+')
-          wget -q "https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSION}/linux64/chromedriver-linux64.zip" -O /tmp/chromedriver.zip
-          unzip -o /tmp/chromedriver.zip -d /tmp/
-          sudo mv /tmp/chromedriver-linux64/chromedriver /usr/local/bin/
-          sudo chmod +x /usr/local/bin/chromedriver
+        run: bash .github/scripts/install-chrome-for-testing.sh
 
       - name: Create test-results directory (testng)
         if: env.SDK_SELENIUM_JOB == 'java-selenium-testng'

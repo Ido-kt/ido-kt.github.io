@@ -59,6 +59,19 @@ This validates the full `localCheck` flow end-to-end for each SDK language.
 - **One line per push:** Change only the `SDK_*_JOB` value in that file.
 - JUnit and TestNG run in separate pushes so report uploads can be verified per framework.
 
+## Node: `package-lock.json` and the SDK tarball
+
+`npm ci` installs **exactly** what is recorded in `sdk-tests/node/package-lock.json`. That file must list `@acsbe/accessflow-sdk` with `file:../packages/acsbe-accessflow-sdk.tgz` and a matching **integrity** hash for that file.
+
+- The **`1.1.0`** in errors is the **version inside the tarball** (`package.json` of the SDK), not a separate npm registry requirement.
+- If you replace `sdk-tests/packages/acsbe-accessflow-sdk.tgz` with a new build, run **`npm install`** in `sdk-tests/node` and **commit the updated `package-lock.json`**, or `npm ci` will fail (missing package or integrity mismatch).
+
+Node CI jobs use **`npm ci` only**; the SDK is not installed in a second step.
+
+## Selenium jobs (Node / Python / Java)
+
+`sdk-selenium-tests.yml` installs **Chrome for Testing** Stable (matching Chrome + chromedriver from the [CfT JSON feed](https://googlechromelabs.github.io/chrome-for-testing/)) and sets **`CHROME_BIN`** for later steps — same approach as AccessFlow CircleCI. The old `apt install google-chrome-stable` + `chrome-for-testing-public/${VERSION}` chromedriver pattern often breaks (version skew, `wget` exit 8 on 404).
+
 ## How to run the cycle
 
 For each push 1-11:

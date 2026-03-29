@@ -40,17 +40,10 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install test dependencies (node)
+      - name: Install Node dependencies (npm ci — SDK via file: in package-lock)
         if: env.SDK_LOCALCHECK_JOB == 'node-localcheck'
         working-directory: ./sdk-tests/node
         run: npm ci
-
-      - name: Install SDK from local package (node)
-        if: env.SDK_LOCALCHECK_JOB == 'node-localcheck'
-        working-directory: ./sdk-tests/node
-        run: |
-          echo "📦 Installing SDK from local package..."
-          npm install ../../sdk-tests/packages/acsbe-accessflow-sdk.tgz
 
       - name: Install Playwright browsers (node)
         if: env.SDK_LOCALCHECK_JOB == 'node-localcheck'
