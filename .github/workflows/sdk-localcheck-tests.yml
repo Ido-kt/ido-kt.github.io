@@ -40,7 +40,7 @@ jobs:
         with:
           node-version: '18'
 
-      - name: "Install Node dependencies (npm ci — SDK via file: in package-lock)"
+      - name: Install Node dependencies (npm ci, SDK tarball from package-lock)
         if: env.SDK_LOCALCHECK_JOB == 'node-localcheck'
         working-directory: ./sdk-tests/node
         run: npm ci
