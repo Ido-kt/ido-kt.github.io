@@ -64,7 +64,7 @@ def test_audit_deployed_site(page, run_accessibility_audit):
 
     if rule_violations:
         assert_rule_violations_wcag_links(rule_violations)
-    
+
     print(f"\n🎉 Test passed! SDK successfully audited deployed site and found {total_issues} issues across {len(rule_violations)} rules")
 
 
@@ -99,7 +99,7 @@ def test_verify_report_structure(page, run_accessibility_audit):
     rv = result["ruleViolations"]
     if rv:
         assert_rule_violations_wcag_links(rv)
-    
+
     print("\n✅ Report structure validation passed")
 
 
@@ -156,7 +156,7 @@ def test_audit_fixture_page(page, run_accessibility_audit):
     assert total_issues > 0, f"Expected to find accessibility issues in fixture, but found {total_issues}"
 
     assert_rule_violations_wcag_links(rule_violations)
-    
+
     print(f"\n🎉 Test passed! SDK successfully audited fixture page and found {total_issues} issues across {len(rule_violations)} rules")
 
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+  TestNG suite for AccessFlow SDK integration tests.
+  AccessFlowSuiteListener is registered via @Listeners on the test class AND via
+  ServiceLoader in the SDK JAR (zero-config for TestNG 7.6+).
+-->
+<suite name="AccessFlow SDK TestNG Suite" verbose="2">
+    <test name="SDK TestNG Tests">
+        <classes>
+            <class name="com.acsbe.accessflow.SDKTestNGTest"/>
+        </classes>
+    </test>
+</suite>
