@@ -226,7 +226,7 @@ The tests will automatically use the new packages.
 ### Adding More Tests
 
 Add new test cases to:
-- Node: `sdk-tests/node/tests/sdk-audit.spec.ts`
+- Node: `sdk-tests/node/tests/sdk-audit.spec.ts`, `sdk-tests/node/tests/wcag-link-report.spec.ts` (WCAGLink normalization)
 - Python: `sdk-tests/python/tests/test_sdk_audit.py`
 - Java: `sdk-tests/java/src/test/java/com/acsbe/accessflow/SDKAuditTest.java`
 

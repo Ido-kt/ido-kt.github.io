@@ -10,6 +10,7 @@ Tests validate that the SDK can:
 import pytest
 import os
 from pathlib import Path
+from wcag_payload import assert_rule_violations_wcag_links
 
 
 @pytest.mark.accessibility
@@ -60,7 +61,10 @@ def test_audit_deployed_site(page, run_accessibility_audit):
     
     # Verify we found results (may be 0 for a well-designed site)
     assert total_issues >= 0, f"Total issues should be non-negative, got {total_issues}"
-    
+
+    if rule_violations:
+        assert_rule_violations_wcag_links(rule_violations)
+
     print(f"\n🎉 Test passed! SDK successfully audited deployed site and found {total_issues} issues across {len(rule_violations)} rules")
 
 
@@ -91,7 +95,11 @@ def test_verify_report_structure(page, run_accessibility_audit):
     assert issues['high'] >= 0
     assert issues['medium'] >= 0
     assert issues['low'] >= 0
-    
+
+    rv = result["ruleViolations"]
+    if rv:
+        assert_rule_violations_wcag_links(rv)
+
     print("\n✅ Report structure validation passed")
 
 
@@ -146,8 +154,27 @@ def test_audit_fixture_page(page, run_accessibility_audit):
     
     # Verify we found some issues (our HTML has known issues)
     assert total_issues > 0, f"Expected to find accessibility issues in fixture, but found {total_issues}"
-    
+
+    assert_rule_violations_wcag_links(rule_violations)
+
     print(f"\n🎉 Test passed! SDK successfully audited fixture page and found {total_issues} issues across {len(rule_violations)} rules")
+
+
+@pytest.mark.accessibility
+def test_wcag_link_key_on_fixture_violations(page, run_accessibility_audit):
+    """SDK summaries must include WCAGLink on each rule (URL or '-' placeholder)."""
+    test_dir = Path(__file__).parent.parent.parent
+    html_file = test_dir / "fixtures" / "sample_page_with_issues.html"
+    if not html_file.exists():
+        pytest.fail(f"Test fixture not found: {html_file}")
+
+    page.goto(f"file://{html_file.absolute()}")
+    page.wait_for_load_state("domcontentloaded")
+
+    result = run_accessibility_audit()
+    rule_violations = result["ruleViolations"]
+    assert len(rule_violations) > 0
+    assert_rule_violations_wcag_links(rule_violations)
 
 
 def test_sdk_initialization(page, sdk_config):

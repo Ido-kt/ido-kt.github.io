@@ -105,6 +105,10 @@ public class SDKAuditTest {
         // Verify we found results (may be 0 for a well-designed site)
         assertTrue(totalIssues >= 0, "Total issues should be non-negative");
 
+        if (ruleViolationCount > 0) {
+            WcagLinkAssertions.assertRuleViolationsWcagLinksValid(ruleViolations);
+        }
+
         System.out.println(String.format(
             "\n🎉 Test passed! SDK successfully audited deployed site and found %d issues across %d rules",
             totalIssues, ruleViolationCount
@@ -139,6 +143,12 @@ public class SDKAuditTest {
         assertTrue(getIssueCount(issues, "high") >= 0);
         assertTrue(getIssueCount(issues, "medium") >= 0);
         assertTrue(getIssueCount(issues, "low") >= 0);
+
+        @SuppressWarnings("unchecked")
+        Map<String, Object> ruleViolations = (Map<String, Object>) report.get("ruleViolations");
+        if (ruleViolations != null && !ruleViolations.isEmpty()) {
+            WcagLinkAssertions.assertRuleViolationsWcagLinksValid(ruleViolations);
+        }
 
         System.out.println("\n✅ Report structure validation passed");
     }
@@ -195,10 +205,33 @@ public class SDKAuditTest {
         assertTrue(totalIssues > 0, "Expected to find accessibility issues in fixture");
         assertTrue(ruleViolationCount > 0, "Expected to find rule violations");
 
+        WcagLinkAssertions.assertRuleViolationsWcagLinksValid(ruleViolations);
+
         System.out.println(String.format(
             "\n🎉 Test passed! SDK successfully audited fixture page and found %d issues across %d rules",
             totalIssues, ruleViolationCount
         ));
+    }
+
+    @Test
+    @DisplayName("Fixture report: each ruleViolation includes WCAGLink (- or URL)")
+    void testFixtureWcagLinkKeyOnEveryViolation() {
+        String fileUrl = getFixtureUrl();
+        page.navigate(fileUrl);
+        page.waitForLoadState(LoadState.DOMCONTENTLOADED);
+
+        AccessFlowSDK sdk = new AccessFlowSDK(new PlaywrightDriver(page));
+        Map<String, Object> rawAudits = sdk.audit();
+        assertNotNull(rawAudits);
+        assertFalse(rawAudits.isEmpty());
+
+        Map<String, Object> report = sdk.generateReport(rawAudits);
+        @SuppressWarnings("unchecked")
+        Map<String, Object> ruleViolations = (Map<String, Object>) report.get("ruleViolations");
+        assertNotNull(ruleViolations);
+        assertFalse(ruleViolations.isEmpty(), "Fixture should produce rule violations");
+
+        WcagLinkAssertions.assertRuleViolationsWcagLinksValid(ruleViolations);
     }
 
     @Test

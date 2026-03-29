@@ -1,6 +1,8 @@
 # SDK test cycle (11 pushes)
 
-To validate all three SDKs (Node, Python, Java) with Playwright, Selenium, and **localCheck threshold enforcement** using local packages, and to verify **Java JUnit vs TestNG** report uploads separately, run **11 separate commits and pushes**. Each push runs exactly **one workflow** (and thus one job), because each workflow is triggered only when its own file changes.
+To validate all three SDKs (Node, Python, Java) with Playwright, Selenium, and **localCheck threshold enforcement** using local packages, and to verify **Java JUnit vs TestNG** report uploads separately, run **11 separate commits and pushes**. Each push should run exactly **one** of these three workflows (one job), because each workflow is scoped with `on.push.paths` to **only its own YAML file**.
+
+**Important:** These workflows use **`push` only** (no `pull_request`). If you add `pull_request` with `paths` pointing at each workflow file, GitHub matches paths against **every file changed in the whole PR vs the base branch**, not just the latest commit. After a few cycle commits the PR touches all three YAML files, so **every** later `pull_request` synchronize runs **all three** workflows — you get **3× runs per push**, unrelated workflow names on the same commit, and misleading titles. Push-scoped paths do **not** have that problem: only files in **that** push are considered.
 
 ## How it works
 
@@ -55,9 +57,22 @@ This validates the full `localCheck` flow end-to-end for each SDK language.
 
 ## Rules
 
-- **One file per push -- critical:** Each push must change **only one** workflow file. If you edit both files in the same commit, **both** workflows will run (duplicate runs). So: for pushes 1, 3, 5, 6 edit **only** `sdk-playwright-tests.yml`; for pushes 2, 4, 7, 8 edit **only** `sdk-selenium-tests.yml`; for pushes 9-11 edit **only** `sdk-localcheck-tests.yml`. Do not set the other files back to `none` in the same push.
+- **One file per push -- critical:** Each push must change **only one** workflow file. If you edit two or three files in the same commit, **two or three** workflows will run on that push (one per changed file). So: for pushes 1, 3, 5, 6 edit **only** `sdk-playwright-tests.yml`; for pushes 2, 4, 7, 8 edit **only** `sdk-selenium-tests.yml`; for pushes 9-11 edit **only** `sdk-localcheck-tests.yml`. Do not set the other files back to `none` in the same push. (Hotfixes that must touch multiple YAML files are fine, but expect multiple workflow runs for that commit.)
 - **One line per push:** Change only the `SDK_*_JOB` value in that file.
 - JUnit and TestNG run in separate pushes so report uploads can be verified per framework.
+
+## Node: `package-lock.json` and the SDK tarball
+
+`npm ci` installs **exactly** what is recorded in `sdk-tests/node/package-lock.json`. That file must list `@acsbe/accessflow-sdk` with `file:../packages/acsbe-accessflow-sdk.tgz` and a matching **integrity** hash for that file.
+
+- The **`1.1.0`** in errors is the **version inside the tarball** (`package.json` of the SDK), not a separate npm registry requirement.
+- If you replace `sdk-tests/packages/acsbe-accessflow-sdk.tgz` with a new build, run **`npm install`** in `sdk-tests/node` and **commit the updated `package-lock.json`**, or `npm ci` will fail (missing package or integrity mismatch).
+
+Node CI jobs use **`npm ci` only**; the SDK is not installed in a second step.
+
+## Selenium jobs (Node / Python / Java)
+
+`sdk-selenium-tests.yml` installs **Chrome for Testing** Stable (matching Chrome + chromedriver from the [CfT JSON feed](https://googlechromelabs.github.io/chrome-for-testing/)) and sets **`CHROME_BIN`** for later steps — same approach as AccessFlow CircleCI. The old `apt install google-chrome-stable` + `chrome-for-testing-public/${VERSION}` chromedriver pattern often breaks (version skew, `wget` exit 8 on 404).
 
 ## How to run the cycle
 
@@ -67,4 +82,6 @@ For each push 1-11:
 2. Find the `env:` block at the top and set the variable to the value for that push (e.g. `SDK_PLAYWRIGHT_JOB: node-local` for push 1).
 3. Commit and push **only that file**, e.g. push 1: `git add .github/workflows/sdk-playwright-tests.yml && git commit -m "test cycle 1/11: node Playwright" && git push`. Push 9: `git add .github/workflows/sdk-localcheck-tests.yml && git commit -m "test cycle 9/11: node localCheck=true" && git push`.
 
-Repeat for the next push with the next value. Leave the other workflow files unchanged so only one workflow triggers per push.
+Repeat for the next push with the next value. Leave the other workflow files unchanged so **only one** workflow file is in the commit and **only that** workflow’s `push` trigger fires (check the Actions run name matches the file you edited).
+
+To re-run a scenario without a new commit, use **Actions → workflow → Run workflow** (`workflow_dispatch`).

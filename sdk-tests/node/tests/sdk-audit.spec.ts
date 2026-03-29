@@ -11,6 +11,22 @@ import { expect, test } from '@playwright/test';
 import path from 'path';
 import AccessFlowSDK from '@acsbe/accessflow-sdk';
 
+/**
+ * Each ruleViolation must include WCAGLink: a valid URL or '-' when rules.json has no WCAG URL.
+ * The SDK always sets this key (issueWCAGLinks[0] or '-'); CI schema allows it to be optional
+ * for older payloads, but current SDK summaries should always emit it.
+ */
+function assertRuleViolationsWcagLinksValid(ruleViolations: Record<string, { WCAGLink?: string }>) {
+  for (const [ruleId, v] of Object.entries(ruleViolations)) {
+    expect(v, `rule ${ruleId}: violation object`).toHaveProperty('WCAGLink');
+    const link = v.WCAGLink;
+    expect(typeof link, `rule ${ruleId}: WCAGLink must be a string`).toBe('string');
+    if (link !== '-') {
+      expect(() => new URL(link as string)).not.toThrow();
+    }
+  }
+}
+
 test.describe('AccessFlow SDK - Deployed Site Audits', () => {
   test('should audit the deployed GitHub Pages site', async ({ page }) => {
     console.log('\n📄 Loading deployed site: https://ido-kt.github.io/');
@@ -56,6 +72,10 @@ test.describe('AccessFlow SDK - Deployed Site Audits', () => {
     // Verify we found some issues (real sites typically have at least some issues)
     expect(totalIssues).toBeGreaterThanOrEqual(0);
 
+    if (ruleViolationCount > 0) {
+      assertRuleViolationsWcagLinksValid(ruleViolations as Record<string, { WCAGLink?: string }>);
+    }
+
     console.log(
       `\n🎉 Test passed! SDK successfully audited deployed site and found ${totalIssues} issues across ${ruleViolationCount} rules`,
     );
@@ -85,6 +105,11 @@ test.describe('AccessFlow SDK - Deployed Site Audits', () => {
     expect(numberOfIssuesFound.high).toBeGreaterThanOrEqual(0);
     expect(numberOfIssuesFound.medium).toBeGreaterThanOrEqual(0);
     expect(numberOfIssuesFound.low).toBeGreaterThanOrEqual(0);
+
+    const rv = report.ruleViolations as Record<string, { WCAGLink?: string }>;
+    if (Object.keys(rv).length > 0) {
+      assertRuleViolationsWcagLinksValid(rv);
+    }
 
     console.log('\n✅ Report structure validation passed');
   });
@@ -139,6 +164,8 @@ test.describe('AccessFlow SDK - Fixture Page Audit', () => {
     // Verify we found some issues (our HTML has known issues)
     expect(totalIssues).toBeGreaterThan(0);
     expect(ruleViolationCount).toBeGreaterThan(0);
+
+    assertRuleViolationsWcagLinksValid(ruleViolations as Record<string, { WCAGLink?: string }>);
 
     console.log(
       `\n🎉 Test passed! SDK successfully audited fixture page and found ${totalIssues} issues across ${ruleViolationCount} rules`,

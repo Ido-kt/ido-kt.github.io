@@ -1,10 +1,10 @@
 name: AccessFlow SDK Playwright Integration Tests
 
+# Push + paths => only this workflow runs when this file changes in the push.
+# pull_request is omitted: for PRs, path filters match any file touched anywhere in the PR,
+# so after several cycle commits all three sdk-*.yml workflows fire on every push (3× runs).
 on:
   push:
-    branches: ['**']
-    paths: ['.github/workflows/sdk-playwright-tests.yml']
-  pull_request:
     branches: ['**']
     paths: ['.github/workflows/sdk-playwright-tests.yml']
   workflow_dispatch:
@@ -15,7 +15,7 @@ on:
 # Cycle: 1=node-local, 3=python-local, 5=java-playwright-junit, 6=java-playwright-testng
 # -----------------------------------------------------------------------------
 env:
-  SDK_PLAYWRIGHT_JOB: python-local
+  SDK_PLAYWRIGHT_JOB: java-playwright-testng
 
 jobs:
   sdk-playwright:
@@ -38,17 +38,10 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install test dependencies
+      - name: Install Node dependencies (npm ci, SDK tarball from package-lock)
         if: env.SDK_PLAYWRIGHT_JOB == 'node-local'
         working-directory: ./sdk-tests/node
         run: npm ci
-
-      - name: Install SDK from local package
-        if: env.SDK_PLAYWRIGHT_JOB == 'node-local'
-        working-directory: ./sdk-tests/node
-        run: |
-          echo "📦 Installing SDK from local package..."
-          npm install ../../sdk-tests/packages/acsbe-accessflow-sdk.tgz
 
       - name: Install Playwright browsers
         if: env.SDK_PLAYWRIGHT_JOB == 'node-local'

@@ -33,6 +33,10 @@ public class SDKSeleniumTestNGTest {
     public void openBrowser() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless=new", "--no-sandbox", "--disable-dev-shm-usage");
+        String chromeBin = System.getenv("CHROME_BIN");
+        if (chromeBin != null && !chromeBin.isEmpty()) {
+            options.setBinary(chromeBin);
+        }
         driver = new ChromeDriver(options);
     }
 

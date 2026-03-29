@@ -22,6 +22,10 @@ before(() => {
 function buildChromeDriver() {
   const options = new chrome.Options();
   options.addArguments('--headless=new', '--no-sandbox', '--disable-dev-shm-usage');
+  const chromeBin = process.env.CHROME_BIN;
+  if (chromeBin) {
+    options.setChromeBinaryPath(chromeBin);
+  }
   return new Builder().forBrowser('chrome').setChromeOptions(options).build();
 }
 
