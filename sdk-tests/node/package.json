@@ -4,6 +4,7 @@
   "description": "Node.js integration tests for AccessFlow SDK",
   "private": true,
   "scripts": {
+    "refresh:accessflow-sdk-lock": "npm install @acsbe/accessflow-sdk@file:../packages/acsbe-accessflow-sdk.tgz",
     "test": "npm run test:playwright && npm run test:selenium",
     "test:playwright": "playwright test",
     "test:selenium": "node --test tests/sdk-selenium.spec.js",
