@@ -36,7 +36,7 @@ jobs:
         if: env.SDK_PLAYWRIGHT_JOB == 'node-local'
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Install Node dependencies (npm ci, SDK tarball from package-lock)
         if: env.SDK_PLAYWRIGHT_JOB == 'node-local'
@@ -86,8 +86,17 @@ jobs:
         if: env.SDK_PLAYWRIGHT_JOB == 'python-local'
         working-directory: ./sdk-tests/python
         run: |
+          set -euo pipefail
           echo "📦 Installing SDK from local package..."
-          pip install ../packages/accessflow_sdk-*.whl
+          shopt -s nullglob
+          wheels=(../packages/accessflow_sdk-*.whl)
+          if [ "${#wheels[@]}" -eq 0 ]; then
+            echo "❌ No wheel matching ../packages/accessflow_sdk-*.whl"
+            ls -la ../packages/ || true
+            exit 1
+          fi
+          echo "Installing: ${wheels[0]}"
+          pip install "${wheels[0]}"
 
       - name: Install Playwright browsers (python)
         if: env.SDK_PLAYWRIGHT_JOB == 'python-local'
