@@ -122,7 +122,7 @@ const AppRoutes = ({ navigate }) => (
       path="/test-item"
       element={
         <ItemPage
-          ruleData={{ name: "Test Rule", description: "Testing ItemPage" }}
+          ruleData={{ name: "Test Rule", description: "Testing Item Page" }}
         />
       }
     />
