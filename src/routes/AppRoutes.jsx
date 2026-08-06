@@ -36,6 +36,7 @@ import TablesRoutes from "../components/pages/Criteria/Tables/rules/tablesRoutes
 import AllRulesWithRoutes from "../components/pages/Criteria/AllRulesLinks";
 import EngineRulesListing from "../components/pages/EngineRulesListing";
 import EngineLibrary from "../components/pages/Engine/EngineLibrary";
+import RuleFixture from "../components/pages/RuleFixture";
 import RulesListing from "../components/pages/RulesListing";
 import EngineRoutes from "./engineRoutes";
 
@@ -108,6 +109,9 @@ const AppRoutes = ({ navigate }) => (
     {CarouselsRoutes()}
     {TablesRoutes()}
     {NavigationRoutes()}
+
+    {/* Verify-fix rule fixture */}
+    <Route path="/rule-fixture" element={<RuleFixture />} />
 
     {/* Engine Rules */}
     <Route path="/engine" element={<EngineRulesListing />} />

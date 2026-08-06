@@ -1,6 +1,7 @@
 import {
   Animation as AnimationIcon,
   Article as ArticleIcon,
+  BugReport as BugIcon,
   TouchApp as ClickableIcon,
   Psychology as ContextIcon,
   Dashboard as DashboardIcon,
@@ -216,6 +217,17 @@ export const getSecondaryListItems = (data = [], isOpen = true) => (
       ruleCount={158}
       category="Rules"
       hasSuccess={true}
+      hasFailure={true}
+      isTestable={false}
+      isDrawerOpen={isOpen}
+    />
+    <CustomNavLink
+      to="/rule-fixture"
+      label="Rule Fixture"
+      icon={BugIcon}
+      ruleCount={57}
+      category="Rules"
+      hasSuccess={false}
       hasFailure={true}
       isTestable={false}
       isDrawerOpen={isOpen}
