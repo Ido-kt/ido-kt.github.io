@@ -1,0 +1,380 @@
+<!doctype html>
+<!-- FIX languageReport: add lang="en" to <html> -->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!-- FIX viewportScalability: drop user-scalable=no and maximum-scale -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1" />
+    <!-- FIX pageTitle: give it a real title (>= 2 chars) -->
+    <title>F</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 24px;
+        font-family: system-ui, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        color: #111;
+        background: #fff;
+        letter-spacing: normal;
+      }
+      section {
+        border-top: 1px solid #ccc;
+        padding: 16px 0;
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+      }
+      .bg-hero {
+        background-image: url('logo192.png');
+        background-size: cover;
+        width: 240px;
+        height: 120px;
+      }
+      .icon {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        background: #444;
+      }
+      .btn-like {
+        display: inline-block;
+        padding: 8px 16px;
+        background: #eee;
+        cursor: pointer;
+      }
+      .carousel {
+        border: 1px solid #999;
+        padding: 12px;
+        width: 320px;
+      }
+      .carousel .next,
+      .carousel .owl-dot {
+        display: inline-block;
+        padding: 6px 10px;
+        border: 1px solid #666;
+      }
+      table {
+        border-collapse: collapse;
+        margin: 8px 0;
+      }
+      td,
+      th {
+        border: 1px solid #999;
+        padding: 6px 10px;
+      }
+      .tiny-target {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background: #06c;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ================================================================
+         accessFlow rule fixture.
+         Every element below trips exactly one rule and carries a FIX
+         comment describing the IN-PLACE repair. Fixes must never delete
+         the element: removing it sends the audit down the "irrelevant"
+         path instead of the "passes now" path, which is the path under
+         test.
+         ================================================================ -->
+
+    <!-- FIX skipLinks: point href at #content, which exists below -->
+    <a href="#no-such-anchor">Skip to content</a>
+
+    <!-- ============ keyboard ============ -->
+    <section>
+      <h2>Keyboard</h2>
+
+      <!-- FIX brokenTabindex / inlinePopupFocus: tabindex="0" -->
+      <div tabindex="3">Positive tabindex container</div>
+
+      <!-- FIX noninteractiveTabindex: add role="button" -->
+      <span tabindex="0">Focusable but not interactive</span>
+
+      <!-- FIX noticeableFocus / enterClickability: remove outline:none -->
+      <a href="#content" style="outline: none">Link with suppressed focus ring</a>
+    </section>
+
+    <!-- ============ document / landmarks ============ -->
+    <!-- FIX mainLandmark: add role="main" to this wrapper -->
+    <div id="content">
+      <!-- FIX multipleMainHeadings: hide the second h1 (style="display:none") -->
+      <h1>Rule fixture page</h1>
+      <h1>Second top-level heading</h1>
+
+      <!-- ============ headings ============ -->
+      <section>
+        <h2>Headings</h2>
+
+        <!-- FIX longHeadings: shorten the text under 160 chars -->
+        <h3>
+          This heading is deliberately far longer than the one hundred and sixty character ceiling that the auditor
+          applies to headings, so that it is reported as a long heading violation on every scan of this page
+        </h3>
+
+        <!-- FIX untaggedHeadings: add role="heading" aria-level="2" -->
+        <div style="font-size: 28px; font-weight: 700">Looks Like A Heading</div>
+      </section>
+
+      <!-- ============ readability ============ -->
+      <section>
+        <h2>Readability</h2>
+
+        <!-- FIX fontSizes: font-size:13px -->
+        <p style="font-size: 11px">Text below the minimum font size.</p>
+
+        <!-- FIX letterSpacing: letter-spacing:-1px -->
+        <p style="letter-spacing: -3px">Text with negative letter spacing.</p>
+
+        <!-- FIX colorContrast: color:#333 -->
+        <p style="color: #bbbbbb; background: #ffffff">Low contrast paragraph text.</p>
+      </section>
+
+      <!-- ============ graphics ============ -->
+      <section>
+        <h2>Graphics</h2>
+
+        <!-- FIX altText: add alt="accessFlow logo" -->
+        <img src="logo192.png" width="64" height="64" />
+
+        <!-- FIX decorativeContent: add aria-label="Decorative star" -->
+        <i class="icon"></i>
+
+        <!-- FIX svgContent: add <title>Circle</title> as first child -->
+        <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="false">
+          <circle cx="20" cy="20" r="18" fill="#06c" />
+        </svg>
+
+        <!-- FIX backgroundImages: add <span class="sr-only" role="img">Hero banner</span> as FIRST child -->
+        <div class="bg-hero"></div>
+
+        <!-- FIX figureSetup: add <figcaption>Quarterly revenue</figcaption> -->
+        <figure><p>Quarterly revenue climbed 12% year over year.</p></figure>
+      </section>
+
+      <!-- ============ clickables ============ -->
+      <section>
+        <h2>Clickables</h2>
+
+        <!-- FIX emptyLinks: add alt="Home" to the nested image -->
+        <a href="#content"><img src="logo192.png" width="32" height="32" /></a>
+
+        <!-- FIX linkContext: change the text to "Home" -->
+        <a href="/">Click here</a>
+
+        <!-- FIX buttonLabels: add aria-label="Submit form" -->
+        <button style="width: 40px; height: 32px"></button>
+
+        <!-- FIX buttonRoles: add role="button" -->
+        <span class="btn-like" tabindex="0">Save changes</span>
+
+        <!-- FIX newWindowLinks: add aria-label="Example site, opens in a new tab" -->
+        <a href="https://example.com" target="_blank" rel="noopener">Example site</a>
+
+        <!-- FIX ambiguousLinks: add aria-label="Read more about pricing plans" -->
+        <a href="#content">Read more</a>
+
+        <!-- FIX targetSize: widen to 44x44 -->
+        <a href="#content" class="tiny-target" aria-label="Tiny target"></a>
+      </section>
+
+      <!-- ============ errors ============ -->
+      <section>
+        <h2>ARIA / errors</h2>
+
+        <!-- FIX brokenAriaReference: point aria-labelledby at "real-label" -->
+        <div aria-labelledby="missing-label-id" tabindex="0">Region with a dangling label reference</div>
+        <span id="real-label">Account settings</span>
+
+        <!-- FIX brokenAriaLabels: change aria-label to "Send request" -->
+        <button aria-label="Submit">Send request</button>
+
+        <!-- FIX titleMisuse: add aria-label="More information" -->
+        <span title="More information">i</span>
+
+        <!-- FIX ariaLabelMisuse: remove the aria-label attribute value mismatch by using aria-label="Promotional banner text" -->
+        <span aria-label="Banner">Promotional banner text</span>
+
+        <!-- FIX brokenList: add role="list" to this wrapper -->
+        <div>
+          <div role="listitem">Orphaned list item</div>
+        </div>
+
+        <!-- FIX emptyList: add a second <li> -->
+        <ul>
+          <li>Only child item</li>
+        </ul>
+
+        <!-- FIX fakeHiddenContent: add aria-hidden="true" -->
+        <div style="opacity: 0; height: 20px">Visually hidden promotional copy</div>
+
+        <!-- GROUP B probe (violations-only on the legacy engine) -->
+        <!-- FIX marquee: style="display:none" -->
+        <marquee>Scrolling announcement</marquee>
+
+        <!-- GROUP B probe -->
+        <!-- FIX roleApplications: change role to "region" -->
+        <div role="application" tabindex="0">Application role container</div>
+
+        <!-- GROUP B probe -->
+        <!-- FIX loadAutofocus: remove the autofocus attribute -->
+        <input type="text" autofocus aria-label="Autofocused field" />
+      </section>
+
+      <!-- ============ forms ============ -->
+      <section>
+        <h2>Forms</h2>
+
+        <!-- FIX searchFormTagging: add role="search" to this form -->
+        <form action="#">
+          <input type="text" name="search" placeholder="Search" />
+        </form>
+
+        <form action="#">
+          <!-- FIX fieldLabel: add aria-label="Full name" -->
+          <input type="text" name="fullname" />
+
+          <!-- FIX fieldRequired: add the required attribute -->
+          <label for="email-field">Email *</label>
+          <input type="email" id="email-field" name="email" />
+
+          <!-- FIX missingFormButton: change type to "submit" -->
+          <button type="button">Send</button>
+        </form>
+      </section>
+
+      <!-- ============ tables ============ -->
+      <section>
+        <h2>Tables</h2>
+
+        <!-- FIX headlessTables: add role="presentation" to this table -->
+        <table>
+          <tr>
+            <td>Plan</td>
+            <td>Price</td>
+          </tr>
+          <tr>
+            <td>Basic</td>
+            <td>$10</td>
+          </tr>
+        </table>
+
+        <!-- FIX emptyTableHeaders: put text in the empty th -->
+        <table>
+          <tr>
+            <th>Region</th>
+            <th></th>
+          </tr>
+          <tr>
+            <td>EMEA</td>
+            <td>42</td>
+          </tr>
+        </table>
+
+        <!-- FIX nestedTables: add role="presentation" to the INNER table -->
+        <table>
+          <tr>
+            <td>
+              <table>
+                <tr>
+                  <td>Nested cell</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </section>
+
+      <!-- ============ context ============ -->
+      <section>
+        <h2>Context</h2>
+
+        <!-- FIX iframeLabeling: add aria-label="Embedded map" -->
+        <iframe src="about:blank" width="200" height="120"></iframe>
+
+        <!-- FIX articleSetup: add role="presentation" -->
+        <article>Short article body.</article>
+
+        <!-- FIX salePrices: add <span class="sr-only">Discounted price:</span> before the sale price -->
+        <p><del>$99.00</del> $79.00</p>
+
+        <!-- FIX userRating: add <span class="sr-only">4.5 out of 5</span> inside -->
+        <div><span itemprop="ratingValue">4.5</span></div>
+      </section>
+
+      <!-- ============ carousels ============ -->
+      <section>
+        <h2>Carousel</h2>
+
+        <!-- FIX carouselLabeling: add role="region" aria-label="Featured products" -->
+        <!-- FIX liveCarousels: remove aria-live from the slide track -->
+        <div class="carousel">
+          <div aria-live="polite">
+            <div class="slide">Slide one <img src="logo192.png" width="32" height="32" alt="Product one" /></div>
+            <div class="slide" style="display: none">Slide two</div>
+          </div>
+          <!-- FIX carouselArrows: change the text to "Next" -->
+          <a href="#content" class="next">&rsaquo;</a>
+          <!-- FIX carouselPagination: add aria-label="Go to slide 1" -->
+          <a href="#content" class="owl-dot"></a>
+        </div>
+      </section>
+
+      <!-- ============ navigation ============ -->
+      <section>
+        <h2>Navigation</h2>
+
+        <!-- FIX navigationTagging: add aria-label="Main" -->
+        <nav>
+          <ul>
+            <li><a href="#content">Products</a></li>
+            <!-- FIX missingNavItems: wrap the text in <a href="#content"> -->
+            <li>Services</li>
+            <li>
+              <!-- FIX submenuState: add aria-expanded="false" -->
+              <a href="#content" class="has-submenu">Resources</a>
+              <ul>
+                <li><a href="#content">Guides</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- FIX breadcrumbs: add aria-label="Breadcrumb" -->
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="#content">Home</a></li>
+            <li><a href="#content">Docs</a></li>
+          </ol>
+        </nav>
+
+        <!-- GROUP B probe -->
+        <!-- FIX nestedNavigation: change the inner <nav> to a <div> -->
+        <nav aria-label="Outer">
+          <nav aria-label="Inner">
+            <a href="#content">Inner nav link</a>
+          </nav>
+        </nav>
+
+        <!-- GROUP B probe -->
+        <!-- FIX brokenNavTagging: change role="menu" to role="list" -->
+        <div role="menu">
+          <a href="#content">Menu entry without menuitem role</a>
+        </div>
+      </section>
+    </div>
+
+    <!-- FIX footerLandmark: add role="contentinfo" -->
+    <div class="site-footer">
+      <p>Fixture footer &mdash; accessFlow rule coverage page.</p>
+    </div>
+  </body>
+</html>
