@@ -1,16 +1,18 @@
 import * as React from "react";
 
 /**
- * accessFlow rule fixture.
+ * accessFlow rule fixture — FIXED state.
  *
- * Every element below trips exactly one auditor rule and carries a FIX comment
- * describing the IN-PLACE repair. Fixes must never delete the element: removing
- * it sends the audit down the "irrelevant" path instead of the "passes now"
- * path, which is the path under test.
+ * Every FIXED comment marks a repair applied IN PLACE: an attribute, style, or
+ * text change. No element was deleted and no tag name was changed, so every
+ * audit's stored selector still matches. That matters: a deleted element sends
+ * the audit down the "irrelevant" path, which already works and would prove
+ * nothing. The path under test is "element still present, now passes".
  *
- * All styles are scoped under .aflw-fixture so nothing leaks into the rest of
- * the app (a stray small font or low-contrast rule elsewhere would create
- * issues on every other page).
+ * To return to the broken state, reverse each FIXED comment.
+ *
+ * All styles stay scoped under .aflw-fixture so nothing leaks into the rest of
+ * the app.
  */
 
 const css = `
@@ -45,8 +47,9 @@ const css = `
 }
 .aflw-fixture table { border-collapse: collapse; margin: 8px 0; }
 .aflw-fixture td, .aflw-fixture th { border: 1px solid #999; padding: 6px 10px; }
+/* FIXED targetSize: 16x16 -> 44x44 (class kept, so the selector still matches) */
 .aflw-fixture .tiny-target {
-  display: inline-block; width: 16px; height: 16px; background: #06c;
+  display: inline-block; width: 44px; height: 44px; background: #06c;
 }
 `;
 
@@ -55,79 +58,83 @@ export default function RuleFixture() {
     <>
       <style dangerouslySetInnerHTML={{ __html: css }} />
 
-      {/* FIX mainLandmark: add role="main" to this wrapper */}
-      <div className="aflw-fixture" id="content">
-        {/* FIX skipLinks: point href at #content, which exists */}
-        <a href="#no-such-anchor">Skip to content</a>
+      {/* FIXED mainLandmark: added role="main" */}
+      <div className="aflw-fixture" id="content" role="main">
+        {/* FIXED skipLinks: now points at #content, which exists */}
+        <a href="#content">Skip to content</a>
 
         {/* ============ keyboard ============ */}
         <section>
           <h2>Keyboard</h2>
 
-          {/* FIX brokenTabindex / inlinePopupFocus: tabIndex={0} */}
-          <div tabIndex={3}>Positive tabindex container</div>
+          {/* FIXED brokenTabindex / inlinePopupFocus: 3 -> 0 */}
+          <div tabIndex={0}>Positive tabindex container</div>
 
-          {/* FIX noninteractiveTabindex: add role="button" */}
-          <span tabIndex={0}>Focusable but not interactive</span>
+          {/* FIXED noninteractiveTabindex: added role="button" */}
+          <span tabIndex={0} role="button">
+            Focusable but not interactive
+          </span>
 
-          {/* FIX noticeableFocus / enterClickability: remove outline none */}
-          <a href="#content" style={{ outline: "none" }}>
-            Link with suppressed focus ring
-          </a>
+          {/* FIXED noticeableFocus / enterClickability: outline:none removed */}
+          <a href="#content">Link with suppressed focus ring</a>
         </section>
 
         {/* ============ headings ============ */}
         <section>
-          {/* FIX multipleMainHeadings: hide the second h1 (display none) */}
           <h1>Rule fixture page</h1>
-          <h1>Second top-level heading</h1>
+          {/* FIXED multipleMainHeadings: second h1 hidden, element retained */}
+          <h1 style={{ display: "none" }}>Second top-level heading</h1>
 
-          {/* FIX longHeadings: shorten the text under 160 chars */}
-          <h3>
-            This heading is deliberately far longer than the one hundred and sixty character ceiling that the auditor
-            applies to headings, so that it is reported as a long heading violation on every scan of this page
-          </h3>
+          {/* FIXED longHeadings: shortened under 160 chars */}
+          <h3>Deliberately long heading, now shortened</h3>
 
-          {/* FIX untaggedHeadings: add role="heading" aria-level={2} */}
-          <div style={{ fontSize: "28px", fontWeight: 700 }}>Looks Like A Heading</div>
+          {/* FIXED untaggedHeadings: added role="heading" aria-level */}
+          <div style={{ fontSize: "28px", fontWeight: 700 }} role="heading" aria-level={2}>
+            Looks Like A Heading
+          </div>
         </section>
 
         {/* ============ readability ============ */}
         <section>
           <h2>Readability</h2>
 
-          {/* FIX fontSizes: fontSize 13px */}
-          <p style={{ fontSize: "11px" }}>Text below the minimum font size.</p>
+          {/* FIXED fontSizes: 11px -> 13px */}
+          <p style={{ fontSize: "13px" }}>Text below the minimum font size.</p>
 
-          {/* FIX letterSpacing: letterSpacing -1px */}
-          <p style={{ letterSpacing: "-3px" }}>Text with negative letter spacing.</p>
+          {/* FIXED letterSpacing: -3px -> -1px */}
+          <p style={{ letterSpacing: "-1px" }}>Text with negative letter spacing.</p>
 
-          {/* FIX colorContrast: color #333 */}
-          <p style={{ color: "#bbbbbb", background: "#ffffff" }}>Low contrast paragraph text.</p>
+          {/* FIXED colorContrast: #bbbbbb -> #333333 */}
+          <p style={{ color: "#333333", background: "#ffffff" }}>Low contrast paragraph text.</p>
         </section>
 
         {/* ============ graphics ============ */}
         <section>
           <h2>Graphics</h2>
 
-          {/* FIX altText: add alt="accessFlow logo" */}
-          {/* eslint-disable-next-line jsx-a11y/alt-text */}
-          <img src="/logo192.png" width="64" height="64" />
+          {/* FIXED altText: alt added */}
+          <img src="/logo192.png" width="64" height="64" alt="accessFlow logo" />
 
-          {/* FIX decorativeContent: add aria-label="Decorative star" */}
-          <i className="icon" />
+          {/* FIXED decorativeContent: aria-label added */}
+          <i className="icon" aria-label="Decorative star" />
 
-          {/* FIX svgContent: add <title>Circle</title> as first child */}
+          {/* FIXED svgContent: <title> added as first child */}
           <svg width="40" height="40" viewBox="0 0 40 40">
+            <title>Circle</title>
             <circle cx="20" cy="20" r="18" fill="#06c" />
           </svg>
 
-          {/* FIX backgroundImages: add <span className="sr-only" role="img">Hero banner</span> as FIRST child */}
-          <div className="bg-hero" />
+          {/* FIXED backgroundImages: sr-only role="img" added as first child */}
+          <div className="bg-hero">
+            <span className="sr-only" role="img">
+              Hero banner
+            </span>
+          </div>
 
-          {/* FIX figureSetup: add <figcaption>Quarterly revenue</figcaption> */}
+          {/* FIXED figureSetup: figcaption added */}
           <figure>
             <p>Quarterly revenue climbed 12% year over year.</p>
+            <figcaption>Quarterly revenue</figcaption>
           </figure>
         </section>
 
@@ -135,32 +142,38 @@ export default function RuleFixture() {
         <section>
           <h2>Clickables</h2>
 
-          {/* FIX emptyLinks: add alt="Home" to the nested image */}
-          {/* eslint-disable-next-line jsx-a11y/alt-text */}
+          {/* FIXED emptyLinks: alt added to the nested image */}
           <a href="#content">
-            <img src="/logo192.png" width="32" height="32" />
+            <img src="/logo192.png" width="32" height="32" alt="Home" />
           </a>
 
-          {/* FIX linkContext: change the text to "Home" */}
-          <a href="/">Click here</a>
+          {/* FIXED linkContext: text now matches the Home preset */}
+          <a href="/">Home</a>
 
-          {/* FIX buttonLabels: add aria-label="Submit form" */}
-          <button type="button" style={{ width: "40px", height: "32px" }} />
+          {/* FIXED buttonLabels: aria-label added */}
+          <button type="button" style={{ width: "40px", height: "32px" }} aria-label="Submit form" />
 
-          {/* FIX buttonRoles: add role="button" */}
-          <span className="btn-like" tabIndex={0}>
+          {/* FIXED buttonRoles: role="button" added */}
+          <span className="btn-like" tabIndex={0} role="button">
             Save changes
           </span>
 
-          {/* FIX newWindowLinks: add aria-label="Example site, opens in a new tab" */}
-          <a href="https://example.com" target="_blank" rel="noopener noreferrer">
+          {/* FIXED newWindowLinks: aria-label announces the new tab */}
+          <a
+            href="https://example.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Example site, opens in a new tab"
+          >
             Example site
           </a>
 
-          {/* FIX ambiguousLinks: add aria-label="Read more about pricing plans" */}
-          <a href="#content">Read more</a>
+          {/* FIXED ambiguousLinks: aria-label longer than the visible text */}
+          <a href="#content" aria-label="Read more about pricing plans">
+            Read more
+          </a>
 
-          {/* FIX targetSize: widen to 44x44 */}
+          {/* FIXED targetSize: see .tiny-target in the stylesheet (44x44) */}
           <a href="#content" className="tiny-target" aria-label="Tiny target">
             {" "}
           </a>
@@ -170,68 +183,72 @@ export default function RuleFixture() {
         <section>
           <h2>ARIA / errors</h2>
 
-          {/* FIX brokenAriaReference: point aria-labelledby at "real-label" */}
-          <div aria-labelledby="missing-label-id" tabIndex={0}>
+          {/* FIXED brokenAriaReference: now points at an element that exists */}
+          <div aria-labelledby="real-label" tabIndex={0}>
             Region with a dangling label reference
           </div>
           <span id="real-label">Account settings</span>
 
-          {/* FIX brokenAriaLabels: change aria-label to "Send request" */}
-          <button type="button" aria-label="Submit">
+          {/* FIXED brokenAriaLabels: aria-label now contains the visible text */}
+          <button type="button" aria-label="Send request">
             Send request
           </button>
 
-          {/* FIX titleMisuse: add aria-label="More information" */}
-          <span title="More information">i</span>
+          {/* FIXED titleMisuse: aria-label added */}
+          <span title="More information" aria-label="More information">
+            i
+          </span>
 
-          {/* FIX ariaLabelMisuse: use aria-label="Promotional banner text" */}
-          <span aria-label="Banner">Promotional banner text</span>
+          {/* FIXED ariaLabelMisuse: aria-label now matches the visible text */}
+          <span aria-label="Promotional banner text">Promotional banner text</span>
 
-          {/* FIX brokenList: add role="list" to this wrapper */}
-          <div>
+          {/* FIXED brokenList: role="list" added to the wrapper */}
+          <div role="list">
             <div role="listitem">Orphaned list item</div>
           </div>
 
-          {/* FIX emptyList: add a second <li> */}
+          {/* FIXED emptyList: second item added */}
           <ul>
             <li>Only child item</li>
+            <li>Second item</li>
           </ul>
 
-          {/* FIX fakeHiddenContent: add aria-hidden="true" */}
-          <div style={{ opacity: 0, height: "20px" }}>Visually hidden promotional copy</div>
+          {/* FIXED fakeHiddenContent: aria-hidden added */}
+          <div style={{ opacity: 0, height: "20px" }} aria-hidden="true">
+            Visually hidden promotional copy
+          </div>
 
-          {/* GROUP B probe - FIX marquee: display none */}
-          <marquee>Scrolling announcement</marquee>
+          {/* GROUP B probe - FIXED marquee: hidden, element retained */}
+          <marquee style={{ display: "none" }}>Scrolling announcement</marquee>
 
-          {/* GROUP B probe - FIX roleApplications: change role to "region" */}
-          <div role="application" tabIndex={0}>
+          {/* GROUP B probe - FIXED roleApplications: application -> region */}
+          <div role="region" aria-label="Application container" tabIndex={0}>
             Application role container
           </div>
 
-          {/* GROUP B probe - FIX loadAutofocus: remove autoFocus */}
-          {/* eslint-disable-next-line jsx-a11y/no-autofocus */}
-          <input type="text" autoFocus aria-label="Autofocused field" />
+          {/* GROUP B probe - FIXED loadAutofocus: autoFocus removed */}
+          <input type="text" aria-label="Autofocused field" />
         </section>
 
         {/* ============ forms ============ */}
         <section>
           <h2>Forms</h2>
 
-          {/* FIX searchFormTagging: add role="search" to this form */}
-          <form action="#">
+          {/* FIXED searchFormTagging: role="search" added */}
+          <form action="#" role="search">
             <input type="text" name="search" placeholder="Search" aria-label="Search" />
           </form>
 
           <form action="#">
-            {/* FIX fieldLabel: add aria-label="Full name" */}
-            <input type="text" name="fullname" />
+            {/* FIXED fieldLabel: aria-label added */}
+            <input type="text" name="fullname" aria-label="Full name" />
 
-            {/* FIX fieldRequired: add the required attribute */}
+            {/* FIXED fieldRequired: required added */}
             <label htmlFor="email-field">Email *</label>
-            <input type="email" id="email-field" name="email" />
+            <input type="email" id="email-field" name="email" required />
 
-            {/* FIX missingFormButton: change type to "submit" */}
-            <button type="button">Send</button>
+            {/* FIXED missingFormButton: type button -> submit */}
+            <button type="submit">Send</button>
           </form>
         </section>
 
@@ -239,8 +256,8 @@ export default function RuleFixture() {
         <section>
           <h2>Tables</h2>
 
-          {/* FIX headlessTables: add role="presentation" to this table */}
-          <table>
+          {/* FIXED headlessTables: role="presentation" added */}
+          <table role="presentation">
             <tbody>
               <tr>
                 <td>Plan</td>
@@ -253,12 +270,12 @@ export default function RuleFixture() {
             </tbody>
           </table>
 
-          {/* FIX emptyTableHeaders: put text in the empty th */}
           <table>
             <tbody>
               <tr>
                 <th>Region</th>
-                <th />
+                {/* FIXED emptyTableHeaders: text added */}
+                <th>Count</th>
               </tr>
               <tr>
                 <td>EMEA</td>
@@ -267,12 +284,12 @@ export default function RuleFixture() {
             </tbody>
           </table>
 
-          {/* FIX nestedTables: add role="presentation" to the INNER table */}
           <table>
             <tbody>
               <tr>
                 <td>
-                  <table>
+                  {/* FIXED nestedTables: role="presentation" on the inner table */}
+                  <table role="presentation">
                     <tbody>
                       <tr>
                         <td>Nested cell</td>
@@ -289,21 +306,22 @@ export default function RuleFixture() {
         <section>
           <h2>Context</h2>
 
-          {/* FIX iframeLabeling: add aria-label="Embedded map" */}
-          {/* eslint-disable-next-line jsx-a11y/iframe-has-title */}
-          <iframe src="about:blank" width="200" height="120" />
+          {/* FIXED iframeLabeling: aria-label added */}
+          <iframe src="about:blank" width="200" height="120" aria-label="Embedded map" title="Embedded map" />
 
-          {/* FIX articleSetup: add role="presentation" */}
-          <article>Short article body.</article>
+          {/* FIXED articleSetup: role="presentation" added */}
+          <article role="presentation">Short article body.</article>
 
-          {/* FIX salePrices: add <span className="sr-only">Discounted price:</span> before the sale price */}
+          {/* FIXED salePrices: sr-only prefix added */}
           <p>
+            <span className="sr-only">Discounted price:</span>
             <del>$99.00</del> $79.00
           </p>
 
-          {/* FIX userRating: add <span className="sr-only">4.5 out of 5</span> inside */}
+          {/* FIXED userRating: sr-only rating text added */}
           <div>
             <span itemProp="ratingValue">4.5</span>
+            <span className="sr-only">4.5 out of 5</span>
           </div>
         </section>
 
@@ -311,10 +329,10 @@ export default function RuleFixture() {
         <section>
           <h2>Carousel</h2>
 
-          {/* FIX carouselLabeling: add role="region" aria-label="Featured products" */}
-          {/* FIX liveCarousels: remove aria-live from the slide track */}
-          <div className="carousel">
-            <div aria-live="polite">
+          {/* FIXED carouselLabeling: role="region" + aria-label added */}
+          <div className="carousel" role="region" aria-label="Featured products">
+            {/* FIXED liveCarousels: aria-live removed */}
+            <div>
               <div className="slide">
                 Slide one <img src="/logo192.png" width="32" height="32" alt="Product one" />
               </div>
@@ -322,12 +340,12 @@ export default function RuleFixture() {
                 Slide two
               </div>
             </div>
-            {/* FIX carouselArrows: change the text to "Next" */}
+            {/* FIXED carouselArrows: text now a recognised keyword */}
             <a href="#content" className="next">
-              &rsaquo;
+              Next
             </a>
-            {/* FIX carouselPagination: add aria-label="Go to slide 1" */}
-            <a href="#content" className="owl-dot">
+            {/* FIXED carouselPagination: aria-label added */}
+            <a href="#content" className="owl-dot" aria-label="Go to slide 1">
               {" "}
             </a>
           </div>
@@ -337,17 +355,19 @@ export default function RuleFixture() {
         <section>
           <h2>Navigation</h2>
 
-          {/* FIX navigationTagging: add aria-label="Main" */}
-          <nav>
+          {/* FIXED navigationTagging / navigationLabel: aria-label added */}
+          <nav aria-label="Main">
             <ul>
               <li>
                 <a href="#content">Products</a>
               </li>
-              {/* FIX missingNavItems: wrap the text in <a href="#content"> */}
-              <li>Services</li>
+              {/* FIXED missingNavItems: text wrapped in a link */}
               <li>
-                {/* FIX submenuState: add aria-expanded="false" */}
-                <a href="#content" className="has-submenu">
+                <a href="#content">Services</a>
+              </li>
+              <li>
+                {/* FIXED submenuState: aria-expanded added */}
+                <a href="#content" className="has-submenu" aria-expanded="false">
                   Resources
                 </a>
                 <ul>
@@ -359,8 +379,8 @@ export default function RuleFixture() {
             </ul>
           </nav>
 
-          {/* FIX breadcrumbs: add aria-label="Breadcrumb" */}
-          <nav className="breadcrumbs">
+          {/* FIXED breadcrumbs: aria-label added */}
+          <nav className="breadcrumbs" aria-label="Breadcrumb">
             <ol>
               <li>
                 <a href="#content">Home</a>
@@ -371,21 +391,22 @@ export default function RuleFixture() {
             </ol>
           </nav>
 
-          {/* GROUP B probe - FIX nestedNavigation: change the inner <nav> to a <div> */}
+          {/* GROUP B probe - FIXED nestedNavigation: inner nav given role="presentation".
+              The <nav> tag is kept deliberately so the stored selector still matches. */}
           <nav aria-label="Outer">
-            <nav aria-label="Inner">
+            <nav role="presentation">
               <a href="#content">Inner nav link</a>
             </nav>
           </nav>
 
-          {/* GROUP B probe - FIX brokenNavTagging: change role="menu" to role="list" */}
-          <div role="menu">
+          {/* GROUP B probe - FIXED brokenNavTagging: role menu -> list */}
+          <div role="list">
             <a href="#content">Menu entry without menuitem role</a>
           </div>
         </section>
 
-        {/* FIX footerLandmark: add role="contentinfo" */}
-        <div className="site-footer">
+        {/* FIXED footerLandmark: role="contentinfo" added */}
+        <div className="site-footer" role="contentinfo">
           <p>Fixture footer &mdash; accessFlow rule coverage page.</p>
         </div>
       </div>
