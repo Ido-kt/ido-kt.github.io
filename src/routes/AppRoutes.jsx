@@ -110,8 +110,12 @@ const AppRoutes = ({ navigate }) => (
     {TablesRoutes()}
     {NavigationRoutes()}
 
-    {/* Verify-fix rule fixture */}
+    {/* Verify-fix rule fixture.
+        Two routes render the SAME component on purpose: identical rule + selector + device on two
+        pages is what makes the scanner treat the issues as recurring (templated), which exercises
+        the recurring branch of the resolution logic. Keep both in sync. */}
     <Route path="/rule-fixture" element={<RuleFixture />} />
+    <Route path="/rule-fixture-b" element={<RuleFixture />} />
 
     {/* Engine Rules */}
     <Route path="/engine" element={<EngineRulesListing />} />

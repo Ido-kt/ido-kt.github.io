@@ -232,6 +232,17 @@ export const getSecondaryListItems = (data = [], isOpen = true) => (
       isTestable={false}
       isDrawerOpen={isOpen}
     />
+    <CustomNavLink
+      to="/rule-fixture-b"
+      label="Rule Fixture B"
+      icon={BugIcon}
+      ruleCount={57}
+      category="Rules"
+      hasSuccess={false}
+      hasFailure={true}
+      isTestable={false}
+      isDrawerOpen={isOpen}
+    />
   </React.Fragment>
 );
 
